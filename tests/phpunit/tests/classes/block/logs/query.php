@@ -15,7 +15,7 @@
  * @covers WordPoints_Top_Users_In_Period_Block_Logs_Query
  */
 class WordPoints_Top_Users_In_Period_Block_Logs_Query_Test
-	extends WordPoints_PHPUnit_TestCase_Points {
+	extends WordPoints_PHPUnit_TestCase {
 
 	/**
 	 * Test the query arg defaults.

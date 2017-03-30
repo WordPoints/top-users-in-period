@@ -15,7 +15,7 @@
  * @covers WordPoints_Top_Users_In_Period_Block_Type_Week_In_Seconds
  */
 class WordPoints_Top_Users_In_Period_Block_Type_Week_In_Seconds_Test
-	extends WordPoints_PHPUnit_TestCase_Points {
+	extends WordPoints_PHPUnit_TestCase {
 
 	/**
 	 * Tests getting the block type slug.
