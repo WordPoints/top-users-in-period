@@ -9,6 +9,7 @@
 
 return array(
 	// auto-generated {
+	'wordpoints_top_users_in_period_blocks_query' => 'blocks/query.php',
 	'wordpoints_top_users_in_period_points_logs_query' => 'points/logs/query.php',
 	// }
 );
