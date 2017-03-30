@@ -30,7 +30,7 @@ class WordPoints_Top_Users_In_Period_Points_Logs_Query_Test
 	}
 
 	/**
-	 * Test the query arg defaults.
+	 * Test that the fields query arg is not supported.
 	 *
 	 * @since 1.0.0
 	 *
@@ -46,7 +46,7 @@ class WordPoints_Top_Users_In_Period_Points_Logs_Query_Test
 	}
 
 	/**
-	 * Test the query arg defaults.
+	 * Test that the fields query arg is not supported.
 	 *
 	 * @since 1.0.0
 	 *
