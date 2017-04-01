@@ -8,6 +8,47 @@
  */
 
 /**
+ * Creates a `DateTimeZone` object for the site's timezone.
+ *
+ * This function determines the site timezone as follows:
+ *
+ * - If the site uses a timezone identifier (i.e., 'timezone_string' option is set),
+ *   that is used.
+ * - If that's not set, we make up an identifier based on the 'gmt_offset'.
+ * - If the GMT offset is 0, or the identifier is invalid, UTC is used.
+ *
+ * @see https://wordpress.stackexchange.com/a/198453/27757
+ * @see https://us.php.net/manual/en/timezones.others.php
+ *
+ * @return DateTimeZone The site's timezone.
+ */
+function wordpoints_top_users_in_period_get_site_timezone() {
+
+	$timezone_string = get_option( 'timezone_string' );
+
+	// A direct offset is being used instead of a timezone identifier.
+	if ( empty( $timezone_string ) ) {
+
+		$offset = (int) get_option( 'gmt_offset' );
+
+		if ( 0 === $offset ) {
+
+			$timezone_string = 'UTC';
+
+		} else {
+
+			// IANA timezone database that provides PHP's timezone support uses POSIX
+			// -style (i.e. reversed) signs.
+			$sign = $offset > 0 ? '-' : '+';
+
+			$timezone_string = 'Etc/GMT' . $sign . abs( $offset );
+		}
+	}
+
+	return new DateTimeZone( $timezone_string );
+}
+
+/**
  * Register Top Users In Period module app when the Modules registry is initialized.
  *
  * @since 1.0.0
