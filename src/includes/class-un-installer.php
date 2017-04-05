@@ -34,14 +34,14 @@ class WordPoints_Top_Users_In_Period_Un_Installer
 					query_signature CHAR(64) NOT NULL,
 					status VARCHAR(10) NOT NULL,
 					PRIMARY KEY  (id),
-					KEY block_signature (block_type,query_signature(8))',
+					UNIQUE KEY block_signature (block_type,query_signature,start_date)',
 				'wordpoints_top_users_in_period_block_logs' => '
 					id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 					block_id BIGINT(20) UNSIGNED NOT NULL,
 					user_id BIGINT(20) UNSIGNED NOT NULL,
 					points BIGINT(20) UNSIGNED NOT NULL,
 					PRIMARY KEY  (id),
-					KEY block_user_id (user_id,block_id)',
+					UNIQUE KEY block_user_id (user_id,block_id)',
 			),
 		),
 	);
