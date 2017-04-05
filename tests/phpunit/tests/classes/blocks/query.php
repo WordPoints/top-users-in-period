@@ -43,6 +43,7 @@ class WordPoints_Top_Users_In_Period_Blocks_Query_Test
 			'start_date'      => '2017-03-21 10:25:32',
 			'end_date'        => '2017-03-28 10:25:32',
 			'query_signature' => '111111111111',
+			'status'          => 'draft',
 		);
 
 		$wpdb->insert(

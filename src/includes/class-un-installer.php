@@ -28,10 +28,11 @@ class WordPoints_Top_Users_In_Period_Un_Installer
 			'tables' => array(
 				'wordpoints_top_users_in_period_blocks' => '
 					id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-					block_type CHAR(32) NOT NULL,
+					block_type VARCHAR(32) NOT NULL,
 					start_date DATETIME NOT NULL,
 					end_date DATETIME NOT NULL,
 					query_signature CHAR(64) NOT NULL,
+					status VARCHAR(10) NOT NULL,
 					PRIMARY KEY  (id),
 					KEY block_signature (block_type,query_signature(8))',
 				'wordpoints_top_users_in_period_block_logs' => '
