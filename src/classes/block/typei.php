@@ -26,6 +26,8 @@ interface WordPoints_Top_Users_In_Period_Block_TypeI {
 	/**
 	 * Gets the start and end times for a block.
 	 *
+	 * Both the start and end times are inclusive.
+	 *
 	 * @since 1.0.0
 	 *
 	 * @param int $timestamp A time within the block to get the info for.

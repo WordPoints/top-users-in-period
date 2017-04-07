@@ -51,7 +51,8 @@ class WordPoints_Top_Users_In_Period_Block_Type_Week_In_Seconds
 
 		$start = $timestamp - ( $timestamp % WEEK_IN_SECONDS );
 
-		return array( 'start' => $start, 'end' => $start + WEEK_IN_SECONDS );
+		// We subtract one from the end because the start and end are inclusive.
+		return array( 'start' => $start, 'end' => $start + WEEK_IN_SECONDS - 1 );
 	}
 }
 

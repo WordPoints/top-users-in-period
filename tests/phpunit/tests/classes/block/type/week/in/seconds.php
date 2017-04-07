@@ -47,7 +47,7 @@ class WordPoints_Top_Users_In_Period_Block_Type_Week_In_Seconds_Test
 		$info = $block_type->get_block_info( $timestamp );
 
 		$this->assertSame( 1490832000, $info['start'] );
-		$this->assertSame( 1491436800, $info['end'] );
+		$this->assertSame( 1491436799, $info['end'] );
 	}
 }
 
