@@ -16,6 +16,15 @@ class WordPoints_Top_Users_In_Period_Points_Logs_Query
 	extends WordPoints_Points_Logs_Query {
 
 	/**
+	 * The HAVING clause for the query.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	protected $having = '';
+
+	/**
 	 * @since 1.0.0
 	 *
 	 * @param array $args {
@@ -66,11 +75,38 @@ class WordPoints_Top_Users_In_Period_Points_Logs_Query
 	/**
 	 * @since 1.0.0
 	 */
+	protected function prepare_where() {
+
+		$this->wheres = array();
+
+		// First do just the total column.
+		$this->prepare_column_where( 'total', $this->columns['total'] );
+
+		if ( $this->wheres ) {
+			$this->having = 'HAVING ' . implode( ' AND ', $this->wheres ) . "\n";
+		}
+
+		$this->wheres = array();
+		$this->where = '';
+
+		// Then do everything else.
+		$all_columns = $this->columns;
+
+		unset( $this->columns['total'] );
+
+		parent::prepare_where();
+
+		$this->columns = $all_columns;
+	}
+
+	/**
+	 * @since 1.0.0
+	 */
 	protected function prepare_order_by() {
 
 		parent::prepare_order_by();
 
-		$this->order = "GROUP BY `user_id`\n{$this->order}";
+		$this->order = "GROUP BY `user_id`\n{$this->having}\n{$this->order}";
 	}
 }
 

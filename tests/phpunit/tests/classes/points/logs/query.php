@@ -94,6 +94,19 @@ class WordPoints_Top_Users_In_Period_Points_Logs_Query_Test
 			(object) array( 'total' => '6', 'user_id' => (string) $user_id_2 )
 			, $results[1]
 		);
+
+		// Conditions on the total.
+		$query = new WordPoints_Top_Users_In_Period_Points_Logs_Query(
+			array( 'total' => 50, 'total__compare' => '>=' )
+		);
+
+		$results = $query->get();
+
+		$this->assertCount( 1, $results );
+		$this->assertSameProperties(
+			(object) array( 'total' => '54', 'user_id' => (string) $user_id_1 )
+			, $results[0]
+		);
 	}
 }
 

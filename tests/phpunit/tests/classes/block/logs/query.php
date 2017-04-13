@@ -109,6 +109,19 @@ class WordPoints_Top_Users_In_Period_Block_Logs_Query_Test
 			(object) array( 'total' => '57', 'user_id' => '4' )
 			, $results[1]
 		);
+
+		// Conditions on the total.
+		$query = new WordPoints_Top_Users_In_Period_Block_Logs_Query(
+			array( 'total' => 100, 'total__compare' => '>=' )
+		);
+
+		$results = $query->get();
+
+		$this->assertCount( 1, $results );
+		$this->assertSameProperties(
+			(object) array( 'total' => '219', 'user_id' => '5' )
+			, $results[0]
+		);
 	}
 }
 
