@@ -53,6 +53,7 @@ class WordPoints_Top_Users_In_Period_Apps_Functions_Test
 		$sub_apps = $app->sub_apps();
 
 		$this->assertTrue( $sub_apps->is_registered( 'block_types' ) );
+		$this->assertTrue( $sub_apps->is_registered( 'query_caches' ) );
 	}
 
 	/**
@@ -71,6 +72,24 @@ class WordPoints_Top_Users_In_Period_Apps_Functions_Test
 		wordpoints_top_users_in_period_block_types_init( $registry );
 
 		$this->assertTrue( $registry->is_registered( 'week_in_seconds' ) );
+	}
+
+	/**
+	 * Tests the query caches registry init function.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @covers ::wordpoints_top_users_in_period_query_caches_init
+	 */
+	public function test_query_caches_init() {
+
+		$this->mock_apps();
+
+		$registry = new WordPoints_Class_Registry();
+
+		wordpoints_top_users_in_period_query_caches_init( $registry );
+
+		$this->assertTrue( $registry->is_registered( 'transients' ) );
 	}
 }
 

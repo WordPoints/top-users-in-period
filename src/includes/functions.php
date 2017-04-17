@@ -78,6 +78,7 @@ function wordpoints_top_users_in_period_apps_init( $app ) {
 	$apps = $app->sub_apps();
 
 	$apps->register( 'block_types', 'WordPoints_Class_Registry' );
+	$apps->register( 'query_caches', 'WordPoints_Class_Registry' );
 }
 
 /**
@@ -92,6 +93,20 @@ function wordpoints_top_users_in_period_apps_init( $app ) {
 function wordpoints_top_users_in_period_block_types_init( $block_types ) {
 
 	$block_types->register( 'week_in_seconds', 'WordPoints_Top_Users_In_Period_Block_Type_Week_In_Seconds' );
+}
+
+/**
+ * Register query caches when the registry is initialized.
+ *
+ * @since 1.0.0
+ *
+ * @WordPress\action wordpoints_init_app_registry-modules-top_users_in_period-query_caches
+ *
+ * @param WordPoints_Class_RegistryI $query_caches The query caches registry.
+ */
+function wordpoints_top_users_in_period_query_caches_init( $query_caches ) {
+
+	$query_caches->register( 'transients', 'WordPoints_Top_Users_In_Period_Query_Cache_Transients' );
 }
 
 // EOF

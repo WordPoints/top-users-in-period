@@ -11,5 +11,6 @@ add_action( 'wordpoints_init_app-modules', 'wordpoints_top_users_in_period_modul
 add_action( 'wordpoints_init_app-modules-top_users_in_period', 'wordpoints_top_users_in_period_apps_init' );
 
 add_action( 'wordpoints_init_app_registry-modules-top_users_in_period-block_types', 'wordpoints_top_users_in_period_block_types_init' );
+add_action( 'wordpoints_init_app_registry-modules-top_users_in_period-query_caches', 'wordpoints_top_users_in_period_query_caches_init' );
 
 // EOF
