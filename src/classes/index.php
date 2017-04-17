@@ -15,6 +15,7 @@ return array(
 	'wordpoints_top_users_in_period_block_type_week_in_seconds' => 'block/type/week/in/seconds.php',
 	'wordpoints_top_users_in_period_blocks_query' => 'blocks/query.php',
 	'wordpoints_top_users_in_period_points_logs_query' => 'points/logs/query.php',
+	'wordpoints_top_users_in_period_query' => 'query.php',
 	'wordpoints_top_users_in_period_query_cache_transients' => 'query/cache/transients.php',
 	// }
 );
