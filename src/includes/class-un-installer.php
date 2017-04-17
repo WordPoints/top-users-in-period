@@ -39,7 +39,7 @@ class WordPoints_Top_Users_In_Period_Un_Installer
 					id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 					block_id BIGINT(20) UNSIGNED NOT NULL,
 					user_id BIGINT(20) UNSIGNED NOT NULL,
-					points BIGINT(20) UNSIGNED NOT NULL,
+					points BIGINT(20) NOT NULL,
 					PRIMARY KEY  (id),
 					UNIQUE KEY block_user_id (user_id,block_id)',
 			),
