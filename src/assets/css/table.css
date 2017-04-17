@@ -1,0 +1,14 @@
+/**
+ * Styles for the top users in period table.
+ *
+ * @package WordPoints_Top_Users_In_Period
+ * @since 1.0.0
+ */
+
+.wordpoints-top-users-in-period .avatar {
+	vertical-align: middle;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+/* EOF */

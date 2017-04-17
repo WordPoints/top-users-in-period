@@ -17,5 +17,6 @@ return array(
 	'wordpoints_top_users_in_period_points_logs_query' => 'points/logs/query.php',
 	'wordpoints_top_users_in_period_query' => 'query.php',
 	'wordpoints_top_users_in_period_query_cache_transients' => 'query/cache/transients.php',
+	'wordpoints_top_users_in_period_table' => 'table.php',
 	// }
 );

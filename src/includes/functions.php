@@ -8,6 +8,41 @@
  */
 
 /**
+ * Register scripts and styles for the component.
+ *
+ * @since 1.0.0
+ *
+ * @WordPress\action wp_enqueue_scripts    5 So they are ready on enqueue (10).
+ * @WordPress\action admin_enqueue_scripts 5 So they are ready on enqueue (10).
+ */
+function wordpoints_top_users_in_period_register_scripts() {
+
+	$assets_url = wordpoints_modules_url( '/assets', dirname( __FILE__ ) );
+	$suffix = SCRIPT_DEBUG ? '' : '.min';
+
+	$version = WordPoints_Modules::get_data( __FILE__, 'version' );
+
+	wp_register_style(
+		'wordpoints-top-users-in-period-table'
+		, "{$assets_url}/css/table{$suffix}.css"
+		, null
+		, $version
+	);
+
+	$styles = wp_styles();
+	$rtl_styles = array( 'wordpoints-top-users-in-period-table' );
+
+	foreach ( $rtl_styles as $rtl_style ) {
+
+		$styles->add_data( $rtl_style, 'rtl', 'replace' );
+
+		if ( $suffix ) {
+			$styles->add_data( $rtl_style, 'suffix', $suffix );
+		}
+	}
+}
+
+/**
  * Creates a `DateTimeZone` object for the site's timezone.
  *
  * This function determines the site timezone as follows:

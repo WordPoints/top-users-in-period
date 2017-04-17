@@ -4,5 +4,8 @@
 	"bootstrap": "dev-lib/l10n-validator/bootstrap.php",
 	"cache": "./.wp-l10n-validator-cache.json",
 	"ignores-cache": "./.wp-l10n-validator-ignores-cache.json",
-	"ignores-tolerance": 25
+	"ignores-tolerance": 25,
+	"ignored-functions": {
+		"WordPoints_Top_Users_In_Period_Table::display_message": [2]
+	}
 }
