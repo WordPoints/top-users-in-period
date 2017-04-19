@@ -275,6 +275,7 @@ class WordPoints_Top_Users_In_Period_Table {
 
 		if ( is_admin() ) {
 			$extra_classes[] = 'widefat';
+			$extra_classes[] = 'striped';
 		}
 
 		/**

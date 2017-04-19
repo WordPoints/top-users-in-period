@@ -1,7 +1,7 @@
 {
     "\/classes\/admin\/screen.php": {
         "00:00": {
-            "141": {
+            "161": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
@@ -10,7 +10,7 @@
             }
         },
         "23:59": {
-            "143": {
+            "163": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
@@ -19,7 +19,7 @@
             }
         },
         "-1": {
-            "144": {
+            "164": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
@@ -345,6 +345,11 @@
                 "arg_count": 1,
                 "parentheses": 1
             }
+        }
+    },
+    "\/classes\/table.php": {
+        "striped": {
+            "278": false
         }
     }
 }

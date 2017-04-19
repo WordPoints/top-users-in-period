@@ -1,8 +1,8 @@
 {
     "files": {
         "\/classes\/admin\/screen.php": {
-            "size": 5042,
-            "hash": "c2672802da2ed1f1e33626897703e483",
+            "size": 5246,
+            "hash": "337be80bcdf401f06951816bf9f74376",
             "errors": false
         },
         "\/classes\/block\/logs\/query.php": {
@@ -51,8 +51,8 @@
             "errors": false
         },
         "\/classes\/table.php": {
-            "size": 6888,
-            "hash": "d0944fa7db9bd724bdc9c5947f5e0842",
+            "size": 6921,
+            "hash": "f59df6c3b260f81bbcdebdb0713b57e7",
             "errors": false
         },
         "\/includes\/actions.php": {
@@ -61,13 +61,13 @@
             "errors": false
         },
         "\/includes\/admin\/actions.php": {
-            "size": 355,
-            "hash": "81f19433eb95eb661f391d29a8981a6a",
+            "size": 358,
+            "hash": "655592b33fb498686ecbe3420dba9cd7",
             "errors": false
         },
         "\/includes\/admin\/functions.php": {
             "size": 951,
-            "hash": "b861689e9be815e70f5a7f201dd52fab",
+            "hash": "572df6255c9c059000990983113b1acf",
             "errors": false
         },
         "\/includes\/class-un-installer.php": {
