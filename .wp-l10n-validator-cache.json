@@ -1,0 +1,90 @@
+{
+    "files": {
+        "\/classes\/admin\/screen.php": {
+            "size": 5042,
+            "hash": "c2672802da2ed1f1e33626897703e483",
+            "errors": false
+        },
+        "\/classes\/block\/logs\/query.php": {
+            "size": 5053,
+            "hash": "7c435cc235b1e8faf4cd4c0bd59fc277",
+            "errors": false
+        },
+        "\/classes\/block\/type\/week\/in\/seconds.php": {
+            "size": 1219,
+            "hash": "57c4dd5fc37d69d53313462dee66f61c",
+            "errors": false
+        },
+        "\/classes\/block\/typei.php": {
+            "size": 826,
+            "hash": "3d59f7c9296496a003afc1de02c031cb",
+            "errors": false
+        },
+        "\/classes\/blocks\/query.php": {
+            "size": 3699,
+            "hash": "e8472ac80f914f71365f2f2685f39d2f",
+            "errors": false
+        },
+        "\/classes\/index.php": {
+            "size": 929,
+            "hash": "2f291d47290d79330bee8c135d96711d",
+            "errors": false
+        },
+        "\/classes\/points\/logs\/query.php": {
+            "size": 2742,
+            "hash": "7a30f04a2bf19206b4fac3fb92551d12",
+            "errors": false
+        },
+        "\/classes\/query\/cache\/transients.php": {
+            "size": 2355,
+            "hash": "fd21ff121af0c0c6e4534ec420af942d",
+            "errors": false
+        },
+        "\/classes\/query\/cachei.php": {
+            "size": 775,
+            "hash": "c2b9325eb8700581d9fb828e1c889215",
+            "errors": false
+        },
+        "\/classes\/query.php": {
+            "size": 25122,
+            "hash": "bf983354935ffedf59e8ec912a5e8f7c",
+            "errors": false
+        },
+        "\/classes\/table.php": {
+            "size": 6888,
+            "hash": "d0944fa7db9bd724bdc9c5947f5e0842",
+            "errors": false
+        },
+        "\/includes\/actions.php": {
+            "size": 806,
+            "hash": "1337747fcbcb8af19024f6de00d6cd6b",
+            "errors": false
+        },
+        "\/includes\/admin\/actions.php": {
+            "size": 355,
+            "hash": "81f19433eb95eb661f391d29a8981a6a",
+            "errors": false
+        },
+        "\/includes\/admin\/functions.php": {
+            "size": 951,
+            "hash": "b861689e9be815e70f5a7f201dd52fab",
+            "errors": false
+        },
+        "\/includes\/class-un-installer.php": {
+            "size": 1186,
+            "hash": "722087a731c12ee81324fbb291552726",
+            "errors": false
+        },
+        "\/includes\/functions.php": {
+            "size": 4211,
+            "hash": "72e7acc0910b9443519de5f0c3eeda27",
+            "errors": false
+        },
+        "\/top-users-in-period.php": {
+            "size": 2212,
+            "hash": "12242ef034a066344fc1603f2bfa1a8e",
+            "errors": false
+        }
+    },
+    "config_signature": "65e11d1a9f4284b0a86a5eb719a18410"
+}

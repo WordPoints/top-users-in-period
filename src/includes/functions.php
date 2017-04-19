@@ -22,9 +22,25 @@ function wordpoints_top_users_in_period_register_scripts() {
 
 	$version = WordPoints_Modules::get_data( __FILE__, 'version' );
 
+	// JS.
+	wp_register_script(
+		'wordpoints-top-users-in-period-datepicker'
+		, "{$assets_url}/js/datepicker{$suffix}.js"
+		, array( 'jquery-ui-datepicker' )
+		, $version
+	);
+
+	// CSS.
 	wp_register_style(
 		'wordpoints-top-users-in-period-table'
 		, "{$assets_url}/css/table{$suffix}.css"
+		, null
+		, $version
+	);
+
+	wp_register_style(
+		'wordpoints-top-users-in-period-datepicker'
+		, "{$assets_url}/css/jquery-ui-datepicker{$suffix}.css"
 		, null
 		, $version
 	);
