@@ -588,7 +588,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		);
 
 		$stub->method( 'get_sql_for_both' )
-		     ->willReturn( new WP_Error() );
+			->willReturn( new WP_Error() );
 
 		$this->assertWPError( $stub->get() );
 		$this->assertFalse(
@@ -705,13 +705,13 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			, array( 'get_sql_for_both' )
 			, array(
 				new DateTime( '@' . $first_info['start'] ),
-				new DateTime( '@' . $second_info['end'] - 50 ),
+				new DateTime( '@' . ( $second_info['end'] - 50 ) ),
 			)
 		);
 
 		$stub->expects( $this->once() )
-		     ->method( 'get_sql_for_both' )
-		     ->willReturn( 'test' );
+			->method( 'get_sql_for_both' )
+			->willReturn( 'test' );
 
 		$this->assertSame( 'test', $stub->get_sql() );
 	}
@@ -740,8 +740,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		);
 
 		$stub->expects( $this->once() )
-		     ->method( 'get_sql_for_both' )
-		     ->willReturn( 'test' );
+			->method( 'get_sql_for_both' )
+			->willReturn( 'test' );
 
 		$this->assertSame( 'test', $stub->get_sql() );
 	}
@@ -769,8 +769,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		);
 
 		$stub->expects( $this->once() )
-		     ->method( 'get_sql_for_block_logs' )
-		     ->willReturn( 'test' );
+			->method( 'get_sql_for_block_logs' )
+			->willReturn( 'test' );
 
 		$this->assertSame( 'test', $stub->get_sql() );
 	}
@@ -801,8 +801,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		);
 
 		$stub->expects( $this->once() )
-		     ->method( 'get_sql_for_block_logs' )
-		     ->willReturn( 'test' );
+			->method( 'get_sql_for_block_logs' )
+			->willReturn( 'test' );
 
 		$this->assertSame( 'test', $stub->get_sql() );
 	}
@@ -868,7 +868,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			'both' => array( new DateTime( '-1 month' ), $now, 2 * WEEK_IN_SECONDS ),
 			'both_start_block_exact' => array(
 				new DateTime( '@' . $start_info['start'] ),
-				new DateTime( '@' . $end_info['end'] - 50 ),
+				new DateTime( '@' . ( $end_info['end'] - 50 ) ),
 			),
 			'both_end_block_exact' => array(
 				new DateTime( '@' . ( $start_info['start'] + 50 ) ),
@@ -2063,7 +2063,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$error = new WP_Error();
 
 		$stub->method( 'get_and_verify_blocks' )
-		     ->willReturn( $error );
+			->willReturn( $error );
 
 		$this->assertSame( $error, $stub->get() );
 	}
