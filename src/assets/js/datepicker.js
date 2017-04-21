@@ -7,28 +7,7 @@
 
 jQuery( function( $ ) {
 
-	var $form = $( '#wordpoints-top-users-in-period-admin-form' );
-
-	var $from = $form.find( '[name=from]' )
-		.datepicker( {
-			showOtherMonths: true,
-			selectOtherMonths: true,
-			dateFormat: 'yy-mm-dd',
-			maxDate: 0
-		} )
-		.on( 'change', function() {
-			$to.datepicker( 'option', 'minDate', getDate( this ) );
-		});
-
-	var $to = $form.find( '[name=to]' )
-		.datepicker( {
-			showOtherMonths: true,
-			selectOtherMonths: true,
-			dateFormat: 'yy-mm-dd'
-		} )
-		.on( 'change', function() {
-			$from.datepicker( 'option', 'maxDate', getDate( this ) );
-		});
+	var $form = $( '.wordpoints-top-users-in-period-form' );
 
 	function getDate( element ) {
 
@@ -43,8 +22,50 @@ jQuery( function( $ ) {
 		return date;
 	}
 
-	$from.change();
-	$to.change();
+	function initDatePicker ( el ) {
+
+		var $el = $( el );
+
+		var $from = $el.find( '.wordpoints-top-users-in-period-from' )
+			.datepicker( {
+				showOtherMonths:   true,
+				selectOtherMonths: true,
+				dateFormat:        'yy-mm-dd',
+				maxDate:           0
+			} )
+			.on( 'change', function () {
+				$to.datepicker( 'option', 'minDate', getDate( this ) );
+			} );
+
+		var $to = $el.find( '.wordpoints-top-users-in-period-to' )
+			.datepicker( {
+				showOtherMonths:   true,
+				selectOtherMonths: true,
+				dateFormat:        'yy-mm-dd'
+			} )
+			.on( 'change', function () {
+				$from.datepicker( 'option', 'maxDate', getDate( this ) );
+			} );
+
+		$from.change();
+		$to.change();
+	}
+
+	$form.each( initDatePicker );
+
+	$( '.wrap' ).on(
+		'focus'
+		, '.wordpoints-top-users-in-period-from, .wordpoints-top-users-in-period-to'
+		, function() {
+
+			var $this = $( this );
+
+			if ( ! $this.hasClass( 'hasDatepicker' ) ) {
+				initDatePicker( $this.closest( '.wordpoints-top-users-in-period-form' ) );
+			}
+		}
+	);
+
 } );
 
 // EOF

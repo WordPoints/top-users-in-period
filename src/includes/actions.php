@@ -16,4 +16,6 @@ add_action( 'wordpoints_init_app_registry-modules-top_users_in_period-query_cach
 add_action( 'wp_enqueue_scripts', 'wordpoints_top_users_in_period_register_scripts', 5 );
 add_action( 'admin_enqueue_scripts', 'wordpoints_top_users_in_period_register_scripts', 5 );
 
+add_action( 'widgets_init', 'wordpoints_top_users_in_period_register_widgets' );
+
 // EOF

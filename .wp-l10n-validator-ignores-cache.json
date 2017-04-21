@@ -1,7 +1,7 @@
 {
     "\/classes\/admin\/screen.php": {
         "00:00": {
-            "161": {
+            "163": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
@@ -10,7 +10,7 @@
             }
         },
         "23:59": {
-            "163": {
+            "165": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
@@ -19,7 +19,7 @@
             }
         },
         "-1": {
-            "164": {
+            "166": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
@@ -147,14 +147,14 @@
                 "arg_count": 2,
                 "parentheses": 1
             },
-            "749": {
+            "1033": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
                 "arg_count": 1,
                 "parentheses": 1
             },
-            "750": {
+            "1034": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
@@ -175,32 +175,11 @@
                 "arg_count": 2,
                 "parentheses": 1
             },
-            "826": {
-                "name": "array",
-                "type": "unknown",
-                "args_started": true,
-                "arg_count": 1,
-                "parentheses": 1
-            },
             "830": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
                 "arg_count": 1,
-                "parentheses": 1
-            },
-            "1033": {
-                "name": "array",
-                "type": "unknown",
-                "args_started": true,
-                "arg_count": 1,
-                "parentheses": 1
-            },
-            "1034": {
-                "name": "array",
-                "type": "unknown",
-                "args_started": true,
-                "arg_count": 2,
                 "parentheses": 1
             }
         },
@@ -238,13 +217,6 @@
             }
         },
         "Y-m-d H:i:s": {
-            "990": {
-                "name": "date",
-                "type": "unknown",
-                "args_started": true,
-                "arg_count": 0,
-                "parentheses": 1
-            },
             "991": {
                 "name": "date",
                 "type": "unknown",
@@ -272,7 +244,7 @@
     },
     "\/includes\/functions.php": {
         "wordpoints-top-users-in-period-table": {
-            "49": {
+            "56": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
@@ -281,7 +253,7 @@
             }
         },
         "rtl": {
-            "53": {
+            "60": {
                 "name": "$styles->add_data",
                 "type": "unknown",
                 "args_started": true,
@@ -290,7 +262,7 @@
             }
         },
         "replace": {
-            "53": {
+            "60": {
                 "name": "$styles->add_data",
                 "type": "unknown",
                 "args_started": true,
@@ -299,7 +271,7 @@
             }
         },
         "suffix": {
-            "56": {
+            "63": {
                 "name": "$styles->add_data",
                 "type": "unknown",
                 "args_started": true,
@@ -308,19 +280,19 @@
             }
         },
         "UTC": {
-            "87": false
+            "106": false
         },
         "-": {
-            "93": false
+            "112": false
         },
         "+": {
-            "93": false
+            "112": false
         },
         "Etc\/GMT": {
-            "95": false
+            "114": false
         },
         "WordPoints_Top_Users_In_Period_Block_Type_Week_In_Seconds": {
-            "146": {
+            "165": {
                 "name": "$block_types->register",
                 "type": "unknown",
                 "args_started": true,
@@ -329,7 +301,7 @@
             }
         },
         "transients": {
-            "160": {
+            "179": {
                 "name": "$query_caches->register",
                 "type": "unknown",
                 "args_started": true,
@@ -338,7 +310,7 @@
             }
         },
         "WordPoints_Top_Users_In_Period_Query_Cache_Transients": {
-            "160": {
+            "179": {
                 "name": "$query_caches->register",
                 "type": "unknown",
                 "args_started": true,
@@ -350,6 +322,32 @@
     "\/classes\/table.php": {
         "striped": {
             "278": false
+        }
+    },
+    "\/classes\/widget.php": {
+        "00:00": {
+            "36": {
+                "name": "array",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 4,
+                "parentheses": 1
+            }
+        },
+        "23:59": {
+            "38": {
+                "name": "array",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 6,
+                "parentheses": 1
+            }
+        },
+        ":00": {
+            "60": false
+        },
+        ":59": {
+            "75": false
         }
     }
 }

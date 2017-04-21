@@ -33,7 +33,7 @@ class WordPoints_Top_Users_In_Period_Admin_Screen extends WordPoints_Admin_Scree
 
 		?>
 
-		<form id="wordpoints-top-users-in-period-admin-form">
+		<form class="wordpoints-top-users-in-period-form">
 			<label>
 				<span class="screen-reader-text">
 					<?php esc_html_e( 'From date (inclusive):', 'wordpoints-top-users-in-period' ); ?>
@@ -42,6 +42,7 @@ class WordPoints_Top_Users_In_Period_Admin_Screen extends WordPoints_Admin_Scree
 					<?php esc_html_e( 'From (inclusive):', 'wordpoints-top-users-in-period' ); ?>
 				</span>
 				<input
+					class="wordpoints-top-users-in-period-from"
 					name="from"
 					type="date"
 					placeholder="<?php esc_attr_e( 'Date', 'wordpoints-top-users-in-period' ); ?>"
@@ -67,6 +68,7 @@ class WordPoints_Top_Users_In_Period_Admin_Screen extends WordPoints_Admin_Scree
 					<?php esc_html_e( 'To (inclusive):', 'wordpoints-top-users-in-period' ); ?>
 				</span>
 				<input
+					class="wordpoints-top-users-in-period-to"
 					name="to"
 					type="date"
 					placeholder="<?php esc_attr_e( 'Date (default: now)', 'wordpoints-top-users-in-period' ); ?>"

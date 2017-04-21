@@ -1,8 +1,8 @@
 {
     "files": {
         "\/classes\/admin\/screen.php": {
-            "size": 5246,
-            "hash": "337be80bcdf401f06951816bf9f74376",
+            "size": 5339,
+            "hash": "0a9f21a2910458413471562654d0d147",
             "errors": false
         },
         "\/classes\/block\/logs\/query.php": {
@@ -26,8 +26,8 @@
             "errors": false
         },
         "\/classes\/index.php": {
-            "size": 929,
-            "hash": "2f291d47290d79330bee8c135d96711d",
+            "size": 987,
+            "hash": "3f4909b168c3c2a91092369f74ee79ef",
             "errors": false
         },
         "\/classes\/points\/logs\/query.php": {
@@ -55,9 +55,14 @@
             "hash": "f59df6c3b260f81bbcdebdb0713b57e7",
             "errors": false
         },
+        "\/classes\/widget.php": {
+            "size": 7371,
+            "hash": "7f58b22b1022afdffa1ae4100c335005",
+            "errors": false
+        },
         "\/includes\/actions.php": {
-            "size": 806,
-            "hash": "1337747fcbcb8af19024f6de00d6cd6b",
+            "size": 888,
+            "hash": "7d48cff43e66373dfb35223f530fafcd",
             "errors": false
         },
         "\/includes\/admin\/actions.php": {
@@ -76,8 +81,8 @@
             "errors": false
         },
         "\/includes\/functions.php": {
-            "size": 4211,
-            "hash": "72e7acc0910b9443519de5f0c3eeda27",
+            "size": 4567,
+            "hash": "408296cedcf630637a7ba1fd8fddb4ee",
             "errors": false
         },
         "\/top-users-in-period.php": {
@@ -86,5 +91,5 @@
             "errors": false
         }
     },
-    "config_signature": "65e11d1a9f4284b0a86a5eb719a18410"
+    "config_signature": "e5ea0d97df33d05f79a4f8cb6f3c1400"
 }

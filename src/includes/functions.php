@@ -39,6 +39,13 @@ function wordpoints_top_users_in_period_register_scripts() {
 	);
 
 	wp_register_style(
+		'wordpoints-top-users-in-period-widget-settings'
+		, "{$assets_url}/css/widget-settings{$suffix}.css"
+		, null
+		, $version
+	);
+
+	wp_register_style(
 		'wordpoints-top-users-in-period-datepicker'
 		, "{$assets_url}/css/jquery-ui-datepicker{$suffix}.css"
 		, null
@@ -56,6 +63,18 @@ function wordpoints_top_users_in_period_register_scripts() {
 			$styles->add_data( $rtl_style, 'suffix', $suffix );
 		}
 	}
+}
+
+/**
+ * Register the widgets.
+ *
+ * @since 1.0.0
+ *
+ * @action widgets_init
+ */
+function wordpoints_top_users_in_period_register_widgets() {
+
+	register_widget( 'WordPoints_Top_Users_In_Period_Widget' );
 }
 
 /**

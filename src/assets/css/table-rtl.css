@@ -5,6 +5,10 @@
  * @since 1.0.0
  */
 
+.wordpoints-top-users-in-period {
+	table-layout: auto;
+}
+
 .wordpoints-top-users-in-period .avatar {
 	vertical-align: middle;
 	display: inline-block;
