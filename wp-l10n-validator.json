@@ -7,6 +7,16 @@
 	"ignores-tolerance": 25,
 	"ignored-functions": {
 		"WordPoints_Top_Users_In_Period_Table::__construct": [2],
-		"WordPoints_Top_Users_In_Period_Table::display_message": [2]
-	}
+		"WordPoints_Top_Users_In_Period_Table::display_message": [2],
+		"$block_types->register": true,
+		"$query_caches->register": true
+	},
+	"ignored-strings": [
+		"@",
+		":00",
+		":59",
+		"00:00",
+		"23:59",
+		"Y-m-d H:i:s"
+	]
 }
