@@ -196,13 +196,13 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 
 		$date = new DateTime( null, $timezone );
 		$date->modify( '-5 minutes' );
-		$date->setTime( $date->format( 'H' ), $date->format( 'i' ) );
+		$date->setTime( $date->format( 'H' ), $date->format( 'i' ), 1 );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
 		);
 
-		$date->modify( '-2 seconds' );
+		$date->modify( '-3 seconds' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
@@ -227,14 +227,14 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 
 		$date = new DateTime( null, $timezone );
-		$date->setTime( $date->format( 'H' ), $date->format( 'i' ) );
+		$date->setTime( $date->format( 'H' ), $date->format( 'i' ), 1 );
 		$date->modify( '-2 hours' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
 		);
 
-		$date->modify( '-2 seconds' );
+		$date->modify( '-3 seconds' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
@@ -259,14 +259,14 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 
 		$date = new DateTime( null, $timezone );
-		$date->setTime( $date->format( 'H' ), 0 );
+		$date->setTime( $date->format( 'H' ), 0, 1 );
 		$date->modify( '-2 days' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
 		);
 
-		$date->modify( '-2 seconds' );
+		$date->modify( '-3 seconds' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
@@ -289,14 +289,14 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 
 		$date = new DateTime( null, $timezone );
-		$date->setTime( 0, 0 );
+		$date->setTime( 0, 0, 1 );
 		$date->modify( '-2 weeks' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
 		);
 
-		$date->modify( '-2 seconds' );
+		$date->modify( '-3 seconds' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
@@ -321,7 +321,7 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 
 		$date = new DateTime( null, $timezone );
-		$date->setTime( 0, 0 );
+		$date->setTime( 0, 0, 1 );
 		$date->setDate(
 			$date->format( 'Y' )
 			, (int) $date->format( 'm' ) - 2
@@ -332,7 +332,7 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
 		);
 
-		$date->modify( '-2 seconds' );
+		$date->modify( '-3 seconds' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
@@ -392,14 +392,14 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 
 		$date = new DateTime( null, $timezone );
-		$date->setTime( $date->format( 'H' ), $date->format( 'i' ) );
+		$date->setTime( $date->format( 'H' ), $date->format( 'i' ), 1 );
 		$date->modify( '-4 minutes' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
 		);
 
-		$date->modify( '-2 seconds' );
+		$date->modify( '-3 seconds' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
@@ -428,14 +428,14 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 
 		$date = new DateTime( null, $timezone );
-		$date->setTime( $date->format( 'H' ), 0 );
+		$date->setTime( $date->format( 'H' ), 0, 1 );
 		$date->modify( '-1 hours' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
 		);
 
-		$date->modify( '-2 seconds' );
+		$date->modify( '-3 seconds' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
@@ -465,13 +465,13 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 
 		$date = new DateTime( null, $timezone );
 		$date->modify( '-1 days' );
-		$date->setTime( 0, 0 );
+		$date->setTime( 0, 0, 1 );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
 		);
 
-		$date->modify( '-2 seconds' );
+		$date->modify( '-3 seconds' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
@@ -500,7 +500,7 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 
 		$date = new DateTime( null, $timezone );
-		$date->setTime( 0, 0 );
+		$date->setTime( 0, 0, 1 );
 		$date->setISODate(
 			$date->format( 'Y' )
 			, (int) $date->format( 'W' ) - 1
@@ -510,7 +510,7 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
 		);
 
-		$date->modify( '-2 seconds' );
+		$date->modify( '-3 seconds' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
@@ -541,7 +541,7 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 
 		$date = new DateTime( null, $timezone );
-		$date->setTime( 0, 0 );
+		$date->setTime( 0, 0, 1 );
 
 		$weeks = 2;
 
@@ -559,7 +559,7 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
 		);
 
-		$date->modify( '-2 seconds' );
+		$date->modify( '-3 seconds' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
@@ -588,7 +588,7 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 
 		$date = new DateTime( null, $timezone );
-		$date->setTime( 0, 0 );
+		$date->setTime( 0, 0, 1 );
 		$date->setDate(
 			$date->format( 'Y' )
 			, (int) $date->format( 'm' ) - 1
@@ -599,7 +599,7 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic_Test
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
 		);
 
-		$date->modify( '-2 seconds' );
+		$date->modify( '-3 seconds' );
 
 		$this->factory->wordpoints->points_log->create(
 			array( 'date' => $date->format( 'Y-m-d H:i:s' ) )
