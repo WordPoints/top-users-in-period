@@ -100,6 +100,11 @@ class WordPoints_Top_Users_In_Period_Widget_Fixed
 			return false;
 		}
 
+		// Requires PHP 5.3+.
+		if ( ! function_exists( 'DateTime::getLastErrors' ) ) {
+			return true;
+		}
+
 		$errors = DateTime::getLastErrors();
 
 		if ( 0 !== $errors['error_count'] || 0 !== $errors['warning_count'] ) {
