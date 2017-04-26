@@ -1,30 +1,31 @@
 <?php
 
 /**
- * Widget class.
+ * Fixed widget class.
  *
  * @package WordPoints_Top_Users_In_Period
  * @since   1.0.0
  */
 
 /**
- * WordPoints Top Users Widget.
+ * Displays the top users in a fixed period.
  *
  * @since 1.0.0
  */
-class WordPoints_Top_Users_In_Period_Widget extends WordPoints_Points_Widget {
+class WordPoints_Top_Users_In_Period_Widget_Fixed
+	extends WordPoints_Points_Widget_Top_Users {
 
 	/**
 	 * @since 1.0.0
 	 */
 	public function __construct() {
 
-		parent::__construct(
+		WordPoints_Points_Widget::__construct(
 			__CLASS__
-			, _x( 'WordPoints Top Users In Period', 'widget name', 'wordpoints-top-users-in-period' )
+			, _x( 'Top Users In Fixed Period', 'widget name', 'wordpoints-top-users-in-period' )
 			, array(
-				'description' => __( 'Showcase the users who earned the most points in a given period of time.', 'wordpoints-top-users-in-period' ),
-				'wordpoints_hook_slug' => 'top_users_in_period',
+				'description' => __( 'Showcase the users who earned the most points between two fixed dates.', 'wordpoints-top-users-in-period' ),
+				'wordpoints_hook_slug' => 'top_users_in_period_fixed',
 			)
 		);
 
@@ -43,10 +44,6 @@ class WordPoints_Top_Users_In_Period_Widget extends WordPoints_Points_Widget {
 	 * @since 1.0.0
 	 */
 	protected function verify_settings( $instance ) {
-
-		if ( empty( $instance['num_users'] ) ) {
-			$instance['num_users'] = $this->defaults['num_users'];
-		}
 
 		if ( empty( $instance['from'] ) ) {
 			$instance['from'] = $this->defaults['from'];
@@ -153,10 +150,6 @@ class WordPoints_Top_Users_In_Period_Widget extends WordPoints_Points_Widget {
 
 		parent::update( $new_instance, $old_instance );
 
-		if ( ! wordpoints_posint( $this->instance['num_users'] ) ) {
-			$this->instance['num_users'] = $this->defaults['num_users'];
-		}
-
 		$this->instance['from']      = sanitize_text_field( $this->instance['from'] );
 		$this->instance['from_time'] = sanitize_text_field( $this->instance['from_time'] );
 		$this->instance['to']        = sanitize_text_field( $this->instance['to'] );
@@ -176,25 +169,16 @@ class WordPoints_Top_Users_In_Period_Widget extends WordPoints_Points_Widget {
 
 		parent::form( $instance );
 
-		if ( ! wordpoints_posint( $this->instance['num_users'] ) ) {
-			$this->instance['num_users'] = $this->defaults['num_users'];
-		}
-
 		?>
-
-		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'num_users' ) ); ?>"><?php esc_html_e( 'Number of top users to show', 'wordpoints-top-users-in-period' ); ?></label>
-			<input type="number" min="1" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'num_users' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'num_users' ) ); ?>" value="<?php echo absint( $this->instance['num_users'] ); ?>" />
-		</p>
 
 		<div class="wordpoints-top-users-in-period-form">
 			<p>
 				<label>
 					<span class="screen-reader-text">
-						<?php esc_html_e( 'From date (inclusive):', 'wordpoints-top-users-in-period' ); ?>
+						<?php esc_html_e( 'From date (inclusive)', 'wordpoints-top-users-in-period' ); ?>
 					</span>
 					<span aria-hidden="true">
-						<?php esc_html_e( 'From (inclusive):', 'wordpoints-top-users-in-period' ); ?>
+						<?php esc_html_e( 'From (inclusive)', 'wordpoints-top-users-in-period' ); ?>
 					</span>
 					<input
 						class="wordpoints-top-users-in-period-from widefat"
@@ -206,7 +190,7 @@ class WordPoints_Top_Users_In_Period_Widget extends WordPoints_Points_Widget {
 				</label>
 				<label>
 					<span class="screen-reader-text">
-						<?php esc_html_e( 'From time (inclusive):', 'wordpoints-top-users-in-period' ); ?>
+						<?php esc_html_e( 'From time (inclusive)', 'wordpoints-top-users-in-period' ); ?>
 					</span>
 					<input
 						class="widefat"
@@ -221,10 +205,10 @@ class WordPoints_Top_Users_In_Period_Widget extends WordPoints_Points_Widget {
 			<p>
 				<label>
 					<span class="screen-reader-text">
-						<?php esc_html_e( 'To date (inclusive) (default: now):', 'wordpoints-top-users-in-period' ); ?>
+						<?php esc_html_e( 'To date (inclusive) (default: now)', 'wordpoints-top-users-in-period' ); ?>
 					</span>
 					<span aria-hidden="true">
-						<?php esc_html_e( 'To (inclusive):', 'wordpoints-top-users-in-period' ); ?>
+						<?php esc_html_e( 'To (inclusive)', 'wordpoints-top-users-in-period' ); ?>
 					</span>
 					<input
 						class="wordpoints-top-users-in-period-to widefat"
@@ -236,7 +220,7 @@ class WordPoints_Top_Users_In_Period_Widget extends WordPoints_Points_Widget {
 				</label>
 				<label>
 					<span class="screen-reader-text">
-						<?php esc_html_e( 'To time (inclusive):', 'wordpoints-top-users-in-period' ); ?>
+						<?php esc_html_e( 'To time (inclusive)', 'wordpoints-top-users-in-period' ); ?>
 					</span>
 					<input
 						class="widefat"

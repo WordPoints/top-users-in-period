@@ -152,17 +152,20 @@
         }
     },
     "\/includes\/functions.php": {
-        "wordpoints-top-users-in-period-table": {
+        "widget-settings": {
             "56": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
-                "arg_count": 0,
+                "arg_count": 1,
                 "parentheses": 1
             }
         },
+        "wordpoints-top-users-in-period-": {
+            "60": false
+        },
         "rtl": {
-            "60": {
+            "62": {
                 "name": "$styles->add_data",
                 "type": "unknown",
                 "args_started": true,
@@ -171,7 +174,7 @@
             }
         },
         "replace": {
-            "60": {
+            "62": {
                 "name": "$styles->add_data",
                 "type": "unknown",
                 "args_started": true,
@@ -180,7 +183,7 @@
             }
         },
         "suffix": {
-            "63": {
+            "65": {
                 "name": "$styles->add_data",
                 "type": "unknown",
                 "args_started": true,
@@ -189,16 +192,163 @@
             }
         },
         "UTC": {
-            "106": false
+            "109": false
         },
         "-": {
-            "112": false
+            "115": false
         },
         "+": {
-            "112": false
+            "115": false
         },
         "Etc\/GMT": {
-            "114": false
+            "117": false
+        }
+    },
+    "\/classes\/widget\/dynamic.php": {
+        "present": {
+            "41": {
+                "name": "array",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 4,
+                "parentheses": 1
+            }
+        },
+        "days": {
+            "42": {
+                "name": "array",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 5,
+                "parentheses": 1
+            },
+            "242": false
+        },
+        "H": {
+            "108": {
+                "name": "$from->format",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            },
+            "112": {
+                "name": "$from->format",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            },
+            "142": {
+                "name": "$from->format",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            },
+            "146": {
+                "name": "$from->format",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            }
+        },
+        "i": {
+            "108": {
+                "name": "$from->format",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            },
+            "142": {
+                "name": "$from->format",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            }
+        },
+        "-": {
+            "138": {
+                "name": "$from->modify",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            }
+        },
+        "Y": {
+            "156": {
+                "name": "$from->format",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            },
+            "177": {
+                "name": "$from->format",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            }
+        },
+        "m": {
+            "157": {
+                "name": "$from->format",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            }
+        },
+        "w": {
+            "167": {
+                "name": "$from->format",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            }
+        },
+        "W": {
+            "178": {
+                "name": "$from->format",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            }
+        },
+        "seconds": {
+            "231": false
+        },
+        "\"\n\t\t\t\t\t\tclass=\"widefat wordpoints-top-users-in-period-units\"\n\t\t\t\t\t>": {
+            "231": false
+        },
+        "minutes": {
+            "236": false
+        },
+        "hours": {
+            "239": false
+        },
+        "weeks": {
+            "245": false
+        },
+        "months": {
+            "248": false
+        },
+        "\"\n\t\t\t\t\t\t\ttype=\"radio\"\n\t\t\t\t\t\t\tvalue=\"present\"": {
+            "269": false
+        },
+        "class=\"widefat\"\n\t\t\t\t\t\t\/>": {
+            "273": false,
+            "285": false
+        },
+        "\"\n\t\t\t\t\t\t\ttype=\"radio\"\n\t\t\t\t\t\t\tvalue=\"calendar\"": {
+            "281": false
         }
     }
 }

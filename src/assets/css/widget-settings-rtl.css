@@ -16,7 +16,7 @@ input.wordpoints-top-users-in-period-length-in-units[type=number] {
 
 select.wordpoints-top-users-in-period-units {
 	width: 50%;
-	float: right;
+	float: left;
 }
 
 .wordpoints-top-users-in-period-form input[type=date] {

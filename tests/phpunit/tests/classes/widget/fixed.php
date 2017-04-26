@@ -14,15 +14,15 @@
  *
  * @group widgets
  *
- * @covers WordPoints_Top_Users_In_Period_Widget
+ * @covers WordPoints_Top_Users_In_Period_Widget_Fixed
  */
-class WordPoints_Top_Users_In_Period_Widget_Test
+class WordPoints_Top_Users_In_Period_Widget_Fixed_Test
 	extends WordPoints_PHPUnit_TestCase_Points {
 
 	/**
 	 * @since 1.0.0
 	 */
-	protected $widget_class = 'WordPoints_Top_Users_In_Period_Widget';
+	protected $widget_class = 'WordPoints_Top_Users_In_Period_Widget_Fixed';
 
 	/**
 	 * Test that and invalid points_type setting results in an error.

@@ -53,9 +53,11 @@ function wordpoints_top_users_in_period_register_scripts() {
 	);
 
 	$styles = wp_styles();
-	$rtl_styles = array( 'wordpoints-top-users-in-period-table' );
+	$rtl_styles = array( 'table', 'widget-settings' );
 
 	foreach ( $rtl_styles as $rtl_style ) {
+
+		$rtl_style = "wordpoints-top-users-in-period-{$rtl_style}";
 
 		$styles->add_data( $rtl_style, 'rtl', 'replace' );
 
@@ -74,7 +76,8 @@ function wordpoints_top_users_in_period_register_scripts() {
  */
 function wordpoints_top_users_in_period_register_widgets() {
 
-	register_widget( 'WordPoints_Top_Users_In_Period_Widget' );
+	register_widget( 'WordPoints_Top_Users_In_Period_Widget_Dynamic' );
+	register_widget( 'WordPoints_Top_Users_In_Period_Widget_Fixed' );
 }
 
 /**

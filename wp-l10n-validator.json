@@ -8,6 +8,7 @@
 	"ignored-functions": {
 		"WordPoints_Top_Users_In_Period_Table::__construct": [2],
 		"WordPoints_Top_Users_In_Period_Table::display_message": [2],
+		"WordPoints_Points_Widget_Top_Users::get_field_name": true,
 		"$block_types->register": true,
 		"$query_caches->register": true
 	},
