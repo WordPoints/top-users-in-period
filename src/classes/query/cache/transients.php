@@ -36,10 +36,11 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Transients
 	/**
 	 * @since 1.0.0
 	 *
-	 * @param string $slug       The slug of this query cache object.
-	 * @param array  $query_args The args of the query this cache object is for.
+	 * @param string $slug         The slug of this query cache object.
+	 * @param array  $query_args   The args of the query this cache object is for.
+	 * @param bool   $network_wide Whether the query is network-wide.
 	 */
-	public function __construct( $slug, array $query_args = array() ) {
+	public function __construct( $slug, array $query_args = array(), $network_wide = false ) {
 
 		ksort( $query_args );
 
@@ -47,35 +48,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Transients
 
 		$this->transient_name = "wordpoints_top_users_in_period_query_{$query_signature}";
 
-		$this->is_network_query = $this->is_network_query( $query_args );
-	}
-
-	/**
-	 * Checks if this is a network query.
-	 *
-	 * A query is considered a network-scope query if it affects other sites on the
-	 * network beside the current one.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $query_args The query args.
-	 *
-	 * @return bool Whether this is a network query.
-	 */
-	protected function is_network_query( $query_args ) {
-
-		if ( ! is_multisite() ) {
-			return false;
-		}
-
-		return (
-			empty( $query_args['blog_id'] )
-			|| (
-				isset( $query_args['blog_id__compare'] )
-				&& '=' !== $query_args['blog_id__compare']
-			)
-			|| get_current_blog_id() !== $query_args['blog_id']
-		);
+		$this->is_network_query = $network_wide;
 	}
 
 	/**

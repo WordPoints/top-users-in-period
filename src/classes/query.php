@@ -70,6 +70,15 @@ class WordPoints_Top_Users_In_Period_Query
 	protected $end_block_info;
 
 	/**
+	 * Whether an explicit end date was specified for this query.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var bool
+	 */
+	protected $open_ended = false;
+
+	/**
 	 * The block type being used in the query.
 	 *
 	 * @since 1.0.0
@@ -111,6 +120,9 @@ class WordPoints_Top_Users_In_Period_Query
 	) {
 
 		if ( null === $end_date ) {
+
+			$this->open_ended = true;
+
 			$end_date = new DateTime(
 				'@' . current_time( 'timestamp', true )
 				, new DateTimeZone( 'UTC' )
@@ -170,6 +182,32 @@ class WordPoints_Top_Users_In_Period_Query
 	 */
 	public function get_args() {
 		return $this->args;
+	}
+
+	/**
+	 * Checks if this is a network query.
+	 *
+	 * A query is considered a network-scope query if it affects other sites on the
+	 * network beside the current one.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool Whether this is a network query.
+	 */
+	public function is_network_scope() {
+
+		if ( ! is_multisite() ) {
+			return false;
+		}
+
+		return (
+			empty( $this->args['blog_id'] )
+			|| (
+				isset( $this->args['blog_id__compare'] )
+				&& '=' !== $this->args['blog_id__compare']
+			)
+			|| get_current_blog_id() !== $this->args['blog_id']
+		);
 	}
 
 	/**
@@ -371,17 +409,34 @@ class WordPoints_Top_Users_In_Period_Query
 
 		$args = $this->args;
 		$args['start_timestamp'] = $this->start_timestamp;
-		$args['end_timestamp'] = $this->end_timestamp;
+
+		if ( ! $this->open_ended ) {
+			$args['end_timestamp'] = $this->end_timestamp;
+		}
+
+		$is_network_query = $this->is_network_scope();
 
 		$cache = wordpoints_module( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
-			->get( $slug, array( $args ) );
+			->get( $slug, array( $args, $is_network_query ) );
 
 		if ( ! $cache instanceof WordPoints_Top_Users_In_Period_Query_CacheI ) {
-			return new WordPoints_Top_Users_In_Period_Query_Cache_Transients(
-				'transients'
+
+			$slug = 'transients';
+
+			$cache = new WordPoints_Top_Users_In_Period_Query_Cache_Transients(
+				$slug
 				, $args
+				, $is_network_query
 			);
+		}
+
+		if ( $this->open_ended ) {
+			$cache_index = new WordPoints_Top_Users_In_Period_Query_Cache_Index(
+				$is_network_query
+			);
+
+			$cache_index->add( $slug, $this->args, $args['start_timestamp'] );
 		}
 
 		return $cache;

@@ -26,8 +26,8 @@
             "errors": false
         },
         "\/classes\/index.php": {
-            "size": 1073,
-            "hash": "6df2b768aa731b026a67f115adf26488",
+            "size": 1153,
+            "hash": "95ff962d2f2699d5c97eaed7c7992cfc",
             "errors": false
         },
         "\/classes\/points\/logs\/query.php": {
@@ -36,8 +36,8 @@
             "errors": false
         },
         "\/classes\/query\/cache\/transients.php": {
-            "size": 2355,
-            "hash": "fd21ff121af0c0c6e4534ec420af942d",
+            "size": 1810,
+            "hash": "b32b76dff25e69a5371639eeb2dc3e6a",
             "errors": false
         },
         "\/classes\/query\/cachei.php": {
@@ -46,8 +46,8 @@
             "errors": false
         },
         "\/classes\/query.php": {
-            "size": 25122,
-            "hash": "bf983354935ffedf59e8ec912a5e8f7c",
+            "size": 26204,
+            "hash": "9ff9b60181476619d6aee2a6375212c2",
             "errors": false
         },
         "\/classes\/table.php": {
@@ -61,13 +61,13 @@
             "errors": false
         },
         "\/classes\/widget\/fixed.php": {
-            "size": 6609,
-            "hash": "d3163495aa3e2b3c4d22c4b205b0c31c",
+            "size": 6712,
+            "hash": "dd19a405b1cefd9ad84739146630660b",
             "errors": false
         },
         "\/includes\/actions.php": {
-            "size": 888,
-            "hash": "7d48cff43e66373dfb35223f530fafcd",
+            "size": 991,
+            "hash": "d6d389cb519a86b956e2c3cc8e4afb14",
             "errors": false
         },
         "\/includes\/admin\/actions.php": {
@@ -86,13 +86,23 @@
             "errors": false
         },
         "\/includes\/functions.php": {
-            "size": 4693,
-            "hash": "9f1badce1d0f8f63150aaddd5f43e347",
+            "size": 5013,
+            "hash": "2af062365e6a217f6c004fb1b7ec7f43",
             "errors": false
         },
         "\/top-users-in-period.php": {
             "size": 2212,
             "hash": "12242ef034a066344fc1603f2bfa1a8e",
+            "errors": false
+        },
+        "\/classes\/query\/cache\/flusher.php": {
+            "size": 1721,
+            "hash": "74d34ceff47ff84664200ded776ba8d3",
+            "errors": false
+        },
+        "\/classes\/query\/cache\/index.php": {
+            "size": 2018,
+            "hash": "0a2769f58db2cf1e600a93efc3d218f9",
             "errors": false
         }
     },

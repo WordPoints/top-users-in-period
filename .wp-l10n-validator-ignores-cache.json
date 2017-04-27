@@ -61,14 +61,14 @@
     },
     "\/classes\/query.php": {
         "U": {
-            "123": {
+            "135": {
                 "name": "WordPoints_Top_Users_In_Period_Query::start_date->format",
                 "type": "unknown",
                 "args_started": true,
                 "arg_count": 0,
                 "parentheses": 1
             },
-            "124": {
+            "136": {
                 "name": "WordPoints_Top_Users_In_Period_Query::end_date->format",
                 "type": "unknown",
                 "args_started": true,
@@ -76,43 +76,40 @@
                 "parentheses": 1
             }
         },
+        "=": {
+            "207": false
+        },
         "total": {
-            "302": {
+            "340": {
                 "name": "WordPoints_Top_Users_In_Period_Query::prepare_column_where",
                 "type": "unknown",
                 "args_started": true,
                 "arg_count": 0,
                 "parentheses": 1
             },
-            "696": false
+            "751": false
         },
         "transients": {
-            "356": false,
-            "382": {
-                "name": "WordPoints_Top_Users_In_Period_Query_Cache_Transients::__construct",
-                "type": "unknown",
-                "args_started": true,
-                "arg_count": 0,
-                "parentheses": 1
-            }
+            "394": false,
+            "425": false
         },
         "!=": {
-            "464": false
+            "519": false
         },
         ") AS `t`": {
-            "662": false
+            "717": false
         },
         "limit": {
-            "692": false
+            "747": false
         },
         "start": {
-            "693": false
+            "748": false
         },
         "order": {
-            "694": false
+            "749": false
         },
         "OR": {
-            "744": {
+            "799": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
@@ -121,7 +118,7 @@
             }
         },
         "draft": {
-            "852": {
+            "907": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,

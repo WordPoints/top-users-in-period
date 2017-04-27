@@ -436,6 +436,105 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	}
 
 	/**
+	 * Tests checking if a query is network scope.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @requires WordPress multisite
+	 *
+	 * @dataProvider data_provider_network_queries
+	 *
+	 * @param array $args The query args.
+	 */
+	public function test_is_network_scope( $args ) {
+
+		$query = new WordPoints_Top_Users_In_Period_Query(
+			new DateTime( '-1 months' )
+			, null
+			, $args
+		);
+
+		$this->assertTrue( $query->is_network_scope() );
+	}
+
+	/**
+	 * Data provider for network queries.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array Network queries.
+	 */
+	public function data_provider_network_queries() {
+		return array(
+			'no_blog_id'        => array( array() ),
+			'different_blog_id' => array( array( 'blog_id' => 2 ) ),
+			'blog_id_not_='     => array(
+				array( 'blog_id' => 1, 'blog_id__compare' => '!=' ),
+			),
+		);
+	}
+
+	/**
+	 * Tests checking if a query is network scope.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @requires WordPress multisite
+	 *
+	 * @dataProvider data_provider_per_site_queries
+	 *
+	 * @param array $args The query args.
+	 */
+	public function test_is_network_scope_per_site( $args ) {
+
+		$query = new WordPoints_Top_Users_In_Period_Query(
+			new DateTime( '-1 months' )
+			, null
+			, $args
+		);
+
+		$this->assertFalse( $query->is_network_scope() );
+	}
+
+	/**
+	 * Data provider for per-site queries.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array Per-site queries.
+	 */
+	public function data_provider_per_site_queries() {
+		return array(
+			'blog_id' => array( array( 'blog_id' => 1 ) ),
+			'blog_id_=' => array(
+				array( 'blog_id' => 1, 'blog_id__compare' => '=' ),
+			),
+		);
+	}
+
+	/**
+	 * Tests checking if a query is network scope.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @requires WordPress !multisite
+	 *
+	 * @dataProvider data_provider_per_site_queries
+	 *
+	 * @param array $args The query args.
+	 */
+	public function test_is_network_scope_not_multisite( $args ) {
+
+		$query = new WordPoints_Top_Users_In_Period_Query(
+			new DateTime( '-1 months' )
+			, null
+			, $args
+		);
+
+		$this->assertFalse( $query->is_network_scope() );
+	}
+
+	/**
 	 * Tests that the count function is not supported.
 	 *
 	 * @since 1.0.0
@@ -513,6 +612,182 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$this->assertSame( $cache, $query->get() );
 
 		$this->assertSame( 1, $mock->call_count );
+	}
+
+	/**
+	 * Tests that the cache is set with the query results.
+	 *
+	 * @since 1.0.0
+	 */
+	public function test_checks_cache_open_ended() {
+
+		$this->mock_apps();
+
+		wordpoints_module( 'top_users_in_period' )
+			->get_sub_app( 'query_caches' )
+			->register(
+				'transients'
+				, 'WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache'
+			);
+
+		$query = new WordPoints_Top_Users_In_Period_Query(
+			new DateTime( '-1 months' )
+		);
+
+		$this->assertSame( array(), $query->get() );
+		$this->assertSame(
+			array()
+			, WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache::$value
+		);
+	}
+
+	/**
+	 * Tests that the cache is added to the index.
+	 *
+	 * @since 1.0.0
+	 */
+	public function test_adds_to_cache_index() {
+
+		$this->mock_apps();
+
+		wordpoints_module( 'top_users_in_period' )
+			->get_sub_app( 'query_caches' )
+			->register(
+				'mock'
+				, 'WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache'
+			);
+
+		$cache = array( 'test' );
+
+		WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache::$value = $cache;
+
+		$mock = new WordPoints_PHPUnit_Mock_Filter( 'mock' );
+		$mock->add_filter( 'wordpoints_top_user_in_period_query_cache' );
+
+		$start_date = new DateTime( '-1 months' );
+
+		$query = new WordPoints_Top_Users_In_Period_Query( $start_date );
+
+		$this->assertSame( $cache, $query->get() );
+
+		$index = new WordPoints_Top_Users_In_Period_Query_Cache_Index();
+
+		$this->assertSame(
+			array(
+				'd364de38ec891bcf70cb673a316a8a66953725f3b2648a898e93f72dad47891a' => array(
+					'args'   => array(
+						'blog_id'  => 1,
+						'order'    => 'DESC',
+						'order_by' => 'total',
+						'site_id'  => 1,
+						'start'    => 0,
+					),
+					'caches' => array(
+						'mock' => array(
+							$start_date->format( 'U' ) => true,
+						),
+					),
+				),
+			)
+			, $index->get()
+		);
+	}
+
+	/**
+	 * Tests that the cache is not added to the index when an end date is set.
+	 *
+	 * @since 1.0.0
+	 */
+	public function test_adds_to_cache_index_has_end_date() {
+
+		$this->mock_apps();
+
+		wordpoints_module( 'top_users_in_period' )
+			->get_sub_app( 'query_caches' )
+			->register(
+				'mock'
+				, 'WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache'
+			);
+
+		$cache = array( 'test' );
+
+		WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache::$value = $cache;
+
+		$mock = new WordPoints_PHPUnit_Mock_Filter( 'mock' );
+		$mock->add_filter( 'wordpoints_top_user_in_period_query_cache' );
+
+		$query = new WordPoints_Top_Users_In_Period_Query(
+			new DateTime( '-1 months' )
+			, new DateTime()
+		);
+
+		$this->assertSame( $cache, $query->get() );
+
+		$index = new WordPoints_Top_Users_In_Period_Query_Cache_Index();
+
+		$this->assertSame( array(), $index->get() );
+	}
+
+	/**
+	 * Tests that the cache is added to the network index for network queries.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @requires WordPress multisite
+	 */
+	public function test_adds_to_cache_index_network() {
+
+		$this->mock_apps();
+
+		wordpoints_module( 'top_users_in_period' )
+			->get_sub_app( 'query_caches' )
+			->register(
+				'mock'
+				, 'WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache'
+			);
+
+		$cache = array( 'test' );
+
+		WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache::$value = $cache;
+
+		$mock = new WordPoints_PHPUnit_Mock_Filter( 'mock' );
+		$mock->add_filter( 'wordpoints_top_user_in_period_query_cache' );
+
+		$start_date = new DateTime( '-1 months' );
+
+		$query = new WordPoints_Top_Users_In_Period_Query(
+			$start_date
+			, null
+			, array( 'blog_id' => 5 )
+		);
+
+		$this->assertSame( $cache, $query->get() );
+
+		$index = new WordPoints_Top_Users_In_Period_Query_Cache_Index();
+
+		$this->assertSame( array(), $index->get() );
+
+		$index = new WordPoints_Top_Users_In_Period_Query_Cache_Index( true );
+
+		$this->assertSame(
+			array(
+				'd2b248f5c56d245046870436eb4815aa7d4ab15f87f2af364cb12866b15f6381' => array(
+					'args'   => array(
+						'blog_id'  => 5,
+						'order'    => 'DESC',
+						'order_by' => 'total',
+						'site_id'  => 1,
+						'start'    => 0,
+					),
+					'caches' => array(
+						'mock' => array(
+							$start_date->format( 'U' ) => true,
+						),
+					),
+				),
+			)
+			, $index->get()
+		);
 	}
 
 	/**
