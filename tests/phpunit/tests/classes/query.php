@@ -645,6 +645,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 * Tests that the cache is added to the index.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @requires WordPress !multisite
 	 */
 	public function test_adds_to_cache_index() {
 
@@ -674,12 +676,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->assertSame(
 			array(
-				'd364de38ec891bcf70cb673a316a8a66953725f3b2648a898e93f72dad47891a' => array(
+				'3d13afbe3e05f625ab72cc2cb1619af40921a833c545520b31c550d39a90aab4' => array(
 					'args'   => array(
-						'blog_id'  => 1,
 						'order'    => 'DESC',
 						'order_by' => 'total',
-						'site_id'  => 1,
 						'start'    => 0,
 					),
 					'caches' => array(
