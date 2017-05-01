@@ -81,6 +81,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Transients_Test
 		$cache = new WordPoints_Top_Users_In_Period_Query_Cache_Transients(
 			'test'
 			, $args
+			, true
 		);
 
 		$value = array( 'test' );
