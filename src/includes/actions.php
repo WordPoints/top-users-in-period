@@ -18,6 +18,6 @@ add_action( 'admin_enqueue_scripts', 'wordpoints_top_users_in_period_register_sc
 
 add_action( 'widgets_init', 'wordpoints_top_users_in_period_register_widgets' );
 
-add_action( 'wordpoints_points_altered', 'wordpoints_top_users_in_period_query_caches_flush_for_log' );
+add_action( 'wordpoints_points_altered', 'wordpoints_top_users_in_period_query_caches_flush_for_log', 10, 4 );
 
 // EOF

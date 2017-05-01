@@ -185,15 +185,31 @@ function wordpoints_top_users_in_period_query_caches_init( $query_caches ) {
 /**
  * Flushes the query caches in reference to a particular points log.
  *
- * @since ${PROJECT_VERSION}
+ * @since 1.0.0
  *
  * @WordPress\action wordpoints_points_altered Only really needed when the points are
  *                   actually logged, but we can't hook into that action due to a
  *                   bug: https://github.com/WordPoints/wordpoints/issues/651
  */
-function wordpoints_top_users_in_period_query_caches_flush_for_log() {
+function wordpoints_top_users_in_period_query_caches_flush_for_log(
+	$user_id,
+	$points,
+	$points_type,
+	$log_type
+) {
 
-	$flusher = new WordPoints_Top_Users_In_Period_Query_Cache_Flusher();
+	$args = array(
+		'user_id'     => $user_id,
+		'points_type' => $points_type,
+		'log_type'    => $log_type,
+	);
+
+	if ( is_multisite() ) {
+		$args['blog_id'] = get_current_blog_id();
+		$args['site_id'] = get_current_network_id();
+	}
+
+	$flusher = new WordPoints_Top_Users_In_Period_Query_Cache_Flusher( $args );
 	$flusher->flush();
 }
 
