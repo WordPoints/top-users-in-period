@@ -56,7 +56,7 @@ class WordPoints_Top_Users_In_Period_Widget_Fixed
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 		$datetime = "{$instance['from']} {$instance['from_time']}:00";
 
-		if ( ! $this->validate_datetime( $datetime, $timezone ) ) {
+		if ( ! wordpoints_top_users_in_period_validate_datetime( $datetime, $timezone ) ) {
 			return new WP_Error(
 				'wordpoints_top_users_in_period_widget_invalid_from'
 				, esc_html__( 'Please enter a valid From date and time.', 'wordpoints-top-users-in-period' )
@@ -71,7 +71,7 @@ class WordPoints_Top_Users_In_Period_Widget_Fixed
 
 			$datetime = "{$instance['to']} {$instance['to_time']}:59";
 
-			if ( ! $this->validate_datetime( $datetime, $timezone ) ) {
+			if ( ! wordpoints_top_users_in_period_validate_datetime( $datetime, $timezone ) ) {
 				return new WP_Error(
 					'wordpoints_top_users_in_period_widget_invalid_from'
 					, esc_html__( 'Please enter a valid To date and time.', 'wordpoints-top-users-in-period' )
@@ -80,38 +80,6 @@ class WordPoints_Top_Users_In_Period_Widget_Fixed
 		}
 
 		return parent::verify_settings( $instance );
-	}
-
-	/**
-	 * Validate a datetime string.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string       $datetime The datetime string.
-	 * @param DateTimeZone $timezone The timezone to use.
-	 *
-	 * @return bool Whether the datetime is valid.
-	 */
-	protected function validate_datetime( $datetime, $timezone ) {
-
-		try {
-			new DateTime( $datetime, $timezone );
-		} catch ( Exception $e ) {
-			return false;
-		}
-
-		// Requires PHP 5.3+.
-		if ( ! function_exists( 'DateTime::getLastErrors' ) ) {
-			return true;
-		}
-
-		$errors = DateTime::getLastErrors();
-
-		if ( 0 !== $errors['error_count'] || 0 !== $errors['warning_count'] ) {
-			return false;
-		}
-
-		return true;
 	}
 
 	/**

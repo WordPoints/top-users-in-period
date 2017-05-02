@@ -122,6 +122,38 @@ function wordpoints_top_users_in_period_get_site_timezone() {
 }
 
 /**
+ * Validate a datetime string.
+ *
+ * @since 1.0.0
+ *
+ * @param string       $datetime The datetime string.
+ * @param DateTimeZone $timezone The timezone to use.
+ *
+ * @return bool Whether the datetime is valid.
+ */
+function wordpoints_top_users_in_period_validate_datetime( $datetime, $timezone ) {
+
+	try {
+		new DateTime( $datetime, $timezone );
+	} catch ( Exception $e ) {
+		return false;
+	}
+
+	// Requires PHP 5.3+.
+	if ( ! function_exists( 'DateTime::getLastErrors' ) ) {
+		return true;
+	}
+
+	$errors = DateTime::getLastErrors();
+
+	if ( 0 !== $errors['error_count'] || 0 !== $errors['warning_count'] ) {
+		return false;
+	}
+
+	return true;
+}
+
+/**
  * Register Top Users In Period module app when the Modules registry is initialized.
  *
  * @since 1.0.0

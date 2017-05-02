@@ -20,4 +20,9 @@ add_action( 'widgets_init', 'wordpoints_top_users_in_period_register_widgets' );
 
 add_action( 'wordpoints_points_altered', 'wordpoints_top_users_in_period_query_caches_flush_for_log', 10, 4 );
 
+WordPoints_Shortcodes::register(
+	'wordpoints_top_users_in_period'
+	, 'WordPoints_Top_Users_In_Period_Shortcode_Fixed'
+);
+
 // EOF
