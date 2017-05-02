@@ -22,7 +22,7 @@ class WordPoints_Top_Users_In_Period_Shortcode_Fixed_Test
 	/**
 	 * @since 1.0.0
 	 */
-	protected $shortcode = 'wordpoints_top_users_in_period';
+	protected $shortcode = 'wordpoints_top_users_in_fixed_period';
 
 	/**
 	 * @since 1.0.0

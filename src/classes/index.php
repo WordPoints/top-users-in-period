@@ -20,6 +20,7 @@ return array(
 	'wordpoints_top_users_in_period_query_cache_flusher' => 'query/cache/flusher.php',
 	'wordpoints_top_users_in_period_query_cache_index' => 'query/cache/index.php',
 	'wordpoints_top_users_in_period_query_cache_transients' => 'query/cache/transients.php',
+	'wordpoints_top_users_in_period_shortcode_dynamic' => 'shortcode/dynamic.php',
 	'wordpoints_top_users_in_period_shortcode_fixed' => 'shortcode/fixed.php',
 	'wordpoints_top_users_in_period_table' => 'table.php',
 	'wordpoints_top_users_in_period_widget_dynamic' => 'widget/dynamic.php',

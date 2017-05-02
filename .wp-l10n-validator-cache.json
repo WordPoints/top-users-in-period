@@ -26,8 +26,8 @@
             "errors": false
         },
         "\/classes\/index.php": {
-            "size": 1153,
-            "hash": "95ff962d2f2699d5c97eaed7c7992cfc",
+            "size": 1393,
+            "hash": "5ccdf1e6196f227a67c0b70b559efc0d",
             "errors": false
         },
         "\/classes\/points\/logs\/query.php": {
@@ -61,13 +61,13 @@
             "errors": false
         },
         "\/classes\/widget\/fixed.php": {
-            "size": 6712,
-            "hash": "dd19a405b1cefd9ad84739146630660b",
+            "size": 6108,
+            "hash": "bce74c643d9a6596dcd6b3e7e13bd347",
             "errors": false
         },
         "\/includes\/actions.php": {
-            "size": 991,
-            "hash": "d6d389cb519a86b956e2c3cc8e4afb14",
+            "size": 1254,
+            "hash": "4345301c197fb02e01479a8070997c01",
             "errors": false
         },
         "\/includes\/admin\/actions.php": {
@@ -86,8 +86,8 @@
             "errors": false
         },
         "\/includes\/functions.php": {
-            "size": 5013,
-            "hash": "2af062365e6a217f6c004fb1b7ec7f43",
+            "size": 6138,
+            "hash": "5edec4e7ab4171b2a894e253c8163ad0",
             "errors": false
         },
         "\/top-users-in-period.php": {
@@ -96,13 +96,23 @@
             "errors": false
         },
         "\/classes\/query\/cache\/flusher.php": {
-            "size": 1721,
-            "hash": "74d34ceff47ff84664200ded776ba8d3",
+            "size": 3794,
+            "hash": "0bb816e3607dc7ae4e325875f0913d66",
             "errors": false
         },
         "\/classes\/query\/cache\/index.php": {
             "size": 2018,
             "hash": "0a2769f58db2cf1e600a93efc3d218f9",
+            "errors": false
+        },
+        "\/classes\/shortcode\/dynamic.php": {
+            "size": 3869,
+            "hash": "79d4b7b0d4bc917625320c6b3c4be2ca",
+            "errors": false
+        },
+        "\/classes\/shortcode\/fixed.php": {
+            "size": 2337,
+            "hash": "c8992236165f23e66428ec133d0fad0d",
             "errors": false
         }
     },

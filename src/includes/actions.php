@@ -22,6 +22,11 @@ add_action( 'wordpoints_points_altered', 'wordpoints_top_users_in_period_query_c
 
 WordPoints_Shortcodes::register(
 	'wordpoints_top_users_in_period'
+	, 'WordPoints_Top_Users_In_Period_Shortcode_Dynamic'
+);
+
+WordPoints_Shortcodes::register(
+	'wordpoints_top_users_in_fixed_period'
 	, 'WordPoints_Top_Users_In_Period_Shortcode_Fixed'
 );
 
