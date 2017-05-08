@@ -838,7 +838,7 @@ class WordPoints_Top_Users_In_Period_Query
 		if ( $draft_blocks ) {
 			return new WP_Error(
 				'wordpoints_top_users_in_period_query_draft_blocks'
-				, '' // TODO error message
+				, ''
 				, $draft_blocks
 			);
 		}
@@ -852,7 +852,7 @@ class WordPoints_Top_Users_In_Period_Query
 				if ( ! $this->fill_block_logs( $block ) ) {
 					return new WP_Error(
 						'wordpoints_top_users_in_period_query_failed_filling_block'
-						, '' // TODO error message
+						, ''
 						, $block
 					);
 				}
