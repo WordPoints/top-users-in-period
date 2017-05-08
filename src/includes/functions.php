@@ -99,22 +99,20 @@ function wordpoints_top_users_in_period_get_site_timezone() {
 
 	$timezone_string = get_option( 'timezone_string' );
 
-	// A direct offset is being used instead of a timezone identifier.
+	// A direct offset may be used instead of a timezone identifier.
 	if ( empty( $timezone_string ) ) {
 
-		$offset = (int) get_option( 'gmt_offset' );
+		$offset = get_option( 'gmt_offset' );
 
-		if ( 0 === $offset ) {
+		if ( empty( $offset ) ) {
 
 			$timezone_string = 'UTC';
 
 		} else {
 
-			// IANA timezone database that provides PHP's timezone support uses POSIX
-			// -style (i.e. reversed) signs.
-			$sign = $offset > 0 ? '-' : '+';
-
-			$timezone_string = 'Etc/GMT' . $sign . abs( $offset );
+			$hours   = (int) $offset;
+			$minutes = ( $offset - floor( $offset ) ) * 60;
+			$timezone_string = sprintf( '%+03d:%02d', $hours, $minutes );
 		}
 	}
 

@@ -191,14 +191,14 @@
         "UTC": {
             "109": false
         },
-        "-": {
-            "115": false
-        },
-        "+": {
-            "115": false
-        },
-        "Etc\/GMT": {
-            "117": false
+        "%+03d:%02d": {
+            "115": {
+                "name": "sprintf",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            }
         }
     },
     "\/classes\/widget\/dynamic.php": {
