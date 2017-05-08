@@ -60,7 +60,7 @@ class WordPoints_Top_Users_In_Period_Get_Site_Timezone_Function_Test
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 
 		$this->assertInstanceOf( 'DateTimeZone', $timezone );
-		$this->assertSame( 'Etc/GMT+5', $timezone->getName() );
+		$this->assertSame( '-05:00', $timezone->getName() );
 	}
 
 	/**
@@ -76,7 +76,23 @@ class WordPoints_Top_Users_In_Period_Get_Site_Timezone_Function_Test
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 
 		$this->assertInstanceOf( 'DateTimeZone', $timezone );
-		$this->assertSame( 'Etc/GMT-7', $timezone->getName() );
+		$this->assertSame( '+07:00', $timezone->getName() );
+	}
+
+	/**
+	 * Tests getting the timezone when the 'gmt_offset' option is not an integer.
+	 *
+	 * @since 1.0.0
+	 */
+	public function test_using_offset_decimal() {
+
+		delete_option( 'timezone_string' );
+		update_option( 'gmt_offset', 7.25 );
+
+		$timezone = wordpoints_top_users_in_period_get_site_timezone();
+
+		$this->assertInstanceOf( 'DateTimeZone', $timezone );
+		$this->assertSame( '+07:15', $timezone->getName() );
 	}
 
 	/**
