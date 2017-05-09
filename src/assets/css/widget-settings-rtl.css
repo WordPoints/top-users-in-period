@@ -1,0 +1,30 @@
+/**
+ * Styles for the top users in period widget settings.
+ *
+ * @package WordPoints_Top_Users_In_Period
+ * @since 1.0.0
+ */
+
+/* Necessary because of .wp-full-overlay. */
+.ui-datepicker {
+	z-index: 500000 !important;
+}
+
+input.wordpoints-top-users-in-period-length-in-units[type=number] {
+	width: 48%;
+}
+
+select.wordpoints-top-users-in-period-units {
+	width: 50%;
+	float: left;
+}
+
+.wordpoints-top-users-in-period-form input[type=date] {
+	width: 70%;
+}
+
+.wordpoints-top-users-in-period-form input[type=time] {
+	width: 28%;
+}
+
+/* EOF */

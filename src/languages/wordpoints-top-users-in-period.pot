@@ -1,0 +1,233 @@
+# Copyright (C) 2017 J.D. Grimes
+# This file is distributed under the same license as the WordPoints Top Users In Period package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WordPoints Top Users In Period 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-08 13:21:53+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: classes/admin/screen.php:21 includes/admin/functions.php:31
+msgid "Top Users"
+msgstr ""
+
+#: classes/admin/screen.php:39
+msgid "From date (inclusive):"
+msgstr ""
+
+#: classes/admin/screen.php:42
+msgid "From (inclusive):"
+msgstr ""
+
+#: classes/admin/screen.php:48 classes/widget/fixed.php:160
+msgid "Date"
+msgstr ""
+
+#: classes/admin/screen.php:54
+msgid "From time (inclusive):"
+msgstr ""
+
+#: classes/admin/screen.php:59 classes/admin/screen.php:85
+#: classes/widget/fixed.php:172 classes/widget/fixed.php:202
+msgid "Time"
+msgstr ""
+
+#: classes/admin/screen.php:65
+msgid "To date (inclusive) (default: now):"
+msgstr ""
+
+#: classes/admin/screen.php:68
+msgid "To (inclusive):"
+msgstr ""
+
+#: classes/admin/screen.php:74 classes/widget/fixed.php:190
+msgid "Date (default: now)"
+msgstr ""
+
+#: classes/admin/screen.php:80
+msgid "To time (inclusive):"
+msgstr ""
+
+#: classes/admin/screen.php:90
+msgid "Points Type:"
+msgstr ""
+
+#: classes/admin/screen.php:97
+msgctxt "points types"
+msgid "All"
+msgstr ""
+
+#: classes/admin/screen.php:105
+msgid "Show Users"
+msgstr ""
+
+#: classes/query.php:243
+msgid "End date cannot come before start date."
+msgstr ""
+
+#: classes/shortcode/fixed.php:45 classes/widget/fixed.php:62
+msgid "Please enter a valid From date and time."
+msgstr ""
+
+#: classes/shortcode/fixed.php:56 classes/widget/fixed.php:77
+msgid "Please enter a valid To date and time."
+msgstr ""
+
+#: classes/table.php:82
+msgid ""
+"There was an error running the query, please try again in a few moments."
+msgstr ""
+
+#: classes/table.php:87
+msgid "No users received points during this period."
+msgstr ""
+
+#: classes/table.php:221
+msgctxt "top users table heading"
+msgid "#"
+msgstr ""
+
+#: classes/table.php:222
+msgctxt "top users table heading"
+msgid "Position"
+msgstr ""
+
+#: classes/table.php:223
+msgctxt "top users table heading"
+msgid "User"
+msgstr ""
+
+#: classes/table.php:224
+msgctxt "top users table heading"
+msgid "Points"
+msgstr ""
+
+#: classes/widget/dynamic.php:25
+msgctxt "widget name"
+msgid "Top Users In Dynamic Period"
+msgstr ""
+
+#: classes/widget/dynamic.php:27
+msgid ""
+"Showcase the users who earned the most points in the last month/day/week/etc."
+msgstr ""
+
+#: classes/widget/dynamic.php:33
+msgctxt "widget title"
+msgid "Top Users In The Last Day"
+msgstr ""
+
+#: classes/widget/dynamic.php:224
+msgid "Show top users based on the last"
+msgstr ""
+
+#: classes/widget/dynamic.php:228
+msgid "Time Units"
+msgstr ""
+
+#: classes/widget/dynamic.php:235
+msgid "Seconds"
+msgstr ""
+
+#: classes/widget/dynamic.php:238
+msgid "Minutes"
+msgstr ""
+
+#: classes/widget/dynamic.php:241
+msgid "Hours"
+msgstr ""
+
+#: classes/widget/dynamic.php:244
+msgid "Days"
+msgstr ""
+
+#: classes/widget/dynamic.php:247
+msgid "Weeks"
+msgstr ""
+
+#: classes/widget/dynamic.php:250
+msgid "Months"
+msgstr ""
+
+#: classes/widget/dynamic.php:256
+msgid "Number of units"
+msgstr ""
+
+#: classes/widget/dynamic.php:275
+msgid ""
+"Count back from the present (for example, one week would mean during the "
+"last seven days)."
+msgstr ""
+
+#: classes/widget/dynamic.php:287
+msgid ""
+"Calculate relative to the calendar (for example, one week would mean during "
+"the current calendar week)."
+msgstr ""
+
+#: classes/widget/fixed.php:25
+msgctxt "widget name"
+msgid "Top Users In Fixed Period"
+msgstr ""
+
+#: classes/widget/fixed.php:27
+msgid "Showcase the users who earned the most points between two fixed dates."
+msgstr ""
+
+#: classes/widget/fixed.php:33
+msgctxt "widget title"
+msgid "Top Users"
+msgstr ""
+
+#: classes/widget/fixed.php:151
+msgid "From date (inclusive)"
+msgstr ""
+
+#: classes/widget/fixed.php:154
+msgid "From (inclusive)"
+msgstr ""
+
+#: classes/widget/fixed.php:166
+msgid "From time (inclusive)"
+msgstr ""
+
+#: classes/widget/fixed.php:181
+msgid "To date (inclusive) (default: now)"
+msgstr ""
+
+#: classes/widget/fixed.php:184
+msgid "To (inclusive)"
+msgstr ""
+
+#: classes/widget/fixed.php:196
+msgid "To time (inclusive)"
+msgstr ""
+
+#: includes/admin/functions.php:30
+msgid "WordPoints — Top Users"
+msgstr ""
+
+#. Description of the module
+msgid "Display the top points earners within a given period of time."
+msgstr ""
+
+#. Author of the module
+msgid "J.D. Grimes"
+msgstr ""
+
+#. Author URI of the module
+msgid "https://wordpoints.org/"
+msgstr ""
+
+#. Module Name of the module
+msgid "Top Users In Period"
+msgstr ""
+
+#. Module URI of the module
+msgid "https://wordpoints.org/modules/top-users-in-period/"
+msgstr ""

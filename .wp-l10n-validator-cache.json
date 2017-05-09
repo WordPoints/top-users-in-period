@@ -1,0 +1,120 @@
+{
+    "files": {
+        "\/classes\/admin\/screen.php": {
+            "size": 5339,
+            "hash": "0a9f21a2910458413471562654d0d147",
+            "errors": false
+        },
+        "\/classes\/block\/logs\/query.php": {
+            "size": 5053,
+            "hash": "7c435cc235b1e8faf4cd4c0bd59fc277",
+            "errors": false
+        },
+        "\/classes\/block\/type\/week\/in\/seconds.php": {
+            "size": 1219,
+            "hash": "57c4dd5fc37d69d53313462dee66f61c",
+            "errors": false
+        },
+        "\/classes\/block\/typei.php": {
+            "size": 826,
+            "hash": "3d59f7c9296496a003afc1de02c031cb",
+            "errors": false
+        },
+        "\/classes\/blocks\/query.php": {
+            "size": 3699,
+            "hash": "e8472ac80f914f71365f2f2685f39d2f",
+            "errors": false
+        },
+        "\/classes\/index.php": {
+            "size": 1393,
+            "hash": "5ccdf1e6196f227a67c0b70b559efc0d",
+            "errors": false
+        },
+        "\/classes\/points\/logs\/query.php": {
+            "size": 2742,
+            "hash": "7a30f04a2bf19206b4fac3fb92551d12",
+            "errors": false
+        },
+        "\/classes\/query\/cache\/transients.php": {
+            "size": 1810,
+            "hash": "b32b76dff25e69a5371639eeb2dc3e6a",
+            "errors": false
+        },
+        "\/classes\/query\/cachei.php": {
+            "size": 775,
+            "hash": "c2b9325eb8700581d9fb828e1c889215",
+            "errors": false
+        },
+        "\/classes\/query.php": {
+            "size": 26160,
+            "hash": "f3d569fc92909930e12c87360dafc492",
+            "errors": false
+        },
+        "\/classes\/table.php": {
+            "size": 6921,
+            "hash": "f59df6c3b260f81bbcdebdb0713b57e7",
+            "errors": false
+        },
+        "\/classes\/widget\/dynamic.php": {
+            "size": 8059,
+            "hash": "df0bd3b5357fa57020808175bb308ce2",
+            "errors": false
+        },
+        "\/classes\/widget\/fixed.php": {
+            "size": 6108,
+            "hash": "bce74c643d9a6596dcd6b3e7e13bd347",
+            "errors": false
+        },
+        "\/includes\/actions.php": {
+            "size": 1254,
+            "hash": "4345301c197fb02e01479a8070997c01",
+            "errors": false
+        },
+        "\/includes\/admin\/actions.php": {
+            "size": 358,
+            "hash": "655592b33fb498686ecbe3420dba9cd7",
+            "errors": false
+        },
+        "\/includes\/admin\/functions.php": {
+            "size": 951,
+            "hash": "572df6255c9c059000990983113b1acf",
+            "errors": false
+        },
+        "\/includes\/class-un-installer.php": {
+            "size": 1186,
+            "hash": "722087a731c12ee81324fbb291552726",
+            "errors": false
+        },
+        "\/includes\/functions.php": {
+            "size": 6235,
+            "hash": "186472fd9afc1d051c7b47bb417e4b7d",
+            "errors": false
+        },
+        "\/top-users-in-period.php": {
+            "size": 2212,
+            "hash": "12242ef034a066344fc1603f2bfa1a8e",
+            "errors": false
+        },
+        "\/classes\/query\/cache\/flusher.php": {
+            "size": 3794,
+            "hash": "0bb816e3607dc7ae4e325875f0913d66",
+            "errors": false
+        },
+        "\/classes\/query\/cache\/index.php": {
+            "size": 2018,
+            "hash": "0a2769f58db2cf1e600a93efc3d218f9",
+            "errors": false
+        },
+        "\/classes\/shortcode\/dynamic.php": {
+            "size": 3869,
+            "hash": "79d4b7b0d4bc917625320c6b3c4be2ca",
+            "errors": false
+        },
+        "\/classes\/shortcode\/fixed.php": {
+            "size": 2337,
+            "hash": "c8992236165f23e66428ec133d0fad0d",
+            "errors": false
+        }
+    },
+    "config_signature": "d1f4c65c727b0519408cbf01cf91baaa"
+}
