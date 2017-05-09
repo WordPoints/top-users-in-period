@@ -46,8 +46,8 @@
             "errors": false
         },
         "\/classes\/query.php": {
-            "size": 26204,
-            "hash": "9ff9b60181476619d6aee2a6375212c2",
+            "size": 26160,
+            "hash": "f3d569fc92909930e12c87360dafc492",
             "errors": false
         },
         "\/classes\/table.php": {
@@ -86,8 +86,8 @@
             "errors": false
         },
         "\/includes\/functions.php": {
-            "size": 6070,
-            "hash": "c2b5f00a6ca59a999d732627b0aaaa60",
+            "size": 6235,
+            "hash": "186472fd9afc1d051c7b47bb417e4b7d",
             "errors": false
         },
         "\/top-users-in-period.php": {

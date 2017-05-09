@@ -60,7 +60,12 @@ class WordPoints_Top_Users_In_Period_Get_Site_Timezone_Function_Test
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 
 		$this->assertInstanceOf( 'DateTimeZone', $timezone );
-		$this->assertSame( '-05:00', $timezone->getName() );
+
+		if ( version_compare( PHP_VERSION, '5.5', '>=' ) ) {
+			$this->assertSame( '-05:00', $timezone->getName() );
+		} else {
+			$this->assertSame( 'UTC', $timezone->getName() );
+		}
 	}
 
 	/**
@@ -76,7 +81,12 @@ class WordPoints_Top_Users_In_Period_Get_Site_Timezone_Function_Test
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 
 		$this->assertInstanceOf( 'DateTimeZone', $timezone );
-		$this->assertSame( '+07:00', $timezone->getName() );
+
+		if ( version_compare( PHP_VERSION, '5.5', '>=' ) ) {
+			$this->assertSame( '+07:00', $timezone->getName() );
+		} else {
+			$this->assertSame( 'UTC', $timezone->getName() );
+		}
 	}
 
 	/**
@@ -92,7 +102,12 @@ class WordPoints_Top_Users_In_Period_Get_Site_Timezone_Function_Test
 		$timezone = wordpoints_top_users_in_period_get_site_timezone();
 
 		$this->assertInstanceOf( 'DateTimeZone', $timezone );
-		$this->assertSame( '+07:15', $timezone->getName() );
+
+		if ( version_compare( PHP_VERSION, '5.5', '>=' ) ) {
+			$this->assertSame( '+07:15', $timezone->getName() );
+		} else {
+			$this->assertSame( 'UTC', $timezone->getName() );
+		}
 	}
 
 	/**

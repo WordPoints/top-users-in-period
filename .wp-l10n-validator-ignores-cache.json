@@ -189,7 +189,14 @@
             }
         },
         "UTC": {
-            "109": false
+            "109": false,
+            "123": {
+                "name": "DateTimeZone::__construct",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            }
         },
         "%+03d:%02d": {
             "115": {
