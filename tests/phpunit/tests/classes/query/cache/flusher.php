@@ -62,6 +62,75 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 	}
 
 	/**
+	 * Tests flushing the cache when the end date is set.
+	 *
+	 * @since 1.0.1
+	 */
+	public function test_flush_end_date_set() {
+
+		$this->mock_apps();
+
+		wordpoints_module( 'top_users_in_period' )
+			->get_sub_app( 'query_caches' )
+			->register(
+				'test'
+				, 'WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache'
+			);
+
+		$cache = array( 'test' );
+
+		WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache::$value = $cache;
+
+		$index = new WordPoints_Top_Users_In_Period_Query_Cache_Index();
+
+		$index->add( 'test', array(), 5, time() + 10 );
+
+		$this->assertNotEmpty( $index->get() );
+
+		$flusher = new WordPoints_Top_Users_In_Period_Query_Cache_Flusher();
+		$flusher->flush();
+
+		$this->assertFalse(
+			WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache::$value
+		);
+	}
+
+	/**
+	 * Tests flushing the cache when the end date is set.
+	 *
+	 * @since 1.0.1
+	 */
+	public function test_flush_end_date_past() {
+
+		$this->mock_apps();
+
+		wordpoints_module( 'top_users_in_period' )
+			->get_sub_app( 'query_caches' )
+			->register(
+				'test'
+				, 'WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache'
+			);
+
+		$cache = array( 'test' );
+
+		WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache::$value = $cache;
+
+		$index = new WordPoints_Top_Users_In_Period_Query_Cache_Index();
+
+		$index->add( 'test', array(), 5, 7 );
+
+		$this->assertNotEmpty( $index->get() );
+
+		$flusher = new WordPoints_Top_Users_In_Period_Query_Cache_Flusher();
+		$flusher->flush();
+
+		$this->assertSame(
+			$cache
+			, WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache::$value
+		);
+	}
+
+	/**
 	 * Tests flushing the cache when the cache type isn't registered.
 	 *
 	 * @since 1.0.0

@@ -32,7 +32,9 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Index_Test
 			array(
 				'4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945' => array(
 					'args'   => array(),
-					'caches' => array( 'test' => array( 5 => true ) ),
+					'caches' => array(
+						'test' => array( 5 => array( 'none' => true ) ),
+					),
 				),
 			)
 			, $index->get()
@@ -67,7 +69,36 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Index_Test
 			array(
 				'43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777' => array(
 					'args'   => array( 'a' => 1, 'b' => 2 ),
-					'caches' => array( 'test' => array( 5 => true ) ),
+					'caches' => array(
+						'test' => array( 5 => array( 'none' => true ) ),
+					),
+				),
+			)
+			, $index->get()
+		);
+	}
+
+	/**
+	 * Tests adding a query with an end date.
+	 *
+	 * @since 1.0.1
+	 */
+	public function test_add_end_timestamp() {
+
+		$index = new WordPoints_Top_Users_In_Period_Query_Cache_Index();
+
+		$index->add( 'test', array(), 5, 7 );
+		$index->add( 'test', array(), 5, 8 );
+
+		$this->assertSame(
+			array(
+				'4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945' => array(
+					'args'   => array(),
+					'caches' => array(
+						'test' => array(
+							5 => array( 7 => true, 8 => true ),
+						),
+					),
 				),
 			)
 			, $index->get()
@@ -90,7 +121,12 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Index_Test
 			array(
 				'4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945' => array(
 					'args'   => array(),
-					'caches' => array( 'test' => array( 5 => true, 4 => true ) ),
+					'caches' => array(
+						'test' => array(
+							5 => array( 'none' => true ),
+							4 => array( 'none' => true ),
+						),
+					),
 				),
 			)
 			, $index->get()
@@ -114,8 +150,8 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Index_Test
 				'4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945' => array(
 					'args'   => array(),
 					'caches' => array(
-						'test'  => array( 5 => true ),
-						'other' => array( 5 => true ),
+						'test'  => array( 5 => array( 'none' => true ) ),
+						'other' => array( 5 => array( 'none' => true ) ),
 					),
 				),
 			)
@@ -139,11 +175,15 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Index_Test
 			array(
 				'4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945' => array(
 					'args'   => array(),
-					'caches' => array( 'test' => array( 5 => true ) ),
+					'caches' => array(
+						'test' => array( 5 => array( 'none' => true ) ),
+					),
 				),
 				'43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777' => array(
 					'args'   => array( 'a' => 1, 'b' => 2 ),
-					'caches' => array( 'test' => array( 5 => true ) ),
+					'caches' => array(
+						'test' => array( 5 => array( 'none' => true ) ),
+					),
 				),
 			)
 			, $index->get()
@@ -167,7 +207,9 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Index_Test
 			array(
 				'4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945' => array(
 					'args'   => array(),
-					'caches' => array( 'test' => array( 5 => true ) ),
+					'caches' => array(
+						'test' => array( 5 => array( 'none' => true ) ),
+					),
 				),
 			)
 			, get_site_option(
@@ -193,7 +235,9 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Index_Test
 			array(
 				'4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945' => array(
 					'args'   => array(),
-					'caches' => array( 'test' => array( 5 => true ) ),
+					'caches' => array(
+						'test' => array( 5 => array( 'none' => true ) ),
+					),
 				),
 			)
 			, get_option(

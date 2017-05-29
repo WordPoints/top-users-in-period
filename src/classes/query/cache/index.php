@@ -56,20 +56,26 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Index {
 	 * Adds a query to the index.
 	 *
 	 * @since 1.0.0
+	 * @since 1.0.1 The $end_timestamp arg was added.
 	 *
 	 * @param string $type            The type of cache used for the query.
 	 * @param array  $query_args      The args for the query.
 	 * @param int    $start_timestamp The start time of the query.
+	 * @param int    $end_timestamp   The end time of the query.
 	 */
-	public function add( $type, $query_args, $start_timestamp ) {
+	public function add( $type, $query_args, $start_timestamp, $end_timestamp = null ) {
 
 		ksort( $query_args );
 
 		$query_signature = wordpoints_hash( wp_json_encode( $query_args ) );
 
+		if ( is_null( $end_timestamp ) ) {
+			$end_timestamp = 'none';
+		}
+
 		$queries = $this->get();
 		$queries[ $query_signature ]['args'] = $query_args;
-		$queries[ $query_signature ]['caches'][ $type ][ $start_timestamp ] = true;
+		$queries[ $query_signature ]['caches'][ $type ][ $start_timestamp ][ $end_timestamp ] = true;
 
 		$this->save( $queries );
 	}

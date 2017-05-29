@@ -74,6 +74,8 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher {
 	 */
 	protected function flush_caches( $network_wide = false ) {
 
+		$now = time();
+
 		$caches = new WordPoints_Top_Users_In_Period_Query_Cache_Index( $network_wide );
 
 		foreach ( $caches->get() as $query ) {
@@ -88,17 +90,33 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher {
 					continue;
 				}
 
-				foreach ( $dates as $date => $unused ) {
+				foreach ( $dates as $start_date => $end_dates ) {
 
 					$args = $query['args'];
-					$args['start_timestamp'] = $date;
+					$args['start_timestamp'] = $start_date;
 
-					/** @var WordPoints_Top_Users_In_Period_Query_CacheI $cache */
-					$cache = $this->query_caches->get( $type, array( $args, $network_wide ) );
-					$cache->delete();
+					foreach ( $end_dates as $end_date => $unused ) {
+
+						if ( 'none' !== $end_date ) {
+
+							$args['end_timestamp'] = $end_date;
+
+							// If this query's period has ended, then this transaction
+							// doesn't actually fall within the period, and so the cache
+							// is still good.
+							if ( $end_date < $now ) {
+								continue;
+							}
+						}
+
+						/** @var WordPoints_Top_Users_In_Period_Query_CacheI $cache */
+						$cache = $this->query_caches->get( $type, array( $args, $network_wide ) );
+						$cache->delete();
+					}
 				}
 			}
-		}
+
+		} // End foreach ( query cache ).
 	}
 
 	/**

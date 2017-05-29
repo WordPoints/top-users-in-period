@@ -45,6 +45,68 @@ class WordPoints_Top_Users_In_Period_Un_Installer
 			),
 		),
 	);
+
+	/**
+	 * @since 1.0.1
+	 */
+	protected $updates = array(
+		'1.0.1' => array( 'single' => true, 'site' => true, 'network' => true ),
+	);
+
+	/**
+	 * Updates the network to 1.0.1.
+	 *
+	 * @since 1.0.1
+	 */
+	protected function update_network_to_1_0_1() {
+		$this->update_cache_index_to_1_0_1();
+	}
+
+	/**
+	 * Updates a site on the network to 1.0.1.
+	 *
+	 * @since 1.0.1
+	 */
+	protected function update_site_to_1_0_1() {
+		$this->update_cache_index_to_1_0_1();
+	}
+
+	/**
+	 * Updates a single site to 1.0.1.
+	 *
+	 * @since 1.0.1
+	 */
+	protected function update_single_to_1_0_1() {
+		$this->update_cache_index_to_1_0_1();
+	}
+
+	/**
+	 * Updates the cache index for 1.0.1.
+	 *
+	 * @since 1.0.1
+	 */
+	protected function update_cache_index_to_1_0_1() {
+
+		$caches = wordpoints_get_maybe_network_array_option(
+			'wordpoints_top_users_in_period_query_cache_index'
+			, 'network' === $this->context
+		);
+
+		// Each start date now holds an array that is a list of end dates.
+		foreach ( $caches as $key => $query ) {
+			foreach ( $query['caches'] as $type => $dates ) {
+				foreach ( $dates as $start_date => $unused ) {
+					$caches[ $key ]['caches'][ $type ][ $start_date ] = array( 'none' => true );
+				}
+			}
+		}
+
+		wordpoints_update_maybe_network_option(
+			'wordpoints_top_users_in_period_query_cache_index'
+			, $caches
+			, 'network' === $this->context
+		);
+	}
 }
 
 return 'WordPoints_Top_Users_In_Period_Un_Installer';

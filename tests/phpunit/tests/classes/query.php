@@ -684,7 +684,9 @@ class WordPoints_Top_Users_In_Period_Query_Test
 					),
 					'caches' => array(
 						'mock' => array(
-							$start_date->format( 'U' ) => true,
+							$start_date->format( 'U' ) => array(
+								'none' => true,
+							),
 						),
 					),
 				),
@@ -726,6 +728,61 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$index = new WordPoints_Top_Users_In_Period_Query_Cache_Index();
 
 		$this->assertSame( array(), $index->get() );
+	}
+
+	/**
+	 * Tests that the cache is added to the index when the end date is in the future.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @requires WordPress !multisite
+	 */
+	public function test_adds_to_cache_index_has_future_end_date() {
+
+		$this->mock_apps();
+
+		wordpoints_module( 'top_users_in_period' )
+			->get_sub_app( 'query_caches' )
+			->register(
+				'mock'
+				, 'WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache'
+			);
+
+		$cache = array( 'test' );
+
+		WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache::$value = $cache;
+
+		$mock = new WordPoints_PHPUnit_Mock_Filter( 'mock' );
+		$mock->add_filter( 'wordpoints_top_user_in_period_query_cache' );
+
+		$start_date = new DateTime( '-1 months' );
+		$end_date = new DateTime( '+1 months' );
+
+		$query = new WordPoints_Top_Users_In_Period_Query( $start_date, $end_date );
+
+		$this->assertSame( $cache, $query->get() );
+
+		$index = new WordPoints_Top_Users_In_Period_Query_Cache_Index();
+
+		$this->assertSame(
+			array(
+				'3d13afbe3e05f625ab72cc2cb1619af40921a833c545520b31c550d39a90aab4' => array(
+					'args'   => array(
+						'order'    => 'DESC',
+						'order_by' => 'total',
+						'start'    => 0,
+					),
+					'caches' => array(
+						'mock' => array(
+							$start_date->format( 'U' ) => array(
+								$end_date->format( 'U' ) => true,
+							),
+						),
+					),
+				),
+			)
+			, $index->get()
+		);
 	}
 
 	/**
@@ -781,7 +838,9 @@ class WordPoints_Top_Users_In_Period_Query_Test
 					),
 					'caches' => array(
 						'mock' => array(
-							$start_date->format( 'U' ) => true,
+							$start_date->format( 'U' ) => array(
+								'none' => true,
+							),
 						),
 					),
 				),
