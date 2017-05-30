@@ -431,20 +431,17 @@ class WordPoints_Top_Users_In_Period_Query
 			);
 		}
 
-		// We need to keep track of the cache for the purpose of flushing it as
-		// needed, if there is no end date or the end date is still in the future.
-		if ( $this->open_ended || $this->end_timestamp > time() ) {
-			$cache_index = new WordPoints_Top_Users_In_Period_Query_Cache_Index(
-				$is_network_query
-			);
+		// We need to keep track of the cache so that we can flush it as needed.
+		$cache_index = new WordPoints_Top_Users_In_Period_Query_Cache_Index(
+			$is_network_query
+		);
 
-			$cache_index->add(
-				$slug
-				, $this->args
-				, $args['start_timestamp']
-				, isset( $args['end_timestamp'] ) ? $args['end_timestamp'] : null
-			);
-		}
+		$cache_index->add(
+			$slug
+			, $this->args
+			, $args['start_timestamp']
+			, isset( $args['end_timestamp'] ) ? $args['end_timestamp'] : null
+		);
 
 		return $cache;
 	}

@@ -748,45 +748,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$mock = new WordPoints_PHPUnit_Mock_Filter( 'mock' );
 		$mock->add_filter( 'wordpoints_top_user_in_period_query_cache' );
 
-		$query = new WordPoints_Top_Users_In_Period_Query(
-			new DateTime( '-1 months' )
-			, new DateTime()
-		);
-
-		$this->assertSame( $cache, $query->get() );
-
-		$index = new WordPoints_Top_Users_In_Period_Query_Cache_Index();
-
-		$this->assertSame( array(), $index->get() );
-	}
-
-	/**
-	 * Tests that the cache is added to the index when the end date is in the future.
-	 *
-	 * @since 1.0.1
-	 *
-	 * @requires WordPress !multisite
-	 */
-	public function test_adds_to_cache_index_has_future_end_date() {
-
-		$this->mock_apps();
-
-		wordpoints_module( 'top_users_in_period' )
-			->get_sub_app( 'query_caches' )
-			->register(
-				'mock'
-				, 'WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache'
-			);
-
-		$cache = array( 'test' );
-
-		WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache::$value = $cache;
-
-		$mock = new WordPoints_PHPUnit_Mock_Filter( 'mock' );
-		$mock->add_filter( 'wordpoints_top_user_in_period_query_cache' );
-
 		$start_date = new DateTime( '-1 months' );
-		$end_date = new DateTime( '+1 months' );
+		$end_date   = new DateTime();
 
 		$query = new WordPoints_Top_Users_In_Period_Query( $start_date, $end_date );
 
