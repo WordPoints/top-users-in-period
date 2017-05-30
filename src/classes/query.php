@@ -1098,12 +1098,16 @@ class WordPoints_Top_Users_In_Period_Query
 
 		$query = new WordPoints_Top_Users_In_Period_Points_Logs_Query( $args );
 
-		$wpdb->query( // WPCS: unprepared SQL OK.
+		$result = $wpdb->query( // WPCS: unprepared SQL OK.
 			"
 				INSERT INTO `{$wpdb->base_prefix}wordpoints_top_users_in_period_block_logs` 
 					( `block_id`, `points`, `user_id` )
 				SELECT " . (int) $block['id'] . ',' . substr( trim( $query->get_sql() ), 6 )
 		); // WPCS: cache OK.
+
+		if ( false === $result ) {
+			return false;
+		}
 
 		$this->publish_block( $block['id'] );
 
