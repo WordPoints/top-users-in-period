@@ -38,6 +38,16 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher {
 	protected $args;
 
 	/**
+	 * Whether to only flush the caches with results matching the user ID being
+	 * flushed against.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @var bool
+	 */
+	protected $only_matching_cache;
+
+	/**
 	 * @since 1.0.0
 	 *
 	 * @param array $args Query arg values to flush against. Only caches for queries
@@ -52,14 +62,19 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher {
 	 * Flushes the query caches.
 	 *
 	 * @since 1.0.0
-	 * @since 1.0.1 The $flush_ended arg was added.
+	 * @since 1.0.1 - The $flush_ended arg was added.
+	 *              - The $only_matching_cache arg was added.
 	 *
-	 * @param bool $flush_ended Whether to flush caches for ended periods.
+	 * @param bool $flush_ended         Whether to flush caches for ended periods.
+	 * @param bool $only_matching_cache Whether to only flush caches if the results
+	 *                                  match the user that is being flushed against.
 	 */
-	public function flush( $flush_ended = false ) {
+	public function flush( $flush_ended = false, $only_matching_cache = false ) {
 
 		$this->query_caches = wordpoints_module( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' );
+
+		$this->only_matching_cache = $only_matching_cache;
 
 		$this->flush_caches( false, $flush_ended );
 
@@ -115,7 +130,10 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher {
 
 						/** @var WordPoints_Top_Users_In_Period_Query_CacheI $cache */
 						$cache = $this->query_caches->get( $type, array( $args, $network_wide ) );
-						$cache->delete();
+
+						if ( $this->should_flush_cache( $cache ) ) {
+							$cache->delete();
+						}
 					}
 				}
 			}
@@ -198,6 +216,52 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher {
 			// If the arg isn't referenced in the query at all, then there are no
 			// restrictions, so it matches.
 			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Checks if the cache should be flushed.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @param WordPoints_Top_Users_In_Period_Query_CacheI $cache The cache.
+	 *
+	 * @return bool Whether the cache should be flushed.
+	 */
+	protected function should_flush_cache(
+		WordPoints_Top_Users_In_Period_Query_CacheI $cache
+	) {
+
+		if ( $this->only_matching_cache && isset( $this->args['user_id'] ) ) {
+			if ( ! $this->is_user_in_cache( $cache, (int) $this->args['user_id'] ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Checks if a user is in the cache.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @param WordPoints_Top_Users_In_Period_Query_CacheI $cache   The cache.
+	 * @param int                                         $user_id The user ID.
+	 *
+	 * @return bool Whether the user is in the cache.
+	 */
+	protected function is_user_in_cache(
+		WordPoints_Top_Users_In_Period_Query_CacheI $cache,
+		$user_id
+	) {
+
+		foreach ( $cache->get() as $result ) {
+			if ( (int) $result->user_id === $user_id ) {
+				return true;
+			}
 		}
 
 		return false;
