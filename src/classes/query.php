@@ -516,7 +516,9 @@ class WordPoints_Top_Users_In_Period_Query
 
 				$value = array_unique( $value );
 
-				if ( count( $value ) === 1 ) {
+				$count = count( $value );
+
+				if ( 1 === $count ) {
 
 					unset( $args[ $arg ] );
 
@@ -525,6 +527,10 @@ class WordPoints_Top_Users_In_Period_Query
 					if ( 'not_in' === $operator ) {
 						$args[ "{$column}__compare" ] = '!=';
 					}
+
+				} elseif ( 0 === $count ) {
+
+					unset( $args[ $arg ] );
 
 				} else {
 

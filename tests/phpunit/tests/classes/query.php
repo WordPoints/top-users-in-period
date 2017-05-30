@@ -275,6 +275,36 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	}
 
 	/**
+	 * Tests that the args are cleaned, removing empty '*__in' args.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @requires WordPress !multisite
+	 */
+	public function test_cleans_args_removes_empty_in() {
+
+		$query = new WordPoints_Top_Users_In_Period_Query(
+			new DateTime( '-1 months' )
+			, null
+			, array(
+				'user_id__in'   => array(),
+				'total__not_in' => array(),
+			)
+		);
+
+		$query->get();
+
+		$this->assertSameSetsWithIndex(
+			array(
+				'order_by' => 'total',
+				'order'    => 'DESC',
+				'start'    => 0,
+			)
+			, $query->get_args()
+		);
+	}
+
+	/**
 	 * Tests that the args are cleaned, sorting '*__in' and '*__not_in' args.
 	 *
 	 * @since 1.0.0
