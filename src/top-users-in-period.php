@@ -44,6 +44,10 @@ WordPoints_Modules::register(
 	, __FILE__
 );
 
+if ( ! wordpoints_component_is_active( 'points' ) ) {
+	return;
+}
+
 WordPoints_Class_Autoloader::register_dir( dirname( __FILE__ ) . '/classes/' );
 
 /**
