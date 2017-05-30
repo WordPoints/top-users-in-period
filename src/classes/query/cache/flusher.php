@@ -52,27 +52,32 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher {
 	 * Flushes the query caches.
 	 *
 	 * @since 1.0.0
+	 * @since 1.0.1 The $flush_ended arg was added.
+	 *
+	 * @param bool $flush_ended Whether to flush caches for ended periods.
 	 */
-	public function flush() {
+	public function flush( $flush_ended = false ) {
 
 		$this->query_caches = wordpoints_module( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' );
 
-		$this->flush_caches();
+		$this->flush_caches( false, $flush_ended );
 
 		if ( is_multisite() ) {
-			$this->flush_caches( true );
+			$this->flush_caches( true, $flush_ended );
 		}
 	}
 
 	/**
 	 * Flushes a given set of queries' caches.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
+	 * @since 1.0.1 The $flush_ended arg was added.
 	 *
 	 * @param bool $network_wide Whether to flush the network-wide caches or not.
+	 * @param bool $flush_ended  Whether to flush caches for ended periods.
 	 */
-	protected function flush_caches( $network_wide = false ) {
+	protected function flush_caches( $network_wide = false, $flush_ended = false ) {
 
 		$now = time();
 
@@ -101,10 +106,9 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher {
 
 							$args['end_timestamp'] = $end_date;
 
-							// If this query's period has ended, then this transaction
-							// doesn't actually fall within the period, and so the cache
-							// is still good.
-							if ( $end_date < $now ) {
+							// If this query's period has ended, and we're not
+							// flushing caches for past periods, skip it.
+							if ( ! $flush_ended && $end_date < $now ) {
 								continue;
 							}
 						}
