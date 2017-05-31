@@ -250,4 +250,30 @@ function wordpoints_top_users_in_period_query_caches_flush_for_log(
 	$flusher->flush();
 }
 
+/**
+ * Deletes the block logs for a user and flushes the appropriate caches.
+ *
+ * @since 1.0.1
+ *
+ * @WordPress\action deleted_user
+ *
+ * @param int $user_id The ID of the user.
+ */
+function wordpoints_top_users_in_period_delete_block_logs_for_user( $user_id ) {
+
+	global $wpdb;
+
+	$wpdb->delete(
+		$wpdb->base_prefix . 'wordpoints_top_users_in_period_block_logs'
+		, array( 'user_id' => $user_id )
+		, '%d'
+	); // WPCS: cache OK.
+
+	$flusher = new WordPoints_Top_Users_In_Period_Query_Cache_Flusher(
+		array( 'user_id' => $user_id )
+	);
+
+	$flusher->flush( true, true );
+}
+
 // EOF

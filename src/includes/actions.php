@@ -20,6 +20,8 @@ add_action( 'widgets_init', 'wordpoints_top_users_in_period_register_widgets' );
 
 add_action( 'wordpoints_points_altered', 'wordpoints_top_users_in_period_query_caches_flush_for_log', 10, 4 );
 
+add_action( 'deleted_user', 'wordpoints_top_users_in_period_delete_block_logs_for_user' );
+
 WordPoints_Shortcodes::register(
 	'wordpoints_top_users_in_period'
 	, 'WordPoints_Top_Users_In_Period_Shortcode_Dynamic'
