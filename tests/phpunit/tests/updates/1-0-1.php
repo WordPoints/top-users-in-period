@@ -31,6 +31,11 @@ class WordPoints_Top_Users_In_Period_Update_1_0_1_Test
 	protected $wordpoints_module = 'top-users-in-period';
 
 	/**
+	 * @since 1.0.1
+	 */
+	protected $backup_globals = array( '_wp_using_ext_object_cache' );
+
+	/**
 	 * Tests that the cache index is updated.
 	 *
 	 * @since 1.0.1
@@ -102,6 +107,60 @@ class WordPoints_Top_Users_In_Period_Update_1_0_1_Test
 			)
 			, $index->get()
 		);
+	}
+
+	/**
+	 * Tests that the caches are flushed.
+	 *
+	 * @since 1.0.1
+	 */
+	public function test_caches_flushed() {
+
+		$cache = new WordPoints_Top_Users_In_Period_Query_Cache_Transients( 'test' );
+		$cache->set( array( 'test' ) );
+
+		$this->update_module();
+
+		$this->assertFalse( $cache->get() );
+	}
+
+	/**
+	 * Tests that the caches are flushed.
+	 *
+	 * @since 1.0.1
+	 */
+	public function test_caches_flushed_external_object_cache() {
+
+		wp_using_ext_object_cache( true );
+
+		$cache = new WordPoints_Top_Users_In_Period_Query_Cache_Transients( 'test' );
+		$cache->set( array( 'test' ) );
+
+		$this->update_module();
+
+		$this->assertFalse( $cache->get() );
+	}
+
+	/**
+	 * Tests that the network caches are flushed.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @requires WordPress multisite
+	 */
+	public function test_network_caches_flushed() {
+
+		$cache = new WordPoints_Top_Users_In_Period_Query_Cache_Transients(
+			'test'
+			, array()
+			, true
+		);
+
+		$cache->set( array( 'test' ) );
+
+		$this->update_module();
+
+		$this->assertFalse( $cache->get() );
 	}
 }
 

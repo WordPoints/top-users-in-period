@@ -60,6 +60,7 @@ class WordPoints_Top_Users_In_Period_Un_Installer
 	 */
 	protected function update_network_to_1_0_1() {
 		$this->update_cache_index_to_1_0_1();
+		$this->flush_caches_for_1_0_1();
 	}
 
 	/**
@@ -69,6 +70,7 @@ class WordPoints_Top_Users_In_Period_Un_Installer
 	 */
 	protected function update_site_to_1_0_1() {
 		$this->update_cache_index_to_1_0_1();
+		$this->flush_caches_for_1_0_1();
 	}
 
 	/**
@@ -78,6 +80,7 @@ class WordPoints_Top_Users_In_Period_Un_Installer
 	 */
 	protected function update_single_to_1_0_1() {
 		$this->update_cache_index_to_1_0_1();
+		$this->flush_caches_for_1_0_1();
 	}
 
 	/**
@@ -106,6 +109,31 @@ class WordPoints_Top_Users_In_Period_Un_Installer
 			, $caches
 			, 'network' === $this->context
 		);
+	}
+
+	/**
+	 * Flushes the caches for 1.0.1, in case they contain deleted users.
+	 *
+	 * @since 1.0.1
+	 */
+	protected function flush_caches_for_1_0_1() {
+
+		if ( 'network' === $this->context ) {
+
+			$this->uninstall_network_option(
+				'_site_transient_wordpoints_top_users_in_period_query_%'
+			);
+
+		} else {
+
+			$this->uninstall_option(
+				'_transient_wordpoints_top_users_in_period_query_%'
+			);
+
+			if ( wp_using_ext_object_cache() ) {
+				wp_cache_flush();
+			}
+		}
 	}
 }
 
