@@ -37,7 +37,7 @@ WordPoints_Modules::register(
 		Description: Display the top points earners within a given period of time.
 		Text Domain: wordpoints-top-users-in-period
 		Domain Path: /languages
-		Channel:     wordpoints.org
+		Server:      wordpoints.org
 		ID:          1058
 		Namespace:   Top_Users_In_Period
 	'
