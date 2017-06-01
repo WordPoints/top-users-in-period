@@ -12,8 +12,8 @@
     },
     "\/classes\/block\/logs\/query.php": {
         "total": {
-            "85": false,
-            "115": {
+            "90": false,
+            "140": {
                 "name": "WordPoints_Top_Users_In_Period_Block_Logs_Query::prepare_column_where",
                 "type": "unknown",
                 "args_started": true,
@@ -53,8 +53,8 @@
     },
     "\/classes\/points\/logs\/query.php": {
         "total": {
-            "50": false,
-            "83": {
+            "55": false,
+            "108": {
                 "name": "WordPoints_Top_Users_In_Period_Points_Logs_Query::prepare_column_where",
                 "type": "unknown",
                 "args_started": true,

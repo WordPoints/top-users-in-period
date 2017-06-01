@@ -6,8 +6,8 @@
             "errors": false
         },
         "\/classes\/block\/logs\/query.php": {
-            "size": 5053,
-            "hash": "7c435cc235b1e8faf4cd4c0bd59fc277",
+            "size": 5437,
+            "hash": "68e5962b273393c272bc4c520a8fc97b",
             "errors": false
         },
         "\/classes\/block\/type\/week\/in\/seconds.php": {
@@ -31,8 +31,8 @@
             "errors": false
         },
         "\/classes\/points\/logs\/query.php": {
-            "size": 2742,
-            "hash": "7a30f04a2bf19206b4fac3fb92551d12",
+            "size": 3126,
+            "hash": "1dc22d253765cd7a08c27321b0901f76",
             "errors": false
         },
         "\/classes\/query\/cache\/flusher.php": {
