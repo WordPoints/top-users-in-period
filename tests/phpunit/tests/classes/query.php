@@ -275,6 +275,36 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	}
 
 	/**
+	 * Tests that the args are cleaned, removing empty '*__in' args.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @requires WordPress !multisite
+	 */
+	public function test_cleans_args_removes_empty_in() {
+
+		$query = new WordPoints_Top_Users_In_Period_Query(
+			new DateTime( '-1 months' )
+			, null
+			, array(
+				'user_id__in'   => array(),
+				'total__not_in' => array(),
+			)
+		);
+
+		$query->get();
+
+		$this->assertSameSetsWithIndex(
+			array(
+				'order_by' => 'total',
+				'order'    => 'DESC',
+				'start'    => 0,
+			)
+			, $query->get_args()
+		);
+	}
+
+	/**
 	 * Tests that the args are cleaned, sorting '*__in' and '*__not_in' args.
 	 *
 	 * @since 1.0.0
@@ -684,7 +714,9 @@ class WordPoints_Top_Users_In_Period_Query_Test
 					),
 					'caches' => array(
 						'mock' => array(
-							$start_date->format( 'U' ) => true,
+							$start_date->format( 'U' ) => array(
+								'none' => true,
+							),
 						),
 					),
 				),
@@ -697,6 +729,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 * Tests that the cache is not added to the index when an end date is set.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @requires WordPress !multisite
 	 */
 	public function test_adds_to_cache_index_has_end_date() {
 
@@ -716,16 +750,34 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$mock = new WordPoints_PHPUnit_Mock_Filter( 'mock' );
 		$mock->add_filter( 'wordpoints_top_user_in_period_query_cache' );
 
-		$query = new WordPoints_Top_Users_In_Period_Query(
-			new DateTime( '-1 months' )
-			, new DateTime()
-		);
+		$start_date = new DateTime( '-1 months' );
+		$end_date   = new DateTime();
+
+		$query = new WordPoints_Top_Users_In_Period_Query( $start_date, $end_date );
 
 		$this->assertSame( $cache, $query->get() );
 
 		$index = new WordPoints_Top_Users_In_Period_Query_Cache_Index();
 
-		$this->assertSame( array(), $index->get() );
+		$this->assertSame(
+			array(
+				'3d13afbe3e05f625ab72cc2cb1619af40921a833c545520b31c550d39a90aab4' => array(
+					'args'   => array(
+						'order'    => 'DESC',
+						'order_by' => 'total',
+						'start'    => 0,
+					),
+					'caches' => array(
+						'mock' => array(
+							$start_date->format( 'U' ) => array(
+								$end_date->format( 'U' ) => true,
+							),
+						),
+					),
+				),
+			)
+			, $index->get()
+		);
 	}
 
 	/**
@@ -781,7 +833,9 @@ class WordPoints_Top_Users_In_Period_Query_Test
 					),
 					'caches' => array(
 						'mock' => array(
-							$start_date->format( 'U' ) => true,
+							$start_date->format( 'U' ) => array(
+								'none' => true,
+							),
 						),
 					),
 				),
@@ -2344,6 +2398,27 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	}
 
 	/**
+	 * Tests that it returns an error if there was one while getting the blocks.
+	 *
+	 * @since 1.0.1
+	 */
+	public function test_get_and_verify_blocks_get_blocks_error() {
+
+		$stub = $this->getMock(
+			'WordPoints_Top_Users_In_Period_Query'
+			, array( 'get_blocks' )
+			, array( new DateTime( '-1 months' ) )
+		);
+
+		$error = new WP_Error();
+
+		$stub->method( 'get_blocks' )
+			->willReturn( $error );
+
+		$this->assertSame( $error, $stub->get() );
+	}
+
+	/**
 	 * Tests that it returns an error if there were any draft blocks.
 	 *
 	 * @since 1.0.0
@@ -2351,6 +2426,16 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	public function test_get_and_verify_blocks_draft_blocks() {
 
 		global $wpdb;
+
+		$wpdb->insert(
+			$wpdb->base_prefix . 'wordpoints_top_users_in_period_query_signatures'
+			, array(
+				'signature'  => self::$default_signature,
+				'query_args' => '',
+			)
+		);
+
+		$signature_id = $wpdb->insert_id;
 
 		$block = new WordPoints_Top_Users_In_Period_Block_Type_Week_In_Seconds(
 			'test'
@@ -2363,11 +2448,11 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$wpdb->insert(
 			$wpdb->base_prefix . 'wordpoints_top_users_in_period_blocks'
 			, array(
-				'block_type'      => 'week_in_seconds',
-				'start_date'      => date( 'Y-m-d H:i:s', $info['start'] ),
-				'end_date'        => date( 'Y-m-d H:i:s', $info['end'] ),
-				'query_signature' => self::$default_signature,
-				'status'          => 'draft',
+				'block_type'         => 'week_in_seconds',
+				'start_date'         => date( 'Y-m-d H:i:s', $info['start'] ),
+				'end_date'           => date( 'Y-m-d H:i:s', $info['end'] ),
+				'query_signature_id' => $signature_id,
+				'status'             => 'draft',
 			)
 		);
 
@@ -2379,6 +2464,60 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	}
 
 	/**
+	 * Tests that it returns an error if there was one while getting the signature.
+	 *
+	 * @since 1.0.1
+	 */
+	public function test_get_blocks_error() {
+
+		$stub = $this->getMock(
+			'WordPoints_Top_Users_In_Period_Query'
+			, array( 'get_query_signature_id' )
+			, array( new DateTime( '-1 months' ) )
+		);
+
+		$stub->method( 'get_query_signature_id' )
+			->willReturn( false );
+
+		$results = $stub->get();
+
+		$this->assertWPError( $results );
+		$this->assertSame(
+			'wordpoints_top_users_in_period_query_failed_inserting_signature'
+			, $results->get_error_code()
+		);
+	}
+
+	/**
+	 * Tests that it only inserts the query signature if not found.
+	 *
+	 * @since 1.0.1
+	 */
+	public function test_get_query_signature_id() {
+
+		$signature_query = new WordPoints_Top_Users_In_Period_Query_Signatures_Query(
+			array( 'signature' => self::$default_signature )
+		);
+
+		$this->assertSame( 0, $signature_query->count() );
+
+		$query = new WordPoints_Top_Users_In_Period_Query(
+			new DateTime( '-1 months' )
+		);
+
+		$this->assertSame( array(), $query->get() );
+
+		$this->assertSame( 1, $signature_query->count() );
+
+		$signature = $signature_query->get( 'row' );
+
+		$this->assertSame(
+			is_multisite() ? '{"blog_id":1,"site_id":1}' : '[]'
+			, $signature->query_args
+		);
+	}
+
+	/**
 	 * Tests that it only gets blocks of the correct type.
 	 *
 	 * @since 1.0.0
@@ -2386,6 +2525,16 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	public function test_get_blocks_other_type() {
 
 		global $wpdb;
+
+		$wpdb->insert(
+			$wpdb->base_prefix . 'wordpoints_top_users_in_period_query_signatures'
+			, array(
+				'signature'  => self::$default_signature,
+				'query_args' => '',
+			)
+		);
+
+		$signature_id = $wpdb->insert_id;
 
 		$block = new WordPoints_Top_Users_In_Period_Block_Type_Week_In_Seconds(
 			'test'
@@ -2398,11 +2547,11 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$wpdb->insert(
 			$wpdb->base_prefix . 'wordpoints_top_users_in_period_blocks'
 			, array(
-				'block_type'      => 'other',
-				'start_date'      => date( 'Y-m-d H:i:s', $info['start'] ),
-				'end_date'        => date( 'Y-m-d H:i:s', $info['end'] ),
-				'query_signature' => self::$default_signature,
-				'status'          => 'draft',
+				'block_type'         => 'other',
+				'start_date'         => date( 'Y-m-d H:i:s', $info['start'] ),
+				'end_date'           => date( 'Y-m-d H:i:s', $info['end'] ),
+				'query_signature_id' => $signature_id,
+				'status'             => 'draft',
 			)
 		);
 
@@ -2422,6 +2571,16 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		global $wpdb;
 
+		$wpdb->insert(
+			$wpdb->base_prefix . 'wordpoints_top_users_in_period_query_signatures'
+			, array(
+				'signature'  => 'other',
+				'query_args' => '',
+			)
+		);
+
+		$signature_id = $wpdb->insert_id;
+
 		$block = new WordPoints_Top_Users_In_Period_Block_Type_Week_In_Seconds(
 			'test'
 		);
@@ -2433,11 +2592,11 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$wpdb->insert(
 			$wpdb->base_prefix . 'wordpoints_top_users_in_period_blocks'
 			, array(
-				'block_type'      => 'week_in_seconds',
-				'start_date'      => date( 'Y-m-d H:i:s', $info['start'] ),
-				'end_date'        => date( 'Y-m-d H:i:s', $info['end'] ),
-				'query_signature' => 'other',
-				'status'          => 'draft',
+				'block_type'         => 'week_in_seconds',
+				'start_date'         => date( 'Y-m-d H:i:s', $info['start'] ),
+				'end_date'           => date( 'Y-m-d H:i:s', $info['end'] ),
+				'query_signature_id' => $signature_id,
+				'status'             => 'draft',
 			)
 		);
 
@@ -2457,6 +2616,16 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		global $wpdb;
 
+		$wpdb->insert(
+			$wpdb->base_prefix . 'wordpoints_top_users_in_period_query_signatures'
+			, array(
+				'signature'  => self::$default_signature,
+				'query_args' => '',
+			)
+		);
+
+		$signature_id = $wpdb->insert_id;
+
 		$start_date = new DateTime( '-1 months' );
 		$end_date   = new DateTime();
 
@@ -2467,11 +2636,11 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$wpdb->insert(
 			$wpdb->base_prefix . 'wordpoints_top_users_in_period_blocks'
 			, array(
-				'block_type'      => 'week_in_seconds',
-				'start_date'      => date( 'Y-m-d H:i:s', $start - WEEK_IN_SECONDS ),
-				'end_date'        => date( 'Y-m-d H:i:s', $start - 1 ),
-				'query_signature' => self::$default_signature,
-				'status'          => 'draft',
+				'block_type'         => 'week_in_seconds',
+				'start_date'         => date( 'Y-m-d H:i:s', $start - WEEK_IN_SECONDS ),
+				'end_date'           => date( 'Y-m-d H:i:s', $start - 1 ),
+				'query_signature_id' => $signature_id,
+				'status'             => 'draft',
 			)
 		);
 
@@ -2479,11 +2648,11 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$wpdb->insert(
 			$wpdb->base_prefix . 'wordpoints_top_users_in_period_blocks'
 			, array(
-				'block_type'      => 'week_in_seconds',
-				'start_date'      => date( 'Y-m-d H:i:s', $end + 1 ),
-				'end_date'        => date( 'Y-m-d H:i:s', $end + WEEK_IN_SECONDS ),
-				'query_signature' => self::$default_signature,
-				'status'          => 'draft',
+				'block_type'         => 'week_in_seconds',
+				'start_date'         => date( 'Y-m-d H:i:s', $end + 1 ),
+				'end_date'           => date( 'Y-m-d H:i:s', $end + WEEK_IN_SECONDS ),
+				'query_signature_id' => $signature_id,
+				'status'             => 'draft',
 			)
 		);
 
@@ -2532,17 +2701,27 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		global $wpdb;
 
+		$wpdb->insert(
+			$wpdb->base_prefix . 'wordpoints_top_users_in_period_query_signatures'
+			, array(
+				'signature'  => self::$default_signature,
+				'query_args' => '',
+			)
+		);
+
+		$signature_id = $wpdb->insert_id;
+
 		// Pre-fill any blocks requested to be pre-filled.
 		foreach ( $pre_filled as $block ) {
 
 			$wpdb->insert(
 				$wpdb->base_prefix . 'wordpoints_top_users_in_period_blocks'
 				, array(
-					'block_type'      => 'week_in_seconds',
-					'start_date'      => date( 'Y-m-d H:i:s', $block['start'] ),
-					'end_date'        => date( 'Y-m-d H:i:s', $block['end'] ),
-					'query_signature' => self::$default_signature,
-					'status'          => 'filled',
+					'block_type'         => 'week_in_seconds',
+					'start_date'         => date( 'Y-m-d H:i:s', $block['start'] ),
+					'end_date'           => date( 'Y-m-d H:i:s', $block['end'] ),
+					'query_signature_id' => $signature_id,
+					'status'             => 'filled',
 				)
 			);
 		}

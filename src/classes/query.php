@@ -88,9 +88,19 @@ class WordPoints_Top_Users_In_Period_Query
 	protected $block_type;
 
 	/**
+	 * The ID of the signature for this query to match against in the blocks table.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @var int
+	 */
+	protected $blocks_query_signature_id;
+
+	/**
 	 * The signature for this query to match against in the blocks table.
 	 *
 	 * @since 1.0.0
+	 * @deprecated 1.0.1
 	 *
 	 * @var string
 	 */
@@ -277,10 +287,6 @@ class WordPoints_Top_Users_In_Period_Query
 			_doing_it_wrong( __METHOD__, 'The top users query doesn\'t use the $select_type parameter.', '1.0.0' );
 		}
 
-		if ( ! $this->is_query_ready ) {
-			$this->blocks_query_signature = $this->generate_blocks_query_signature();
-		}
-
 		$this->block_type = $this->get_block_type();
 		$this->start_block_info = $this->block_type->get_block_info( $this->start_timestamp );
 		$this->end_block_info = $this->block_type->get_block_info( $this->end_timestamp );
@@ -431,13 +437,17 @@ class WordPoints_Top_Users_In_Period_Query
 			);
 		}
 
-		if ( $this->open_ended ) {
-			$cache_index = new WordPoints_Top_Users_In_Period_Query_Cache_Index(
-				$is_network_query
-			);
+		// We need to keep track of the cache so that we can flush it as needed.
+		$cache_index = new WordPoints_Top_Users_In_Period_Query_Cache_Index(
+			$is_network_query
+		);
 
-			$cache_index->add( $slug, $this->args, $args['start_timestamp'] );
-		}
+		$cache_index->add(
+			$slug
+			, $this->args
+			, $args['start_timestamp']
+			, isset( $args['end_timestamp'] ) ? $args['end_timestamp'] : null
+		);
 
 		return $cache;
 	}
@@ -509,7 +519,9 @@ class WordPoints_Top_Users_In_Period_Query
 
 				$value = array_unique( $value );
 
-				if ( count( $value ) === 1 ) {
+				$count = count( $value );
+
+				if ( 1 === $count ) {
 
 					unset( $args[ $arg ] );
 
@@ -518,6 +530,10 @@ class WordPoints_Top_Users_In_Period_Query
 					if ( 'not_in' === $operator ) {
 						$args[ "{$column}__compare" ] = '!=';
 					}
+
+				} elseif ( 0 === $count ) {
+
+					unset( $args[ $arg ] );
 
 				} else {
 
@@ -543,10 +559,13 @@ class WordPoints_Top_Users_In_Period_Query
 	 * Generates the query signature to use for the blocks table.
 	 *
 	 * @since 1.0.0
+	 * @deprecated 1.0.1 No longer used.
 	 *
 	 * @return string The query signature.
 	 */
 	protected function generate_blocks_query_signature() {
+
+		_deprecated_function( __METHOD__, '1.0.1' );
 
 		$args = $this->get_block_signature_args();
 
@@ -586,6 +605,71 @@ class WordPoints_Top_Users_In_Period_Query
 		);
 
 		return $args;
+	}
+
+	/**
+	 * Gets the ID of this query's signature.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @return int|false The query signature ID, or false on failure.
+	 */
+	protected function get_query_signature_id() {
+
+		if ( $this->is_query_ready && isset( $this->blocks_query_signature_id ) ) {
+			return $this->blocks_query_signature_id;
+		}
+
+		$args = $this->get_block_signature_args();
+
+		ksort( $args );
+
+		$args = wp_json_encode( $args );
+
+		$signature = wordpoints_hash( $args );
+
+		// Back-compat.
+		$this->blocks_query_signature = $signature;
+
+		$query = new WordPoints_Top_Users_In_Period_Query_Signatures_Query(
+			array( 'fields' => 'id', 'signature' => $signature )
+		);
+
+		$id = $query->get( 'var' );
+
+		if ( ! $id ) {
+			$id = $this->insert_query_signature( $signature, $args );
+		}
+
+		$this->blocks_query_signature_id = $id;
+
+		return $this->blocks_query_signature_id;
+	}
+
+	/**
+	 * Inserts this query's signature into the database.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @param string $signature The signature.
+	 * @param string $args      The query args, JSON-encoded.
+	 *
+	 * @return int|false The ID of the signature, or false on failure.
+	 */
+	protected function insert_query_signature( $signature, $args ) {
+
+		global $wpdb;
+
+		$result = $wpdb->insert(
+			$wpdb->base_prefix . 'wordpoints_top_users_in_period_query_signatures'
+			, array( 'signature' => $signature, 'query_args' => $args )
+		);
+
+		if ( ! $result ) {
+			return false;
+		}
+
+		return $wpdb->insert_id;
 	}
 
 	/**
@@ -831,6 +915,10 @@ class WordPoints_Top_Users_In_Period_Query
 		// See if any blocks exist that fall into this period.
 		$blocks = $this->get_blocks();
 
+		if ( is_wp_error( $blocks ) ) {
+			return $blocks;
+		}
+
 		// If any of these blocks are currently in the process of being filled by
 		// another query, we can't proceed.
 		$draft_blocks = $this->check_for_draft_blocks( $blocks );
@@ -868,25 +956,34 @@ class WordPoints_Top_Users_In_Period_Query
 	 * Gets the list of blocks that fall within this query's period.
 	 *
 	 * @since 1.0.0
+	 * @since 1.0.1 May now fail and return an error object.
 	 *
-	 * @return object[] The blocks.
+	 * @return object[]|WP_error The blocks, or an error object on failure.
 	 */
 	protected function get_blocks() {
 
+		$query_signature_id = $this->get_query_signature_id();
+
+		if ( ! $query_signature_id ) {
+			return new WP_Error(
+				'wordpoints_top_users_in_period_query_failed_inserting_signature'
+			);
+		}
+
 		$block_query = new WordPoints_Top_Users_In_Period_Blocks_Query(
 			array(
-				'block_type'       => $this->block_type->get_slug(),
-				'start_date_query' => array(
+				'block_type'         => $this->block_type->get_slug(),
+				'start_date_query'   => array(
 					'inclusive' => true,
 					'after'     => '@' . $this->start_timestamp,
 				),
-				'end_date_query'   => array(
+				'end_date_query'     => array(
 					'inclusive' => true,
 					'before'    => '@' . $this->end_timestamp,
 				),
-				'query_signature'  => $this->blocks_query_signature,
-				'order_by'         => 'start_date',
-				'order'            => 'ASC',
+				'query_signature_id' => $query_signature_id,
+				'order_by'           => 'start_date',
+				'order'              => 'ASC',
 			)
 		);
 
@@ -1042,11 +1139,11 @@ class WordPoints_Top_Users_In_Period_Query
 		$rows = $wpdb->insert(
 			$wpdb->base_prefix . 'wordpoints_top_users_in_period_blocks'
 			, array(
-				'start_date'      => date( 'Y-m-d H:i:s', $block['start'] ),
-				'end_date'        => date( 'Y-m-d H:i:s', $block['end'] ),
-				'block_type'      => $this->block_type->get_slug(),
-				'query_signature' => $this->blocks_query_signature,
-				'status'          => 'draft',
+				'start_date'         => date( 'Y-m-d H:i:s', $block['start'] ),
+				'end_date'           => date( 'Y-m-d H:i:s', $block['end'] ),
+				'block_type'         => $this->block_type->get_slug(),
+				'query_signature_id' => $this->get_query_signature_id(),
+				'status'             => 'draft',
 			)
 		);
 
@@ -1091,12 +1188,16 @@ class WordPoints_Top_Users_In_Period_Query
 
 		$query = new WordPoints_Top_Users_In_Period_Points_Logs_Query( $args );
 
-		$wpdb->query( // WPCS: unprepared SQL OK.
+		$result = $wpdb->query( // WPCS: unprepared SQL OK.
 			"
 				INSERT INTO `{$wpdb->base_prefix}wordpoints_top_users_in_period_block_logs` 
 					( `block_id`, `points`, `user_id` )
 				SELECT " . (int) $block['id'] . ',' . substr( trim( $query->get_sql() ), 6 )
 		); // WPCS: cache OK.
+
+		if ( false === $result ) {
+			return false;
+		}
 
 		$this->publish_block( $block['id'] );
 

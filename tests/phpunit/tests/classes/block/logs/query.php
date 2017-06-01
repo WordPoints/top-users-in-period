@@ -98,6 +98,8 @@ class WordPoints_Top_Users_In_Period_Block_Logs_Query_Test
 
 		$query = new WordPoints_Top_Users_In_Period_Block_Logs_Query();
 
+		$this->assertSame( 2, $query->count() );
+
 		$results = $query->get();
 
 		$this->assertCount( 2, $results );

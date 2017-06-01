@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WordPoints Top Users In Period package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WordPoints Top Users In Period 1.0.0\n"
+"Project-Id-Version: WordPoints Top Users In Period 1.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-08 13:21:53+00:00\n"
+"POT-Creation-Date: 2017-06-01 21:01:17+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -66,7 +66,7 @@ msgstr ""
 msgid "Show Users"
 msgstr ""
 
-#: classes/query.php:243
+#: classes/query.php:253
 msgid "End date cannot come before start date."
 msgstr ""
 

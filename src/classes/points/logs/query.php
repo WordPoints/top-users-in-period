@@ -16,6 +16,11 @@ class WordPoints_Top_Users_In_Period_Points_Logs_Query
 	extends WordPoints_Points_Logs_Query {
 
 	/**
+	 * @since 1.0.1
+	 */
+	protected $select_count = 'SELECT COUNT(DISTINCT `user_id`)';
+
+	/**
 	 * The HAVING clause for the query.
 	 *
 	 * @since 1.0.0
@@ -53,6 +58,26 @@ class WordPoints_Top_Users_In_Period_Points_Logs_Query
 		$this->columns['total'] = array( 'format' => '%d' );
 
 		parent::__construct( $args );
+	}
+
+	/**
+	 * @since 1.0.1
+	 */
+	public function get_sql( $select_type = 'SELECT' ) {
+
+		$this->prepare_query();
+
+		$order = $this->order;
+
+		if ( 'SELECT COUNT' === $select_type ) {
+			$this->order = '';
+		}
+
+		$sql = parent::get_sql( $select_type );
+
+		$this->order = $order;
+
+		return $sql;
 	}
 
 	/**

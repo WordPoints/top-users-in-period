@@ -21,7 +21,7 @@
  * ---------------------------------------------------------------------------------|
  *
  * @package WordPoints_Top_Users_In_Period
- * @version 1.0.0
+ * @version 1.0.1
  * @author  J.D. Grimes <jdg@codesymphony.co>
  * @license GPLv2+
  */
@@ -32,17 +32,21 @@ WordPoints_Modules::register(
 		Author:      J.D. Grimes
 		Author URI:  https://wordpoints.org/
 		Module URI:  https://wordpoints.org/modules/top-users-in-period/
-		Version:     1.0.0
+		Version:     1.0.1
 		License:     GPLv2+
 		Description: Display the top points earners within a given period of time.
 		Text Domain: wordpoints-top-users-in-period
 		Domain Path: /languages
-		Channel:     wordpoints.org
+		Server:      wordpoints.org
 		ID:          1058
 		Namespace:   Top_Users_In_Period
 	'
 	, __FILE__
 );
+
+if ( ! wordpoints_component_is_active( 'points' ) ) {
+	return;
+}
 
 WordPoints_Class_Autoloader::register_dir( dirname( __FILE__ ) . '/classes/' );
 
