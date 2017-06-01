@@ -26,15 +26,21 @@ class WordPoints_Top_Users_In_Period_Un_Installer
 	protected $schema = array(
 		'global' => array(
 			'tables' => array(
+				'wordpoints_top_users_in_period_query_signatures' => '
+					id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+					signature CHAR(64) NOT NULL,
+					query_args TEXT NOT NULL,
+					PRIMARY KEY  (id),
+					UNIQUE KEY (signature)',
 				'wordpoints_top_users_in_period_blocks' => '
 					id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 					block_type VARCHAR(32) NOT NULL,
 					start_date DATETIME NOT NULL,
 					end_date DATETIME NOT NULL,
-					query_signature CHAR(64) NOT NULL,
+					query_signature_id BIGINT(20) UNSIGNED NOT NULL,
 					status VARCHAR(10) NOT NULL,
 					PRIMARY KEY  (id),
-					UNIQUE KEY block_signature (block_type,query_signature,start_date)',
+					UNIQUE KEY block_signature (block_type,query_signature_id,start_date)',
 				'wordpoints_top_users_in_period_block_logs' => '
 					id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 					block_id BIGINT(20) UNSIGNED NOT NULL,
@@ -54,6 +60,18 @@ class WordPoints_Top_Users_In_Period_Un_Installer
 	);
 
 	/**
+	 * @since 1.0.1
+	 */
+	protected function before_update() {
+
+		parent::before_update();
+
+		if ( '1.0.0' === $this->updating_from ) {
+			$this->map_shortcuts( 'schema' );
+		}
+	}
+
+	/**
 	 * Updates the network to 1.0.1.
 	 *
 	 * @since 1.0.1
@@ -61,6 +79,7 @@ class WordPoints_Top_Users_In_Period_Un_Installer
 	protected function update_network_to_1_0_1() {
 		$this->update_cache_index_to_1_0_1();
 		$this->flush_caches_for_1_0_1();
+		$this->update_db_tables_to_1_0_1();
 	}
 
 	/**
@@ -81,6 +100,7 @@ class WordPoints_Top_Users_In_Period_Un_Installer
 	protected function update_single_to_1_0_1() {
 		$this->update_cache_index_to_1_0_1();
 		$this->flush_caches_for_1_0_1();
+		$this->update_db_tables_to_1_0_1();
 	}
 
 	/**
@@ -134,6 +154,19 @@ class WordPoints_Top_Users_In_Period_Un_Installer
 				wp_cache_flush();
 			}
 		}
+	}
+
+	/**
+	 * Updates the database tables to 1.0.1.
+	 *
+	 * @since 1.0.1
+	 */
+	protected function update_db_tables_to_1_0_1() {
+
+		$this->uninstall_table( 'wordpoints_top_users_in_period_blocks' );
+		$this->uninstall_table( 'wordpoints_top_users_in_period_block_logs' );
+
+		$this->install_db_schema();
 	}
 }
 

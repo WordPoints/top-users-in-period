@@ -40,6 +40,15 @@
                 "arg_count": 1,
                 "parentheses": 1
             }
+        },
+        "id": {
+            "109": {
+                "name": "array",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            }
         }
     },
     "\/classes\/points\/logs\/query.php": {
@@ -61,14 +70,14 @@
     },
     "\/classes\/query.php": {
         "U": {
-            "135": {
+            "145": {
                 "name": "WordPoints_Top_Users_In_Period_Query::start_date->format",
                 "type": "unknown",
                 "args_started": true,
                 "arg_count": 0,
                 "parentheses": 1
             },
-            "136": {
+            "146": {
                 "name": "WordPoints_Top_Users_In_Period_Query::end_date->format",
                 "type": "unknown",
                 "args_started": true,
@@ -77,39 +86,48 @@
             }
         },
         "=": {
-            "207": false
+            "217": false
         },
         "total": {
-            "340": {
+            "346": {
                 "name": "WordPoints_Top_Users_In_Period_Query::prepare_column_where",
                 "type": "unknown",
                 "args_started": true,
                 "arg_count": 0,
                 "parentheses": 1
             },
-            "758": false
+            "835": false
         },
         "transients": {
-            "394": false,
-            "425": false
+            "400": false,
+            "431": false
         },
         "!=": {
-            "526": false
+            "531": false
+        },
+        "id": {
+            "635": {
+                "name": "array",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            }
         },
         ") AS `t`": {
-            "724": false
+            "801": false
         },
         "limit": {
-            "754": false
+            "831": false
         },
         "start": {
-            "755": false
+            "832": false
         },
         "order": {
-            "756": false
+            "833": false
         },
         "OR": {
-            "806": {
+            "883": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
@@ -118,7 +136,7 @@
             }
         },
         "draft": {
-            "914": {
+            "1004": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
@@ -433,6 +451,11 @@
     "\/classes\/query\/cache\/index.php": {
         "none": {
             "73": false
+        }
+    },
+    "\/classes\/query\/signatures\/query.php": {
+        "id": {
+            "64": false
         }
     }
 }

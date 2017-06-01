@@ -162,6 +162,54 @@ class WordPoints_Top_Users_In_Period_Update_1_0_1_Test
 
 		$this->assertFalse( $cache->get() );
 	}
+
+	/**
+	 * Tests that the database tables are updated.
+	 *
+	 * @since 1.0.1
+	 */
+	public function test_db_tables_updated() {
+
+		global $wpdb;
+
+		remove_filter( 'query', array( $this, '_drop_temporary_tables' ) );
+		remove_filter( 'query', array( $this, '_create_temporary_tables' ) );
+
+		$wpdb->query( "DROP TABLE `{$wpdb->base_prefix}wordpoints_top_users_in_period_query_signatures`" );
+		$wpdb->query( "DROP TABLE `{$wpdb->base_prefix}wordpoints_top_users_in_period_blocks`" );
+		$wpdb->query( "DROP TABLE `{$wpdb->base_prefix}wordpoints_top_users_in_period_block_logs`" );
+
+		$wpdb->query(
+			"
+				CREATE TABLE `{$wpdb->base_prefix}wordpoints_top_users_in_period_blocks` (
+					id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+					block_type VARCHAR(32) NOT NULL,
+					start_date DATETIME NOT NULL,
+					end_date DATETIME NOT NULL,
+					query_signature CHAR(64) NOT NULL,
+					status VARCHAR(10) NOT NULL,
+					PRIMARY KEY  (id),
+					UNIQUE KEY block_signature (block_type,query_signature,start_date)
+				)
+			"
+		);
+
+		$this->update_module();
+
+		$this->assertTableHasColumn(
+			'query_signature_id'
+			, "{$wpdb->base_prefix}wordpoints_top_users_in_period_blocks"
+		);
+
+		$this->assertTableHasNotColumn(
+			'query_signature'
+			, "{$wpdb->base_prefix}wordpoints_top_users_in_period_blocks"
+		);
+
+		$this->assertDBTableExists(
+			"{$wpdb->base_prefix}wordpoints_top_users_in_period_query_signatures"
+		);
+	}
 }
 
 // EOF
