@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a CHANGELOG](http://keepachangelog.com/).
 
+## [Unreleased]
+
+Nothing documented at this time.
+
+## [1.0.1] - 2017-06-01
+
+### Fixed
+
+- Queries with future end dates not having their cache flushed when new points logs
+  are added. #11
+- Blocks being published even if they were not filled successfully. #13
+- Empty `*in*` args not being removed before calculating the query signature. #14
+- The module code being loaded even when the points component isn't active. #16
+- Caches not being flushed and block logs not being cleaned when a user was deleted. #12
+- Blocks and block logs not being cleaned when a points type was deleted. #15
+- MySQL errors when attempting to count points logs or block logs queries. #17
+- Deprecated errors from `Channel` module header on WordPoints 2.4.0. #18
+
 ## [1.0.0] - 2017-05-08
 
 ### Added
@@ -28,4 +46,5 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a CH
 - Shortcode that displays totals from a dynamic period.
 
 [unreleased]: https://github.com/WordPoints/top-users-in-period/compare/master...HEAD
+[1.0.1]: https://github.com/WordPoints/top-users-in-period/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/WordPoints/top-users-in-period/compare/...1.0.0
