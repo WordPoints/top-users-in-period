@@ -276,4 +276,112 @@ function wordpoints_top_users_in_period_delete_block_logs_for_user( $user_id ) {
 	$flusher->flush( true, true );
 }
 
+/**
+ * Deletes all blocks, block logs, and query signatures relating to a points type.
+ *
+ * @since 1.0.1
+ *
+ * @param string $points_type The points type slug.
+ */
+function wordpoints_top_users_in_period_delete_blocks_for_points_type( $points_type ) {
+
+	$query = new WordPoints_Top_Users_In_Period_Query_Signatures_Query();
+
+	foreach ( $query->get() as $signature ) {
+
+		$args = json_decode( $signature->query_args, true );
+
+		// If this query is for a specific points type other than this one, skip it.
+		if (
+			isset( $args['points_type'] )
+			&& $points_type !== $args['points_type']
+			&& (
+				! isset( $args['points_type__compare'] )
+				|| '=' === $args['points_type__compare']
+			)
+		) {
+			continue;
+		}
+
+		// Or if it is for a particular set of types, but not this one, skip it.
+		if (
+			isset( $args['points_type__in'] )
+			&& ! in_array( $points_type, $args['points_type__in'], true )
+		) {
+			continue;
+		}
+
+		// We could check not_in too, but any query that specified the points type in
+		// not_in is unlikely to be run again. Same for !=, etc.
+
+		wordpoints_top_users_in_period_delete_query_signature( $signature->id );
+	}
+
+	$flusher = new WordPoints_Top_Users_In_Period_Query_Cache_Flusher(
+		array( 'points_type' => $points_type )
+	);
+
+	$flusher->flush( true );
+}
+
+/**
+ * Deletes a query signature and all blocks and block logs relating to it.
+ *
+ * Note that it does not flush the caches, that is currently expected to be done
+ * outside of the function as necessary.
+ *
+ * @since 1.0.1
+ *
+ * @param int $id The ID of the query signature to delete.
+ */
+function wordpoints_top_users_in_period_delete_query_signature( $id ) {
+
+	// Delete the blocks.
+	$blocks_query = new WordPoints_Top_Users_In_Period_Blocks_Query(
+		array( 'fields' => 'id', 'query_signature_id' => $id )
+	);
+
+	foreach ( $blocks_query->get( 'col' ) as $block_id ) {
+		wordpoints_top_users_in_period_delete_block( $block_id );
+	}
+
+	// Delete the query signature itself.
+	global $wpdb;
+
+	$wpdb->delete(
+		$wpdb->base_prefix . 'wordpoints_top_users_in_period_query_signatures'
+		, array( 'id' => $id )
+		, '%d'
+	); // WPCS: cache OK.
+}
+
+/**
+ * Deletes a block and all block logs relating to it.
+ *
+ * Note that it does not flush any affected caches, you are expected to take care of
+ * that yourself depending on the situation.
+ *
+ * @since 1.0.1
+ *
+ * @param int $id The ID of the block to delete.
+ */
+function wordpoints_top_users_in_period_delete_block( $id ) {
+
+	global $wpdb;
+
+	// Delete the logs.
+	$wpdb->delete(
+		$wpdb->base_prefix . 'wordpoints_top_users_in_period_block_logs'
+		, array( 'block_id' => $id )
+		, '%d'
+	); // WPCS: cache OK.
+
+	// Delete the block itself.
+	$wpdb->delete(
+		$wpdb->base_prefix . 'wordpoints_top_users_in_period_blocks'
+		, array( 'id' => $id )
+		, '%d'
+	); // WPCS: cache OK.
+}
+
 // EOF

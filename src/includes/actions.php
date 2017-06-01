@@ -22,6 +22,8 @@ add_action( 'wordpoints_points_altered', 'wordpoints_top_users_in_period_query_c
 
 add_action( 'deleted_user', 'wordpoints_top_users_in_period_delete_block_logs_for_user' );
 
+add_action( 'wordpoints_delete_points_type', 'wordpoints_top_users_in_period_delete_blocks_for_points_type' );
+
 WordPoints_Shortcodes::register(
 	'wordpoints_top_users_in_period'
 	, 'WordPoints_Top_Users_In_Period_Shortcode_Dynamic'

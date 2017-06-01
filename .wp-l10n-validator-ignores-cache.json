@@ -224,6 +224,15 @@
                 "arg_count": 0,
                 "parentheses": 1
             }
+        },
+        "id": {
+            "341": {
+                "name": "array",
+                "type": "unknown",
+                "args_started": true,
+                "arg_count": 0,
+                "parentheses": 1
+            }
         }
     },
     "\/classes\/widget\/dynamic.php": {

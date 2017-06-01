@@ -91,8 +91,8 @@
             "errors": false
         },
         "\/includes\/actions.php": {
-            "size": 1346,
-            "hash": "d3f187bf88b99c0d5bb06627c9ead958",
+            "size": 1458,
+            "hash": "91de7f1b00a5100a607b473c2f502c30",
             "errors": false
         },
         "\/includes\/admin\/actions.php": {
@@ -106,13 +106,13 @@
             "errors": false
         },
         "\/includes\/class-un-installer.php": {
-            "size": 3923,
-            "hash": "452760f5e0d855b76f1752aa0fce9c69",
+            "size": 3202,
+            "hash": "c5832dc39fe0c96d3298d245016db828",
             "errors": false
         },
         "\/includes\/functions.php": {
-            "size": 6808,
-            "hash": "2d139b1e40892f59bba732313a63d976",
+            "size": 9612,
+            "hash": "81dee6d8b58b389a918203e266fe805f",
             "errors": false
         },
         "\/top-users-in-period.php": {
