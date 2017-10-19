@@ -63,7 +63,7 @@ class WordPoints_Top_Users_In_Period_Table {
 		$context
 	) {
 
-		$this->query = $query;
+		$this->query   = $query;
 		$this->context = $context;
 	}
 
@@ -88,7 +88,7 @@ class WordPoints_Top_Users_In_Period_Table {
 			return;
 		}
 
-		$this->points_type = $this->get_points_type();
+		$this->points_type    = $this->get_points_type();
 		$this->column_headers = $this->get_column_headers();
 
 		$extra_classes = $this->get_extra_classes( $top_users );
@@ -107,7 +107,7 @@ class WordPoints_Top_Users_In_Period_Table {
 			foreach ( $top_users as $data ) {
 
 				$user_id = $data->user_id;
-				$points = $data->total;
+				$points  = $data->total;
 
 				$user = get_userdata( $user_id );
 

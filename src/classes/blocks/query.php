@@ -25,12 +25,12 @@ class WordPoints_Top_Users_In_Period_Blocks_Query
 	 * @since 1.0.0
 	 */
 	protected $columns = array(
-		'id' => array( 'format' => '%d', 'unsigned' => true ),
-		'block_type' => array( 'format' => '%s' ),
-		'start_date' => array( 'format' => '%s', 'is_date' => true ),
-		'end_date' => array( 'format' => '%s', 'is_date' => true ),
+		'id'                 => array( 'format' => '%d', 'unsigned' => true ),
+		'block_type'         => array( 'format' => '%s' ),
+		'start_date'         => array( 'format' => '%s', 'is_date' => true ),
+		'end_date'           => array( 'format' => '%s', 'is_date' => true ),
 		'query_signature_id' => array( 'format' => '%d', 'unsigned' => true ),
-		'status' => array( 'format' => '%s', 'values' => array( 'draft', 'filled' ) ),
+		'status'             => array( 'format' => '%s', 'values' => array( 'draft', 'filled' ) ),
 	);
 
 	/**
@@ -39,23 +39,23 @@ class WordPoints_Top_Users_In_Period_Blocks_Query
 	protected $deprecated_args = array(
 		'query_signature' => array(
 			'replacement' => 'query_signature_id',
-			'version' => '1.0.1',
-			'class' => __CLASS__,
+			'version'     => '1.0.1',
+			'class'       => __CLASS__,
 		),
 		'query_signature__compare' => array(
 			'replacement' => 'query_signature_id__compare',
-			'version' => '1.0.1',
-			'class' => __CLASS__,
+			'version'     => '1.0.1',
+			'class'       => __CLASS__,
 		),
 		'query_signature__in' => array(
 			'replacement' => 'query_signature_id__in',
-			'version' => '1.0.1',
-			'class' => __CLASS__,
+			'version'     => '1.0.1',
+			'class'       => __CLASS__,
 		),
 		'query_signature__not_in' => array(
 			'replacement' => 'query_signature_id__not_in',
-			'version' => '1.0.1',
-			'class' => __CLASS__,
+			'version'     => '1.0.1',
+			'class'       => __CLASS__,
 		),
 	);
 
@@ -88,7 +88,7 @@ class WordPoints_Top_Users_In_Period_Blocks_Query
 	 *        @type string[]     $query_signature_id__not_in  Exclude blocks for these query signature IDs from the results.
 	 *        @type string       $status                      Include only results for blocks with this status.
 	 *        @type string       $status__compare             The comparison operator to use with the above value.
-	 *        @type string[]     $status__in                  Limit results to blocks with these these statuses.
+	 *        @type string[]     $status__in                  Limit results to blocks with these statuses.
 	 *        @type string[]     $status__not_in              Exclude blocks with these statuses from the results.
 	 *        @type array        $start_date_query            Arguments for a WP_Date_Query with the 'start_date' as the default column.
 	 *        @type array        $end_date_query              Arguments for a WP_Date_Query with the 'end_date' as the default column.

@@ -191,7 +191,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Index_Test
 	}
 
 	/**
-	 * Tests that network options are used when when network wide is true.
+	 * Tests that network options are used when network wide is true.
 	 *
 	 * @since 1.0.0
 	 *
@@ -219,7 +219,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Index_Test
 	}
 
 	/**
-	 * Tests that regular options are used when when network wide is not true.
+	 * Tests that regular options are used when network wide is not true.
 	 *
 	 * @since 1.0.0
 	 *

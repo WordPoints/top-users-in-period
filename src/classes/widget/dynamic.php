@@ -24,7 +24,7 @@ class WordPoints_Top_Users_In_Period_Widget_Dynamic
 			__CLASS__
 			, _x( 'Top Users In Dynamic Period', 'widget name', 'wordpoints-top-users-in-period' )
 			, array(
-				'description' => __( 'Showcase the users who earned the most points in the last month/day/week/etc.', 'wordpoints-top-users-in-period' ),
+				'description'          => __( 'Showcase the users who earned the most points in the last month/day/week/etc.', 'wordpoints-top-users-in-period' ),
 				'wordpoints_hook_slug' => 'top_users_in_period_dynamic',
 			)
 		);

@@ -76,7 +76,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	public function test_get_end_date() {
 
 		$start_date = new DateTime( '-2 months' );
-		$end_date = new DateTime( '-1 month' );
+		$end_date   = new DateTime( '-1 month' );
 
 		$query = new WordPoints_Top_Users_In_Period_Query( $start_date, $end_date );
 
@@ -114,7 +114,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	public function test_start_after_end_date() {
 
 		$start_date = new DateTime( '-1 months' );
-		$end_date = new DateTime( '-2 month' );
+		$end_date   = new DateTime( '-2 month' );
 
 		$this->listen_for_filter( 'wordpoints_top_user_in_period_query_cache' );
 
@@ -423,11 +423,11 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->assertSameSetsWithIndex(
 			array(
-				'order_by'       => 'total',
-				'order'          => 'DESC',
-				'start'          => 0,
-				'user_id'        => 5,
-				'total__not_in'  => array( 5, 10 ),
+				'order_by'      => 'total',
+				'order'         => 'DESC',
+				'start'         => 0,
+				'user_id'       => 5,
+				'total__not_in' => array( 5, 10 ),
 			)
 			, $query->get_args()
 		);
@@ -535,7 +535,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function data_provider_per_site_queries() {
 		return array(
-			'blog_id' => array( array( 'blog_id' => 1 ) ),
+			'blog_id'   => array( array( 'blog_id' => 1 ) ),
 			'blog_id_=' => array(
 				array( 'blog_id' => 1, 'blog_id__compare' => '=' ),
 			),
@@ -1027,7 +1027,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		);
 
 		$second_info = $block->get_block_info( current_time( 'timestamp' ) );
-		$first_info = $block->get_block_info( $second_info['start'] - 1 );
+		$first_info  = $block->get_block_info( $second_info['start'] - 1 );
 
 		$stub = $this->getMock(
 			'WordPoints_Top_Users_In_Period_Query'
@@ -1057,7 +1057,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		);
 
 		$second_info = $block->get_block_info( current_time( 'timestamp' ) );
-		$first_info = $block->get_block_info( $second_info['start'] - 1 );
+		$first_info  = $block->get_block_info( $second_info['start'] - 1 );
 
 		$stub = $this->getMock(
 			'WordPoints_Top_Users_In_Period_Query'
@@ -1115,7 +1115,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			'test'
 		);
 
-		$end_info = $block->get_block_info( current_time( 'timestamp' ) );
+		$end_info   = $block->get_block_info( current_time( 'timestamp' ) );
 		$start_info = $block->get_block_info(
 			$end_info['start'] - 2 * WEEK_IN_SECONDS
 		);
@@ -1185,7 +1185,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			'test'
 		);
 
-		$end_info = $block->get_block_info( current_time( 'timestamp' ) );
+		$end_info   = $block->get_block_info( current_time( 'timestamp' ) );
 		$start_info = $block->get_block_info(
 			$end_info['start'] - 2 * WEEK_IN_SECONDS
 		);
@@ -1193,17 +1193,17 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$now = new DateTime();
 
 		return array(
-			'points_logs' => array( new DateTime( '-1 day' ), $now ),
-			'both' => array( new DateTime( '-1 month' ), $now, 2 * WEEK_IN_SECONDS ),
-			'both_start_block_exact' => array(
+			'points_logs'             => array( new DateTime( '-1 day' ), $now ),
+			'both'                    => array( new DateTime( '-1 month' ), $now, 2 * WEEK_IN_SECONDS ),
+			'both_start_block_exact'  => array(
 				new DateTime( '@' . $start_info['start'] ),
 				new DateTime( '@' . ( $end_info['end'] - 50 ) ),
 			),
-			'both_end_block_exact' => array(
+			'both_end_block_exact'    => array(
 				new DateTime( '@' . ( $start_info['start'] + 50 ) ),
 				new DateTime( '@' . $end_info['end'] ),
 			),
-			'one_block_exactly' => array(
+			'one_block_exactly'       => array(
 				new DateTime( '@' . $start_info['start'] ),
 				new DateTime( '@' . $start_info['end'] ),
 			),
@@ -1500,7 +1500,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$to_middle = null
 	) {
 
-		$user_ids = $this->create_logs( $start_date, $end_date, $to_middle );
+		$user_ids    = $this->create_logs( $start_date, $end_date, $to_middle );
 		$user_ids[2] = $this->factory->user->create();
 
 		// A transaction that took place right at the start.
@@ -2045,15 +2045,15 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$to_middle = null
 	) {
 
-		$user_ids = $this->create_logs( $start_date, $end_date, $to_middle );
+		$user_ids    = $this->create_logs( $start_date, $end_date, $to_middle );
 		$user_ids[2] = $this->factory->user->create();
 
 		// A transaction that took place right at the start.
 		$this->factory->wordpoints->points_log->create(
 			array(
-				'user_id'  => $user_ids[2],
-				'points'   => 32,
-				'date'     => $start_date->format( 'Y-m-d H:i:s' ),
+				'user_id' => $user_ids[2],
+				'points'  => 32,
+				'date'    => $start_date->format( 'Y-m-d H:i:s' ),
 			)
 		);
 
@@ -2154,10 +2154,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		// A transaction that took place right at the start.
 		$this->factory->wordpoints->points_log->create(
 			array(
-				'user_id'  => $user_ids[0],
-				'points'   => 32,
-				'date'     => $start_date->format( 'Y-m-d H:i:s' ),
-				'meta'     => array( 'test_1' => 'a' ),
+				'user_id' => $user_ids[0],
+				'points'  => 32,
+				'date'    => $start_date->format( 'Y-m-d H:i:s' ),
+				'meta'    => array( 'test_1' => 'a' ),
 			)
 		);
 
@@ -2204,9 +2204,9 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		// A transaction that took place right at the start.
 		$this->factory->wordpoints->points_log->create(
 			array(
-				'user_id'  => $user_ids[0],
-				'points'   => 32,
-				'date'     => $date->format( 'Y-m-d H:i:s' ),
+				'user_id' => $user_ids[0],
+				'points'  => 32,
+				'date'    => $date->format( 'Y-m-d H:i:s' ),
 			)
 		);
 
@@ -2216,9 +2216,9 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		// A transaction that took place right at the start.
 		$this->factory->wordpoints->points_log->create(
 			array(
-				'user_id'  => $user_ids[0],
-				'points'   => 64,
-				'date'     => $date->format( 'Y-m-d H:i:s' ),
+				'user_id' => $user_ids[0],
+				'points'  => 64,
+				'date'    => $date->format( 'Y-m-d H:i:s' ),
 			)
 		);
 
@@ -2630,7 +2630,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$end_date   = new DateTime();
 
 		$start = (int) $start_date->format( 'U' );
-		$end = (int) $end_date->format( 'U' );
+		$end   = (int) $end_date->format( 'U' );
 
 		// Before the period.
 		$wpdb->insert(
@@ -2787,118 +2787,118 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		);
 
 		$second_info = $block->get_block_info( $first_info['end'] + 1 );
-		$third_info = $block->get_block_info( $second_info['end'] + 1 );
+		$third_info  = $block->get_block_info( $second_info['end'] + 1 );
 		$fourth_info = $block->get_block_info( $third_info['end'] + 1 );
-		$fifth_info = $block->get_block_info( $fourth_info['end'] + 1 );
+		$fifth_info  = $block->get_block_info( $fourth_info['end'] + 1 );
 
 		return array(
-			'all_one_exactly' => array( array( $first_info ) ),
-			'all_one_fits_start' => array(
+			'all_one_exactly'               => array( array( $first_info ) ),
+			'all_one_fits_start'            => array(
 				array( $first_info ),
 				$first_info['start'],
 				$first_info['end'] + HOUR_IN_SECONDS,
 			),
-			'all_one_fits_end' => array(
+			'all_one_fits_end'              => array(
 				array( $first_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$first_info['end'],
 			),
-			'all_one' => array(
+			'all_one'                       => array(
 				array( $first_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$first_info['end'] + HOUR_IN_SECONDS,
 			),
-			'all_multiple_exactly' => array(
+			'all_multiple_exactly'          => array(
 				array( $first_info, $second_info, $third_info ),
 			),
-			'all_multiple_fits_start' => array(
+			'all_multiple_fits_start'       => array(
 				array( $first_info, $second_info, $third_info ),
 				$first_info['start'],
 				$third_info['end'] + HOUR_IN_SECONDS,
 			),
-			'all_multiple_fits_end' => array(
+			'all_multiple_fits_end'         => array(
 				array( $first_info, $second_info, $third_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$third_info['end'],
 			),
-			'all_multiple' => array(
+			'all_multiple'                  => array(
 				array( $first_info, $second_info, $third_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$third_info['end'] + HOUR_IN_SECONDS,
 			),
-			'start_multiple_exactly' => array(
+			'start_multiple_exactly'        => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				null,
 				null,
 				array( $third_info, $fourth_info ),
 			),
-			'start_multiple_fits_start' => array(
+			'start_multiple_fits_start'     => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'],
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $third_info, $fourth_info ),
 			),
-			'start_multiple_fits_end' => array(
+			'start_multiple_fits_end'       => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'],
 				array( $third_info, $fourth_info ),
 			),
-			'start_multiple' => array(
+			'start_multiple'                => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $third_info, $fourth_info ),
 			),
-			'end_multiple_exactly' => array(
+			'end_multiple_exactly'          => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				null,
 				null,
 				array( $first_info, $second_info ),
 			),
-			'end_multiple_fits_start' => array(
+			'end_multiple_fits_start'       => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'],
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $first_info, $second_info ),
 			),
-			'end_multiple_fits_end' => array(
+			'end_multiple_fits_end'         => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'],
 				array( $first_info, $second_info ),
 			),
-			'end_multiple' => array(
+			'end_multiple'                  => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $first_info, $second_info ),
 			),
-			'middle_multiple_exactly' => array(
+			'middle_multiple_exactly'       => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				null,
 				null,
 				array( $first_info, $fourth_info ),
 			),
-			'middle_multiple_fits_start' => array(
+			'middle_multiple_fits_start'    => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'],
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $first_info, $fourth_info ),
 			),
-			'middle_multiple_fits_end' => array(
+			'middle_multiple_fits_end'      => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'],
 				array( $first_info, $fourth_info ),
 			),
-			'middle_multiple' => array(
+			'middle_multiple'               => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $first_info, $fourth_info ),
 			),
-			'both_ends_multiple_exactly' => array(
+			'both_ends_multiple_exactly'    => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				null,
 				null,
@@ -2910,19 +2910,19 @@ class WordPoints_Top_Users_In_Period_Query_Test
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $second_info, $third_info ),
 			),
-			'both_ends_multiple_fits_end' => array(
+			'both_ends_multiple_fits_end'   => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'],
 				array( $second_info, $third_info ),
 			),
-			'both_ends_multiple' => array(
+			'both_ends_multiple'            => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $second_info, $third_info ),
 			),
-			'all_three_multiple_exactly' => array(
+			'all_three_multiple_exactly'    => array(
 				array( $first_info, $second_info, $third_info, $fourth_info, $fifth_info ),
 				null,
 				null,
@@ -2934,13 +2934,13 @@ class WordPoints_Top_Users_In_Period_Query_Test
 				$fifth_info['end'] + HOUR_IN_SECONDS,
 				array( $second_info, $fourth_info ),
 			),
-			'all_three_multiple_fits_end' => array(
+			'all_three_multiple_fits_end'   => array(
 				array( $first_info, $second_info, $third_info, $fourth_info, $fifth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fifth_info['end'],
 				array( $second_info, $fourth_info ),
 			),
-			'all_three_multiple' => array(
+			'all_three_multiple'            => array(
 				array( $first_info, $second_info, $third_info, $fourth_info, $fifth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fifth_info['end'] + HOUR_IN_SECONDS,
@@ -2981,7 +2981,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$start_info = $block->get_block_info( current_time( 'timestamp' ) );
 
 		$start_date = new DateTime( '@' . $start_info['start'] );
-		$end_date = new DateTime( '@' . $start_info['end'] );
+		$end_date   = new DateTime( '@' . $start_info['end'] );
 
 		$user_id_1 = $this->factory->user->create();
 		$user_id_2 = $this->factory->user->create();
@@ -2990,8 +2990,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$this->factory->wordpoints->points_log->create(
 			array(
 				'user_id' => $user_id_1,
-				'points' => 1,
-				'date' => $start_date->format( 'Y-m-d H:i:s' ),
+				'points'  => 1,
+				'date'    => $start_date->format( 'Y-m-d H:i:s' ),
 			)
 		);
 
@@ -2999,8 +2999,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$this->factory->wordpoints->points_log->create(
 			array(
 				'user_id' => $user_id_2,
-				'points' => 2,
-				'date' => $end_date->format( 'Y-m-d H:i:s' ),
+				'points'  => 2,
+				'date'    => $end_date->format( 'Y-m-d H:i:s' ),
 			)
 		);
 
@@ -3008,8 +3008,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$this->factory->wordpoints->points_log->create(
 			array(
 				'user_id' => $user_id_1,
-				'points' => 3,
-				'date' => date(
+				'points'  => 3,
+				'date'    => date(
 					'Y-m-d H:i:s'
 					, (int) $start_date->format( 'U' ) + HOUR_IN_SECONDS
 				),
@@ -3020,8 +3020,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$this->factory->wordpoints->points_log->create(
 			array(
 				'user_id' => $user_id_1,
-				'points' => 5,
-				'date' => date(
+				'points'  => 5,
+				'date'    => date(
 					'Y-m-d H:i:s'
 					, (int) $start_date->format( 'U' ) - 1
 				),
@@ -3032,8 +3032,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$this->factory->wordpoints->points_log->create(
 			array(
 				'user_id' => $user_id_2,
-				'points' => 7,
-				'date' => date(
+				'points'  => 7,
+				'date'    => date(
 					'Y-m-d H:i:s'
 					, (int) $end_date->format( 'U' ) + 1
 				),
@@ -3076,7 +3076,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$start_info = $block->get_block_info( current_time( 'timestamp' ) );
 
 		$start_date = new DateTime( '@' . $start_info['start'] );
-		$end_date = new DateTime( '@' . $start_info['end'] );
+		$end_date   = new DateTime( '@' . $start_info['end'] );
 
 		$query = new WordPoints_Top_Users_In_Period_Query( $start_date, $end_date );
 

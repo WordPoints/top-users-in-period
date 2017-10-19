@@ -432,7 +432,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 			),
 			'points_type_different_compare_equals' => array(
 				array(
-					'points_type' => 'points',
+					'points_type'          => 'points',
 					'points_type__compare' => '=',
 				),
 				array( 'points_type' => 'other' ),
@@ -451,7 +451,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 			),
 			'log_type_different_compare_equals' => array(
 				array(
-					'log_type' => 'test',
+					'log_type'          => 'test',
 					'log_type__compare' => '=',
 				),
 				array( 'log_type' => 'other' ),
@@ -470,7 +470,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 			),
 			'user_id_different_compare_equals' => array(
 				array(
-					'user_id' => 1,
+					'user_id'          => 1,
 					'user_id__compare' => '=',
 				),
 				array( 'user_id' => 2 ),
@@ -489,7 +489,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 			),
 			'blog_id_different_compare_equals' => array(
 				array(
-					'blog_id' => 1,
+					'blog_id'          => 1,
 					'blog_id__compare' => '=',
 				),
 				array( 'blog_id' => 2 ),
@@ -508,7 +508,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 			),
 			'site_id_different_compare_equals' => array(
 				array(
-					'site_id' => 1,
+					'site_id'          => 1,
 					'site_id__compare' => '=',
 				),
 				array( 'site_id' => 2 ),
@@ -582,21 +582,21 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 			),
 			'points_type_different_compare_not_equals' => array(
 				array(
-					'points_type' => 'points',
+					'points_type'          => 'points',
 					'points_type__compare' => '!=',
 				),
 				array( 'points_type' => 'other' ),
 			),
 			'points_type_same_compare_not_equals' => array(
 				array(
-					'points_type' => 'points',
+					'points_type'          => 'points',
 					'points_type__compare' => '!=',
 				),
 				array( 'points_type' => 'points' ),
 			),
 			'points_type_same_compare_equals' => array(
 				array(
-					'points_type' => 'points',
+					'points_type'          => 'points',
 					'points_type__compare' => '=',
 				),
 				array( 'points_type' => 'points' ),
@@ -619,21 +619,21 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 			),
 			'log_type_different_compare_not_equals' => array(
 				array(
-					'log_type' => 'test',
+					'log_type'          => 'test',
 					'log_type__compare' => '!=',
 				),
 				array( 'log_type' => 'other' ),
 			),
 			'log_type_same_compare_not_equals' => array(
 				array(
-					'log_type' => 'test',
+					'log_type'          => 'test',
 					'log_type__compare' => '!=',
 				),
 				array( 'log_type' => 'test' ),
 			),
 			'log_type_same_compare_equals' => array(
 				array(
-					'log_type' => 'test',
+					'log_type'          => 'test',
 					'log_type__compare' => '=',
 				),
 				array( 'log_type' => 'test' ),
@@ -656,21 +656,21 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 			),
 			'user_id_different_compare_not_equals' => array(
 				array(
-					'user_id' => 1,
+					'user_id'          => 1,
 					'user_id__compare' => '!=',
 				),
 				array( 'user_id' => 2 ),
 			),
 			'user_id_same_compare_not_equals' => array(
 				array(
-					'user_id' => 1,
+					'user_id'          => 1,
 					'user_id__compare' => '!=',
 				),
 				array( 'user_id' => 1 ),
 			),
 			'user_id_same_compare_equals' => array(
 				array(
-					'user_id' => 1,
+					'user_id'          => 1,
 					'user_id__compare' => '=',
 				),
 				array( 'user_id' => 1 ),
@@ -693,21 +693,21 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 			),
 			'blog_id_different_compare_not_equals' => array(
 				array(
-					'blog_id' => 1,
+					'blog_id'          => 1,
 					'blog_id__compare' => '!=',
 				),
 				array( 'blog_id' => 2 ),
 			),
 			'blog_id_same_compare_not_equals' => array(
 				array(
-					'blog_id' => 1,
+					'blog_id'          => 1,
 					'blog_id__compare' => '!=',
 				),
 				array( 'blog_id' => 1 ),
 			),
 			'blog_id_same_compare_equals' => array(
 				array(
-					'blog_id' => 1,
+					'blog_id'          => 1,
 					'blog_id__compare' => '=',
 				),
 				array( 'blog_id' => 1 ),
@@ -730,21 +730,21 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 			),
 			'site_id_different_compare_not_equals' => array(
 				array(
-					'site_id' => 1,
+					'site_id'          => 1,
 					'site_id__compare' => '!=',
 				),
 				array( 'site_id' => 2 ),
 			),
 			'site_id_same_compare_not_equals' => array(
 				array(
-					'site_id' => 1,
+					'site_id'          => 1,
 					'site_id__compare' => '!=',
 				),
 				array( 'site_id' => 1 ),
 			),
 			'site_id_same_compare_equals' => array(
 				array(
-					'site_id' => 1,
+					'site_id'          => 1,
 					'site_id__compare' => '=',
 				),
 				array( 'site_id' => 1 ),

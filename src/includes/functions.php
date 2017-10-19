@@ -18,7 +18,7 @@
 function wordpoints_top_users_in_period_register_scripts() {
 
 	$assets_url = wordpoints_modules_url( '/assets', dirname( __FILE__ ) );
-	$suffix = SCRIPT_DEBUG ? '' : '.min';
+	$suffix     = SCRIPT_DEBUG ? '' : '.min';
 
 	$version = WordPoints_Modules::get_data( __FILE__, 'version' );
 
@@ -52,7 +52,7 @@ function wordpoints_top_users_in_period_register_scripts() {
 		, $version
 	);
 
-	$styles = wp_styles();
+	$styles     = wp_styles();
 	$rtl_styles = array( 'table', 'widget-settings' );
 
 	foreach ( $rtl_styles as $rtl_style ) {
@@ -110,8 +110,8 @@ function wordpoints_top_users_in_period_get_site_timezone() {
 
 		} else {
 
-			$hours   = (int) $offset;
-			$minutes = ( $offset - floor( $offset ) ) * 60;
+			$hours           = (int) $offset;
+			$minutes         = ( $offset - floor( $offset ) ) * 60;
 			$timezone_string = sprintf( '%+03d:%02d', $hours, $minutes );
 		}
 	}

@@ -140,7 +140,7 @@ class WordPoints_Top_Users_In_Period_Query
 		}
 
 		$this->start_date = $start_date;
-		$this->end_date = $end_date;
+		$this->end_date   = $end_date;
 
 		$this->start_timestamp = (int) $this->start_date->format( 'U' );
 		$this->end_timestamp   = (int) $this->end_date->format( 'U' );
@@ -256,7 +256,7 @@ class WordPoints_Top_Users_In_Period_Query
 
 		$this->args = $this->clean_query_args( $this->args );
 
-		$cache = $this->get_cache();
+		$cache          = $this->get_cache();
 		$cached_results = $cache->get();
 
 		if ( false !== $cached_results ) {
@@ -287,9 +287,9 @@ class WordPoints_Top_Users_In_Period_Query
 			_doing_it_wrong( __METHOD__, 'The top users query doesn\'t use the $select_type parameter.', '1.0.0' );
 		}
 
-		$this->block_type = $this->get_block_type();
+		$this->block_type       = $this->get_block_type();
 		$this->start_block_info = $this->block_type->get_block_info( $this->start_timestamp );
-		$this->end_block_info = $this->block_type->get_block_info( $this->end_timestamp );
+		$this->end_block_info   = $this->block_type->get_block_info( $this->end_timestamp );
 
 		if ( ! $this->should_use_block_logs() ) {
 
@@ -466,15 +466,15 @@ class WordPoints_Top_Users_In_Period_Query
 	protected function clean_query_args( array $args ) {
 
 		$not_cols = array(
-			'start' => true,
-			'limit' => true,
-			'order' => true,
-			'order_by' => true,
-			'fields' => true,
-			'date_query' => true,
-			'meta_query' => true,
-			'meta_key' => true,
-			'meta_value' => true,
+			'start'        => true,
+			'limit'        => true,
+			'order'        => true,
+			'order_by'     => true,
+			'fields'       => true,
+			'date_query'   => true,
+			'meta_query'   => true,
+			'meta_key'     => true,
+			'meta_value'   => true,
 			'meta_compare' => true,
 		);
 
@@ -484,7 +484,7 @@ class WordPoints_Top_Users_In_Period_Query
 				continue;
 			}
 
-			$column = $arg;
+			$column   = $arg;
 			$operator = null;
 
 			if ( strpos( $column, '__' ) ) {
@@ -791,7 +791,7 @@ class WordPoints_Top_Users_In_Period_Query
 		$this->prepare_query();
 
 		$blocks_query = $this->get_block_logs_query( $blocks, false );
-		$logs_query = $this->get_points_logs_query( $blocks );
+		$logs_query   = $this->get_points_logs_query( $blocks );
 
 		return "
 			SELECT SUM(`total`) AS `total`, `user_id`
@@ -878,7 +878,7 @@ class WordPoints_Top_Users_In_Period_Query
 		$last_block  = end( $blocks );
 
 		$first_block_start = strtotime( $first_block->start_date . '+0000' );
-		$last_block_end = strtotime( $last_block->end_date . '+0000' );
+		$last_block_end    = strtotime( $last_block->end_date . '+0000' );
 
 		$date_query = array( 'relation' => 'OR' );
 
@@ -1033,7 +1033,7 @@ class WordPoints_Top_Users_In_Period_Query
 			return $this->note_missing_blocks( $end_block['end'] + 1, $start );
 		}
 
-		$first_block = array_shift( $blocks );
+		$first_block       = array_shift( $blocks );
 		$first_block_start = strtotime( $first_block->start_date . '+0000' );
 
 		// Check if there are any blocks missing at the start.
@@ -1061,7 +1061,7 @@ class WordPoints_Top_Users_In_Period_Query
 			$previous_block = $block;
 		}
 
-		$last_block = $previous_block;
+		$last_block       = $previous_block;
 		$last_block_start = strtotime( $last_block->start_date . '+0000' );
 
 		// Check if there are any blocks missing at the end.
