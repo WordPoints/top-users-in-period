@@ -1217,11 +1217,7 @@ class WordPoints_Top_Users_In_Period_Query
 			return;
 		}
 
-		ignore_user_abort( true );
-
-		if ( ! wordpoints_is_function_disabled( 'set_time_limit' ) ) {
-			set_time_limit( 0 );
-		}
+		wordpoints_prevent_interruptions();
 
 		$done = true;
 	}
