@@ -145,7 +145,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by'      => 'total',
 				'order'         => 'DESC',
-				'start'         => 0,
+				'offset'        => 0,
 				'text__compare' => 'LIKE',
 			)
 			, $query->get_args()
@@ -167,7 +167,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->assertSameSetsWithIndex(
 			array(
-				'start'         => 0,
+				'offset'        => 0,
 				'order'         => 'DESC',
 				'order_by'      => 'total',
 				'text__compare' => 'LIKE',
@@ -190,7 +190,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$query = new WordPoints_Top_Users_In_Period_Query(
 			new DateTime( '-1 months' )
 			, null
-			, array( 'start' => 10, 'limit' => 10 )
+			, array( 'offset' => 10, 'limit' => 10 )
 		);
 
 		$this->assertSameSetsWithIndex(
@@ -198,7 +198,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 				'order_by'      => 'total',
 				'order'         => 'DESC',
 				'text__compare' => 'LIKE',
-				'start'         => 10,
+				'offset'        => 10,
 				'limit'         => 10,
 			)
 			, $query->get_args()
@@ -231,7 +231,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by'         => 'total',
 				'order'            => 'DESC',
-				'start'            => 0,
+				'offset'           => 0,
 				'user_id'          => 1,
 				'user_id__compare' => '=',
 				'text__compare'    => 'NOT EXISTS',
@@ -266,7 +266,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by' => 'total',
 				'order'    => 'DESC',
-				'start'    => 0,
+				'offset'   => 0,
 				'user_id'  => 1,
 				'total'    => 100,
 			)
@@ -298,7 +298,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by' => 'total',
 				'order'    => 'DESC',
-				'start'    => 0,
+				'offset'   => 0,
 			)
 			, $query->get_args()
 		);
@@ -328,7 +328,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by'      => 'total',
 				'order'         => 'DESC',
-				'start'         => 0,
+				'offset'        => 0,
 				'user_id__in'   => array( 2, 3, 4 ),
 				'total__not_in' => array( 10, 50 ),
 			)
@@ -360,7 +360,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by'      => 'total',
 				'order'         => 'DESC',
-				'start'         => 0,
+				'offset'        => 0,
 				'user_id__in'   => array( 2, 3, 4 ),
 				'total__not_in' => array( 10, 50 ),
 			)
@@ -392,7 +392,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by'       => 'total',
 				'order'          => 'DESC',
-				'start'          => 0,
+				'offset'         => 0,
 				'user_id'        => 2,
 				'total'          => 10,
 				'total__compare' => '!=',
@@ -425,7 +425,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by'      => 'total',
 				'order'         => 'DESC',
-				'start'         => 0,
+				'offset'        => 0,
 				'user_id'       => 5,
 				'total__not_in' => array( 5, 10 ),
 			)
@@ -457,7 +457,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by'    => 'total',
 				'order'       => 'DESC',
-				'start'       => 0,
+				'offset'      => 0,
 				'site_id'     => 5,
 				'blog_id__in' => array( 5, 10 ),
 			)
@@ -706,11 +706,11 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->assertSame(
 			array(
-				'3d13afbe3e05f625ab72cc2cb1619af40921a833c545520b31c550d39a90aab4' => array(
+				'c792e4cd87eeb6f9495144e3155d0c20a8af3f7a4415e64dee0e620f7636ed14' => array(
 					'args'   => array(
+						'offset'   => 0,
 						'order'    => 'DESC',
 						'order_by' => 'total',
-						'start'    => 0,
 					),
 					'caches' => array(
 						'mock' => array(
@@ -761,11 +761,11 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->assertSame(
 			array(
-				'3d13afbe3e05f625ab72cc2cb1619af40921a833c545520b31c550d39a90aab4' => array(
+				'c792e4cd87eeb6f9495144e3155d0c20a8af3f7a4415e64dee0e620f7636ed14' => array(
 					'args'   => array(
+						'offset'   => 0,
 						'order'    => 'DESC',
 						'order_by' => 'total',
-						'start'    => 0,
 					),
 					'caches' => array(
 						'mock' => array(
@@ -823,13 +823,13 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->assertSame(
 			array(
-				'd2b248f5c56d245046870436eb4815aa7d4ab15f87f2af364cb12866b15f6381' => array(
+				'385d15fb30a1670e47ddecce808c3a8523cd628c36c48b7fb4795ca438988e71' => array(
 					'args'   => array(
 						'blog_id'  => 5,
+						'offset'   => 0,
 						'order'    => 'DESC',
 						'order_by' => 'total',
 						'site_id'  => 1,
-						'start'    => 0,
 					),
 					'caches' => array(
 						'mock' => array(
@@ -1268,9 +1268,46 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	}
 
 	/**
+	 * Tests the 'offset' arg.
+	 *
+	 * @since 1.0.2
+	 *
+	 * @dataProvider data_provider_start_end_dates
+	 *
+	 * @param DateTime $start_date The start date.
+	 * @param DateTime $end_date   The end date.
+	 * @param int      $to_middle  The distance to somewhere in the middle.
+	 */
+	public function test_arg_offset(
+		DateTime $start_date,
+		DateTime $end_date,
+		$to_middle = null
+	) {
+
+		$user_ids = $this->create_logs( $start_date, $end_date, $to_middle );
+
+		$query = new WordPoints_Top_Users_In_Period_Query(
+			$start_date
+			, $end_date
+			, array( 'offset' => 1, 'limit' => 1 )
+		);
+
+		$results = $query->get();
+
+		$this->assertCount( 1, $results );
+
+		$this->assertSameProperties(
+			(object) array( 'total' => '2', 'user_id' => (string) $user_ids[1] )
+			, $results[0]
+		);
+	}
+
+	/**
 	 * Tests the 'start' arg.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @expectedDeprecated WordPoints_Points_Logs_Query::__construct
 	 *
 	 * @dataProvider data_provider_start_end_dates
 	 *

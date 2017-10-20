@@ -466,7 +466,7 @@ class WordPoints_Top_Users_In_Period_Query
 	protected function clean_query_args( array $args ) {
 
 		$not_cols = array(
-			'start'        => true,
+			'offset'       => true,
 			'limit'        => true,
 			'order'        => true,
 			'order_by'     => true,
@@ -590,7 +590,7 @@ class WordPoints_Top_Users_In_Period_Query
 		// blocks.
 		unset(
 			$args['limit'],
-			$args['start'],
+			$args['offset'],
 			$args['order'],
 			$args['order_by'],
 			$args['fields'],
@@ -829,7 +829,7 @@ class WordPoints_Top_Users_In_Period_Query
 
 		if ( $inherit_limit_order ) {
 			$inherited_args[] = 'limit';
-			$inherited_args[] = 'start';
+			$inherited_args[] = 'offset';
 			$inherited_args[] = 'order';
 			$inherited_args[] = 'order_by';
 			$inherited_args[] = 'total';
@@ -865,7 +865,7 @@ class WordPoints_Top_Users_In_Period_Query
 		// The conditions for the total need to be set only for the combined query.
 		unset(
 			$args['limit'],
-			$args['start'],
+			$args['offset'],
 			$args['total'],
 			$args['total__in'],
 			$args['total__not_in'],
