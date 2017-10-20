@@ -910,11 +910,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 				, 'WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache'
 			);
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_both' )
-			, array( new DateTime( '-1 months' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_both' ) )
+			->setConstructorArgs( array( new DateTime( '-1 months' ) ) )
+			->getMock();
 
 		$stub->method( 'get_sql_for_both' )
 			->willReturn( new WP_Error() );
@@ -932,11 +931,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function test_should_not_use_block_logs() {
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_points_logs' )
-			, array( new DateTime( '-1 day' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_points_logs' ) )
+			->setConstructorArgs( array( new DateTime( '-1 day' ) ) )
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_points_logs' )
@@ -952,11 +950,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function test_should_use_block_logs() {
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_both' )
-			, array( new DateTime( '-1 month' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_both' ) )
+			->setConstructorArgs( array( new DateTime( '-1 month' ) ) )
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_both' )
@@ -977,11 +974,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			, '__return_true'
 		);
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_both' )
-			, array( new DateTime( '-1 day' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_both' ) )
+			->setConstructorArgs( array( new DateTime( '-1 day' ) ) )
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_both' )
@@ -1002,11 +998,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			, '__return_false'
 		);
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_points_logs' )
-			, array( new DateTime( '-1 month' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_points_logs' ) )
+			->setConstructorArgs( array( new DateTime( '-1 month' ) ) )
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_points_logs' )
@@ -1029,14 +1024,15 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$second_info = $block->get_block_info( current_time( 'timestamp' ) );
 		$first_info  = $block->get_block_info( $second_info['start'] - 1 );
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_both' )
-			, array(
-				new DateTime( '@' . $first_info['start'] ),
-				new DateTime( '@' . ( $second_info['end'] - 50 ) ),
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_both' ) )
+			->setConstructorArgs(
+				array(
+					new DateTime( '@' . $first_info['start'] ),
+					new DateTime( '@' . ( $second_info['end'] - 50 ) ),
+				)
 			)
-		);
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_both' )
@@ -1059,14 +1055,15 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$second_info = $block->get_block_info( current_time( 'timestamp' ) );
 		$first_info  = $block->get_block_info( $second_info['start'] - 1 );
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_both' )
-			, array(
-				new DateTime( '@' . ( $first_info['start'] + 50 ) ),
-				new DateTime( '@' . $second_info['end'] ),
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_both' ) )
+			->setConstructorArgs(
+				array(
+					new DateTime( '@' . ( $first_info['start'] + 50 ) ),
+					new DateTime( '@' . $second_info['end'] ),
+				)
 			)
-		);
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_both' )
@@ -1088,14 +1085,15 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$info = $block->get_block_info( current_time( 'timestamp' ) );
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_block_logs' )
-			, array(
-				new DateTime( '@' . $info['start'] ),
-				new DateTime( '@' . $info['end'] ),
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_block_logs' ) )
+			->setConstructorArgs(
+				array(
+					new DateTime( '@' . $info['start'] ),
+					new DateTime( '@' . $info['end'] ),
+				)
 			)
-		);
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_block_logs' )
@@ -1120,14 +1118,15 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			$end_info['start'] - 2 * WEEK_IN_SECONDS
 		);
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_block_logs' )
-			, array(
-				new DateTime( '@' . $start_info['start'] ),
-				new DateTime( '@' . $end_info['end'] ),
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_block_logs' ) )
+			->setConstructorArgs(
+				array(
+					new DateTime( '@' . $start_info['start'] ),
+					new DateTime( '@' . $end_info['end'] ),
+				)
 			)
-		);
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_block_logs' )
@@ -2420,11 +2419,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function test_get_sql_for_block_logs_error() {
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_and_verify_blocks' )
-			, array( new DateTime( '-1 months' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_and_verify_blocks' ) )
+			->setConstructorArgs( array( new DateTime( '-1 months' ) ) )
+			->getMock();
 
 		$error = new WP_Error();
 
@@ -2441,11 +2439,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function test_get_and_verify_blocks_get_blocks_error() {
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_blocks' )
-			, array( new DateTime( '-1 months' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_blocks' ) )
+			->setConstructorArgs( array( new DateTime( '-1 months' ) ) )
+			->getMock();
 
 		$error = new WP_Error();
 
@@ -2507,11 +2504,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function test_get_blocks_error() {
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_query_signature_id' )
-			, array( new DateTime( '-1 months' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_query_signature_id' ) )
+			->setConstructorArgs( array( new DateTime( '-1 months' ) ) )
+			->getMock();
 
 		$stub->method( 'get_query_signature_id' )
 			->willReturn( false );
@@ -2705,11 +2701,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function test_get_and_verify_blocks_failed_filling_block_logs() {
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'fill_block_logs' )
-			, array( new DateTime( '-1 months' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'fill_block_logs' ) )
+			->setConstructorArgs( array( new DateTime( '-1 months' ) ) )
+			->getMock();
 
 		$stub->method( 'fill_block_logs' )->willReturn( false );
 
@@ -2993,11 +2988,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function test_fill_block_logs_error_saving_draft_block() {
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'save_draft_block' )
-			, array( new DateTime( '-1 month' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'save_draft_block' ) )
+			->setConstructorArgs( array( new DateTime( '-1 month' ) ) )
+			->getMock();
 
 		$stub->method( 'save_draft_block' )->willReturn( false );
 
