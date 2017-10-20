@@ -120,7 +120,7 @@
         "limit": {
             "831": false
         },
-        "start": {
+        "offset": {
             "832": false
         },
         "order": {
@@ -147,7 +147,7 @@
     },
     "\/classes\/table.php": {
         "striped": {
-            "278": false
+            "296": false
         }
     },
     "\/includes\/admin\/functions.php": {
@@ -168,7 +168,7 @@
     },
     "\/includes\/functions.php": {
         "widget-settings": {
-            "56": {
+            "55": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,
@@ -177,10 +177,10 @@
             }
         },
         "wordpoints-top-users-in-period-": {
-            "60": false
+            "59": false
         },
         "rtl": {
-            "62": {
+            "61": {
                 "name": "$styles->add_data",
                 "type": "unknown",
                 "args_started": true,
@@ -189,7 +189,7 @@
             }
         },
         "replace": {
-            "62": {
+            "61": {
                 "name": "$styles->add_data",
                 "type": "unknown",
                 "args_started": true,
@@ -198,7 +198,7 @@
             }
         },
         "suffix": {
-            "65": {
+            "64": {
                 "name": "$styles->add_data",
                 "type": "unknown",
                 "args_started": true,
@@ -207,8 +207,8 @@
             }
         },
         "UTC": {
-            "109": false,
-            "123": {
+            "108": false,
+            "122": {
                 "name": "DateTimeZone::__construct",
                 "type": "unknown",
                 "args_started": true,
@@ -217,7 +217,7 @@
             }
         },
         "%+03d:%02d": {
-            "115": {
+            "114": {
                 "name": "sprintf",
                 "type": "unknown",
                 "args_started": true,
@@ -226,7 +226,7 @@
             }
         },
         "id": {
-            "341": {
+            "366": {
                 "name": "array",
                 "type": "unknown",
                 "args_started": true,

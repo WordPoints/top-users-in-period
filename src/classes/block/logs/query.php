@@ -25,12 +25,12 @@ class WordPoints_Top_Users_In_Period_Block_Logs_Query
 	 * @since 1.0.0
 	 */
 	protected $columns = array(
-		'id' => array( 'format' => '%d', 'unsigned' => true ),
+		'id'       => array( 'format' => '%d', 'unsigned' => true ),
 		'block_id' => array( 'format' => '%d', 'unsigned' => true ),
-		'user_id' => array( 'format' => '%d', 'unsigned' => true ),
-		'points' => array( 'format' => '%d', 'unsigned' => true ),
+		'user_id'  => array( 'format' => '%d', 'unsigned' => true ),
+		'points'   => array( 'format' => '%d', 'unsigned' => true ),
 		// Pseudo-column of the sum of the results.
-		'total' => array( 'format' => '%d' ),
+		'total'    => array( 'format' => '%d' ),
 	);
 
 	/**
@@ -144,7 +144,7 @@ class WordPoints_Top_Users_In_Period_Block_Logs_Query
 		}
 
 		$this->wheres = array();
-		$this->where = '';
+		$this->where  = '';
 
 		// Then do everything else.
 		$all_columns = $this->columns;

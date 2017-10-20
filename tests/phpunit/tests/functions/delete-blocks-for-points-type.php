@@ -114,7 +114,7 @@ class WordPoints_Top_Users_In_Period_Delete_Blocks_For_Points_Type_Function_Test
 		$this->factory->wordpoints->points_log->create(
 			array(
 				'points_type' => 'other',
-				'date' => date( 'Y-m-d H:i:s', strtotime( '-2 weeks' ) ),
+				'date'        => date( 'Y-m-d H:i:s', strtotime( '-2 weeks' ) ),
 			)
 		);
 
@@ -170,19 +170,19 @@ class WordPoints_Top_Users_In_Period_Delete_Blocks_For_Points_Type_Function_Test
 			),
 			'points_type_different_compare_not_equals' => array(
 				array(
-					'points_type' => 'other',
+					'points_type'          => 'other',
 					'points_type__compare' => '!=',
 				),
 			),
 			'points_type_same_compare_not_equals' => array(
 				array(
-					'points_type' => 'points',
+					'points_type'          => 'points',
 					'points_type__compare' => '!=',
 				),
 			),
 			'points_type_same_compare_equals' => array(
 				array(
-					'points_type' => 'points',
+					'points_type'          => 'points',
 					'points_type__compare' => '=',
 				),
 			),
@@ -271,7 +271,7 @@ class WordPoints_Top_Users_In_Period_Delete_Blocks_For_Points_Type_Function_Test
 			),
 			'points_type_different_compare_equals' => array(
 				array(
-					'points_type' => 'points',
+					'points_type'          => 'points',
 					'points_type__compare' => '=',
 				),
 			),

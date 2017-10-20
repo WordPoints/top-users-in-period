@@ -77,7 +77,7 @@ class WordPoints_Top_Users_In_Period_Blocks_Query_Test
 		$wpdb->insert(
 			$wpdb->base_prefix . 'wordpoints_top_users_in_period_query_signatures'
 			, array(
-				'signature' => $query_signature,
+				'signature'  => $query_signature,
 				'query_args' => '',
 			)
 		);

@@ -112,7 +112,7 @@ class WordPoints_Top_Users_In_Period_Points_Logs_Query
 		}
 
 		$this->wheres = array();
-		$this->where = '';
+		$this->where  = '';
 
 		// Then do everything else.
 		$all_columns = $this->columns;

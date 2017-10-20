@@ -290,7 +290,7 @@ class WordPoints_Top_Users_In_Period_Widget_Fixed_Test
 	public function test_update_method() {
 
 		/** @var WP_Widget $widget */
-		$widget = new $this->widget_class;
+		$widget = new $this->widget_class();
 
 		$sanitized = $widget->update(
 			array(

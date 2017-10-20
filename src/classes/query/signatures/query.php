@@ -27,8 +27,8 @@ class WordPoints_Top_Users_In_Period_Query_Signatures_Query
 	 * @since 1.0.1
 	 */
 	protected $columns = array(
-		'id' => array( 'format' => '%d', 'unsigned' => true ),
-		'signature' => array( 'format' => '%s' ),
+		'id'         => array( 'format' => '%d', 'unsigned' => true ),
+		'signature'  => array( 'format' => '%s' ),
 		'query_args' => array( 'format' => '%s' ),
 	);
 
@@ -52,7 +52,7 @@ class WordPoints_Top_Users_In_Period_Query_Signatures_Query
 	 *        @type string[]     $signature__not_in   Exclude blocks for these query signatures from the results.
 	 *        @type string       $query_args          Include only results for queries with this set of query args.
 	 *        @type string       $query_args__compare The comparison operator to use with the above value.
-	 *        @type string[]     $query_args__in      Limit results to queries with these these sets of query args.
+	 *        @type string[]     $query_args__in      Limit results to queries with these sets of query args.
 	 *        @type string[]     $query_args__not_in  Exclude queries with these sets of args from the results.
 	 */
 	public function __construct( $args = array() ) {

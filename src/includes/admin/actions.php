@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Admin-side action and filter hooks of the module.
+ * Admin-side action and filter hooks of the extension.
  *
  * @package WordPoints_Top_Users_In_Period
  * @since 1.0.0

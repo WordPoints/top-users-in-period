@@ -24,7 +24,7 @@ class WordPoints_Top_Users_In_Period_Widget_Fixed
 			__CLASS__
 			, _x( 'Top Users In Fixed Period', 'widget name', 'wordpoints-top-users-in-period' )
 			, array(
-				'description' => __( 'Showcase the users who earned the most points between two fixed dates.', 'wordpoints-top-users-in-period' ),
+				'description'          => __( 'Showcase the users who earned the most points between two fixed dates.', 'wordpoints-top-users-in-period' ),
 				'wordpoints_hook_slug' => 'top_users_in_period_fixed',
 			)
 		);

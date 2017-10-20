@@ -53,6 +53,15 @@ class WordPoints_Top_Users_In_Period_Table {
 	protected $column_headers;
 
 	/**
+	 * The size of the user avatars used in the table, in pixels.
+	 *
+	 * @since 1.0.2
+	 *
+	 * @var int
+	 */
+	protected $avatar_size = 32;
+
+	/**
 	 * @since 1.0.0
 	 *
 	 * @param WordPoints_Top_Users_In_Period_Query $query   The query to display.
@@ -63,7 +72,7 @@ class WordPoints_Top_Users_In_Period_Table {
 		$context
 	) {
 
-		$this->query = $query;
+		$this->query   = $query;
 		$this->context = $context;
 	}
 
@@ -88,7 +97,16 @@ class WordPoints_Top_Users_In_Period_Table {
 			return;
 		}
 
-		$this->points_type = $this->get_points_type();
+		/**
+		 * Filters the size of the user avatars displayed in the top users in period table.
+		 *
+		 * @since 1.0.2
+		 *
+		 * @param int $avatar_size The size of the avatars, in pixels.
+		 */
+		$this->avatar_size = apply_filters( 'wordpoints_top_users_in_period_table_avatar_size', $this->avatar_size );
+
+		$this->points_type    = $this->get_points_type();
 		$this->column_headers = $this->get_column_headers();
 
 		$extra_classes = $this->get_extra_classes( $top_users );
@@ -107,7 +125,7 @@ class WordPoints_Top_Users_In_Period_Table {
 			foreach ( $top_users as $data ) {
 
 				$user_id = $data->user_id;
-				$points = $data->total;
+				$points  = $data->total;
 
 				$user = get_userdata( $user_id );
 
@@ -118,7 +136,7 @@ class WordPoints_Top_Users_In_Period_Table {
 						<?php echo esc_html( number_format_i18n( $position ) ); ?>
 					</td>
 					<td>
-						<?php echo get_avatar( $user_id, 32 ); ?>
+						<?php echo get_avatar( $user_id, $this->avatar_size ); ?>
 						<?php
 
 						$name = sanitize_user_field(

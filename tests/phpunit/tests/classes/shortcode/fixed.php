@@ -220,8 +220,9 @@ class WordPoints_Top_Users_In_Period_Shortcode_Fixed_Test
 		$this->give_current_user_caps( 'manage_options' );
 
 		$this->assertWordPointsShortcodeError(
-			$this->do_shortcode( $this->shortcode,
-				array( 'to' => '2017-04-21', 'to_time' => 'invalid' )
+			$this->do_shortcode(
+				$this->shortcode
+				, array( 'to' => '2017-04-21', 'to_time' => 'invalid' )
 			)
 		);
 

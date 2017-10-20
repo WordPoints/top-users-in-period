@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Main file of the module.
+ * Main file of the extension.
  *
  * ---------------------------------------------------------------------------------|
  * Copyright 2017  J.D. Grimes  (email : jdg@codesymphony.co)
@@ -21,25 +21,25 @@
  * ---------------------------------------------------------------------------------|
  *
  * @package WordPoints_Top_Users_In_Period
- * @version 1.0.1
+ * @version 1.0.2
  * @author  J.D. Grimes <jdg@codesymphony.co>
  * @license GPLv2+
  */
 
-WordPoints_Modules::register(
+wordpoints_register_extension(
 	'
-		Module Name: Top Users In Period
-		Author:      J.D. Grimes
-		Author URI:  https://wordpoints.org/
-		Module URI:  https://wordpoints.org/modules/top-users-in-period/
-		Version:     1.0.1
-		License:     GPLv2+
-		Description: Display the top points earners within a given period of time.
-		Text Domain: wordpoints-top-users-in-period
-		Domain Path: /languages
-		Server:      wordpoints.org
-		ID:          1058
-		Namespace:   Top_Users_In_Period
+		Extension Name: Top Users In Period
+		Author:         J.D. Grimes
+		Author URI:     https://wordpoints.org/
+		Extension URI:  https://wordpoints.org/extensions/top-users-in-period/
+		Version:        1.0.2
+		License:        GPLv2+
+		Description:    Display the top points earners within a given period of time.
+		Text Domain:    wordpoints-top-users-in-period
+		Domain Path:    /languages
+		Server:         wordpoints.org
+		ID:             1058
+		Namespace:      Top_Users_In_Period
 	'
 	, __FILE__
 );
@@ -51,14 +51,14 @@ if ( ! wordpoints_component_is_active( 'points' ) ) {
 WordPoints_Class_Autoloader::register_dir( dirname( __FILE__ ) . '/classes/' );
 
 /**
- * Contains the modules main functions.
+ * Contains the extension's main functions.
  *
  * @since 1.0.0
  */
 require_once dirname( __FILE__ ) . '/includes/functions.php';
 
 /**
- * Hooks up the actions and filters for the module.
+ * Hooks up the actions and filters for the extension.
  *
  * @since 1.0.0
  */

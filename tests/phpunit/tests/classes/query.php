@@ -76,7 +76,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	public function test_get_end_date() {
 
 		$start_date = new DateTime( '-2 months' );
-		$end_date = new DateTime( '-1 month' );
+		$end_date   = new DateTime( '-1 month' );
 
 		$query = new WordPoints_Top_Users_In_Period_Query( $start_date, $end_date );
 
@@ -114,7 +114,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	public function test_start_after_end_date() {
 
 		$start_date = new DateTime( '-1 months' );
-		$end_date = new DateTime( '-2 month' );
+		$end_date   = new DateTime( '-2 month' );
 
 		$this->listen_for_filter( 'wordpoints_top_user_in_period_query_cache' );
 
@@ -145,7 +145,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by'      => 'total',
 				'order'         => 'DESC',
-				'start'         => 0,
+				'offset'        => 0,
 				'text__compare' => 'LIKE',
 			)
 			, $query->get_args()
@@ -167,7 +167,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->assertSameSetsWithIndex(
 			array(
-				'start'         => 0,
+				'offset'        => 0,
 				'order'         => 'DESC',
 				'order_by'      => 'total',
 				'text__compare' => 'LIKE',
@@ -190,7 +190,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$query = new WordPoints_Top_Users_In_Period_Query(
 			new DateTime( '-1 months' )
 			, null
-			, array( 'start' => 10, 'limit' => 10 )
+			, array( 'offset' => 10, 'limit' => 10 )
 		);
 
 		$this->assertSameSetsWithIndex(
@@ -198,7 +198,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 				'order_by'      => 'total',
 				'order'         => 'DESC',
 				'text__compare' => 'LIKE',
-				'start'         => 10,
+				'offset'        => 10,
 				'limit'         => 10,
 			)
 			, $query->get_args()
@@ -231,7 +231,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by'         => 'total',
 				'order'            => 'DESC',
-				'start'            => 0,
+				'offset'           => 0,
 				'user_id'          => 1,
 				'user_id__compare' => '=',
 				'text__compare'    => 'NOT EXISTS',
@@ -266,7 +266,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by' => 'total',
 				'order'    => 'DESC',
-				'start'    => 0,
+				'offset'   => 0,
 				'user_id'  => 1,
 				'total'    => 100,
 			)
@@ -298,7 +298,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by' => 'total',
 				'order'    => 'DESC',
-				'start'    => 0,
+				'offset'   => 0,
 			)
 			, $query->get_args()
 		);
@@ -328,7 +328,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by'      => 'total',
 				'order'         => 'DESC',
-				'start'         => 0,
+				'offset'        => 0,
 				'user_id__in'   => array( 2, 3, 4 ),
 				'total__not_in' => array( 10, 50 ),
 			)
@@ -360,7 +360,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by'      => 'total',
 				'order'         => 'DESC',
-				'start'         => 0,
+				'offset'        => 0,
 				'user_id__in'   => array( 2, 3, 4 ),
 				'total__not_in' => array( 10, 50 ),
 			)
@@ -392,7 +392,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by'       => 'total',
 				'order'          => 'DESC',
-				'start'          => 0,
+				'offset'         => 0,
 				'user_id'        => 2,
 				'total'          => 10,
 				'total__compare' => '!=',
@@ -423,11 +423,11 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->assertSameSetsWithIndex(
 			array(
-				'order_by'       => 'total',
-				'order'          => 'DESC',
-				'start'          => 0,
-				'user_id'        => 5,
-				'total__not_in'  => array( 5, 10 ),
+				'order_by'      => 'total',
+				'order'         => 'DESC',
+				'offset'        => 0,
+				'user_id'       => 5,
+				'total__not_in' => array( 5, 10 ),
 			)
 			, $query->get_args()
 		);
@@ -457,7 +457,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			array(
 				'order_by'    => 'total',
 				'order'       => 'DESC',
-				'start'       => 0,
+				'offset'      => 0,
 				'site_id'     => 5,
 				'blog_id__in' => array( 5, 10 ),
 			)
@@ -535,7 +535,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function data_provider_per_site_queries() {
 		return array(
-			'blog_id' => array( array( 'blog_id' => 1 ) ),
+			'blog_id'   => array( array( 'blog_id' => 1 ) ),
 			'blog_id_=' => array(
 				array( 'blog_id' => 1, 'blog_id__compare' => '=' ),
 			),
@@ -621,7 +621,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'mock'
@@ -653,7 +653,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'transients'
@@ -682,7 +682,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'mock'
@@ -706,11 +706,11 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->assertSame(
 			array(
-				'3d13afbe3e05f625ab72cc2cb1619af40921a833c545520b31c550d39a90aab4' => array(
+				'c792e4cd87eeb6f9495144e3155d0c20a8af3f7a4415e64dee0e620f7636ed14' => array(
 					'args'   => array(
+						'offset'   => 0,
 						'order'    => 'DESC',
 						'order_by' => 'total',
-						'start'    => 0,
 					),
 					'caches' => array(
 						'mock' => array(
@@ -736,7 +736,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'mock'
@@ -761,11 +761,11 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->assertSame(
 			array(
-				'3d13afbe3e05f625ab72cc2cb1619af40921a833c545520b31c550d39a90aab4' => array(
+				'c792e4cd87eeb6f9495144e3155d0c20a8af3f7a4415e64dee0e620f7636ed14' => array(
 					'args'   => array(
+						'offset'   => 0,
 						'order'    => 'DESC',
 						'order_by' => 'total',
-						'start'    => 0,
 					),
 					'caches' => array(
 						'mock' => array(
@@ -791,7 +791,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'mock'
@@ -823,13 +823,13 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->assertSame(
 			array(
-				'd2b248f5c56d245046870436eb4815aa7d4ab15f87f2af364cb12866b15f6381' => array(
+				'385d15fb30a1670e47ddecce808c3a8523cd628c36c48b7fb4795ca438988e71' => array(
 					'args'   => array(
 						'blog_id'  => 5,
+						'offset'   => 0,
 						'order'    => 'DESC',
 						'order_by' => 'total',
 						'site_id'  => 1,
-						'start'    => 0,
 					),
 					'caches' => array(
 						'mock' => array(
@@ -853,7 +853,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'transients'
@@ -876,7 +876,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'transients'
@@ -903,18 +903,17 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'transients'
 				, 'WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache'
 			);
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_both' )
-			, array( new DateTime( '-1 months' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_both' ) )
+			->setConstructorArgs( array( new DateTime( '-1 months' ) ) )
+			->getMock();
 
 		$stub->method( 'get_sql_for_both' )
 			->willReturn( new WP_Error() );
@@ -932,11 +931,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function test_should_not_use_block_logs() {
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_points_logs' )
-			, array( new DateTime( '-1 day' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_points_logs' ) )
+			->setConstructorArgs( array( new DateTime( '-1 day' ) ) )
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_points_logs' )
@@ -952,11 +950,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function test_should_use_block_logs() {
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_both' )
-			, array( new DateTime( '-1 month' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_both' ) )
+			->setConstructorArgs( array( new DateTime( '-1 month' ) ) )
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_both' )
@@ -977,11 +974,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			, '__return_true'
 		);
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_both' )
-			, array( new DateTime( '-1 day' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_both' ) )
+			->setConstructorArgs( array( new DateTime( '-1 day' ) ) )
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_both' )
@@ -1002,11 +998,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			, '__return_false'
 		);
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_points_logs' )
-			, array( new DateTime( '-1 month' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_points_logs' ) )
+			->setConstructorArgs( array( new DateTime( '-1 month' ) ) )
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_points_logs' )
@@ -1027,16 +1022,17 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		);
 
 		$second_info = $block->get_block_info( current_time( 'timestamp' ) );
-		$first_info = $block->get_block_info( $second_info['start'] - 1 );
+		$first_info  = $block->get_block_info( $second_info['start'] - 1 );
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_both' )
-			, array(
-				new DateTime( '@' . $first_info['start'] ),
-				new DateTime( '@' . ( $second_info['end'] - 50 ) ),
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_both' ) )
+			->setConstructorArgs(
+				array(
+					new DateTime( '@' . $first_info['start'] ),
+					new DateTime( '@' . ( $second_info['end'] - 50 ) ),
+				)
 			)
-		);
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_both' )
@@ -1057,16 +1053,17 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		);
 
 		$second_info = $block->get_block_info( current_time( 'timestamp' ) );
-		$first_info = $block->get_block_info( $second_info['start'] - 1 );
+		$first_info  = $block->get_block_info( $second_info['start'] - 1 );
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_both' )
-			, array(
-				new DateTime( '@' . ( $first_info['start'] + 50 ) ),
-				new DateTime( '@' . $second_info['end'] ),
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_both' ) )
+			->setConstructorArgs(
+				array(
+					new DateTime( '@' . ( $first_info['start'] + 50 ) ),
+					new DateTime( '@' . $second_info['end'] ),
+				)
 			)
-		);
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_both' )
@@ -1088,14 +1085,15 @@ class WordPoints_Top_Users_In_Period_Query_Test
 
 		$info = $block->get_block_info( current_time( 'timestamp' ) );
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_block_logs' )
-			, array(
-				new DateTime( '@' . $info['start'] ),
-				new DateTime( '@' . $info['end'] ),
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_block_logs' ) )
+			->setConstructorArgs(
+				array(
+					new DateTime( '@' . $info['start'] ),
+					new DateTime( '@' . $info['end'] ),
+				)
 			)
-		);
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_block_logs' )
@@ -1115,19 +1113,20 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			'test'
 		);
 
-		$end_info = $block->get_block_info( current_time( 'timestamp' ) );
+		$end_info   = $block->get_block_info( current_time( 'timestamp' ) );
 		$start_info = $block->get_block_info(
 			$end_info['start'] - 2 * WEEK_IN_SECONDS
 		);
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_sql_for_block_logs' )
-			, array(
-				new DateTime( '@' . $start_info['start'] ),
-				new DateTime( '@' . $end_info['end'] ),
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_sql_for_block_logs' ) )
+			->setConstructorArgs(
+				array(
+					new DateTime( '@' . $start_info['start'] ),
+					new DateTime( '@' . $end_info['end'] ),
+				)
 			)
-		);
+			->getMock();
 
 		$stub->expects( $this->once() )
 			->method( 'get_sql_for_block_logs' )
@@ -1185,7 +1184,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 			'test'
 		);
 
-		$end_info = $block->get_block_info( current_time( 'timestamp' ) );
+		$end_info   = $block->get_block_info( current_time( 'timestamp' ) );
 		$start_info = $block->get_block_info(
 			$end_info['start'] - 2 * WEEK_IN_SECONDS
 		);
@@ -1193,17 +1192,17 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$now = new DateTime();
 
 		return array(
-			'points_logs' => array( new DateTime( '-1 day' ), $now ),
-			'both' => array( new DateTime( '-1 month' ), $now, 2 * WEEK_IN_SECONDS ),
-			'both_start_block_exact' => array(
+			'points_logs'             => array( new DateTime( '-1 day' ), $now ),
+			'both'                    => array( new DateTime( '-1 month' ), $now, 2 * WEEK_IN_SECONDS ),
+			'both_start_block_exact'  => array(
 				new DateTime( '@' . $start_info['start'] ),
 				new DateTime( '@' . ( $end_info['end'] - 50 ) ),
 			),
-			'both_end_block_exact' => array(
+			'both_end_block_exact'    => array(
 				new DateTime( '@' . ( $start_info['start'] + 50 ) ),
 				new DateTime( '@' . $end_info['end'] ),
 			),
-			'one_block_exactly' => array(
+			'one_block_exactly'       => array(
 				new DateTime( '@' . $start_info['start'] ),
 				new DateTime( '@' . $start_info['end'] ),
 			),
@@ -1268,9 +1267,46 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	}
 
 	/**
+	 * Tests the 'offset' arg.
+	 *
+	 * @since 1.0.2
+	 *
+	 * @dataProvider data_provider_start_end_dates
+	 *
+	 * @param DateTime $start_date The start date.
+	 * @param DateTime $end_date   The end date.
+	 * @param int      $to_middle  The distance to somewhere in the middle.
+	 */
+	public function test_arg_offset(
+		DateTime $start_date,
+		DateTime $end_date,
+		$to_middle = null
+	) {
+
+		$user_ids = $this->create_logs( $start_date, $end_date, $to_middle );
+
+		$query = new WordPoints_Top_Users_In_Period_Query(
+			$start_date
+			, $end_date
+			, array( 'offset' => 1, 'limit' => 1 )
+		);
+
+		$results = $query->get();
+
+		$this->assertCount( 1, $results );
+
+		$this->assertSameProperties(
+			(object) array( 'total' => '2', 'user_id' => (string) $user_ids[1] )
+			, $results[0]
+		);
+	}
+
+	/**
 	 * Tests the 'start' arg.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @expectedDeprecated WordPoints_Points_Logs_Query::__construct
 	 *
 	 * @dataProvider data_provider_start_end_dates
 	 *
@@ -1500,7 +1536,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$to_middle = null
 	) {
 
-		$user_ids = $this->create_logs( $start_date, $end_date, $to_middle );
+		$user_ids    = $this->create_logs( $start_date, $end_date, $to_middle );
 		$user_ids[2] = $this->factory->user->create();
 
 		// A transaction that took place right at the start.
@@ -2045,15 +2081,15 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$to_middle = null
 	) {
 
-		$user_ids = $this->create_logs( $start_date, $end_date, $to_middle );
+		$user_ids    = $this->create_logs( $start_date, $end_date, $to_middle );
 		$user_ids[2] = $this->factory->user->create();
 
 		// A transaction that took place right at the start.
 		$this->factory->wordpoints->points_log->create(
 			array(
-				'user_id'  => $user_ids[2],
-				'points'   => 32,
-				'date'     => $start_date->format( 'Y-m-d H:i:s' ),
+				'user_id' => $user_ids[2],
+				'points'  => 32,
+				'date'    => $start_date->format( 'Y-m-d H:i:s' ),
 			)
 		);
 
@@ -2154,10 +2190,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		// A transaction that took place right at the start.
 		$this->factory->wordpoints->points_log->create(
 			array(
-				'user_id'  => $user_ids[0],
-				'points'   => 32,
-				'date'     => $start_date->format( 'Y-m-d H:i:s' ),
-				'meta'     => array( 'test_1' => 'a' ),
+				'user_id' => $user_ids[0],
+				'points'  => 32,
+				'date'    => $start_date->format( 'Y-m-d H:i:s' ),
+				'meta'    => array( 'test_1' => 'a' ),
 			)
 		);
 
@@ -2204,9 +2240,9 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		// A transaction that took place right at the start.
 		$this->factory->wordpoints->points_log->create(
 			array(
-				'user_id'  => $user_ids[0],
-				'points'   => 32,
-				'date'     => $date->format( 'Y-m-d H:i:s' ),
+				'user_id' => $user_ids[0],
+				'points'  => 32,
+				'date'    => $date->format( 'Y-m-d H:i:s' ),
 			)
 		);
 
@@ -2216,9 +2252,9 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		// A transaction that took place right at the start.
 		$this->factory->wordpoints->points_log->create(
 			array(
-				'user_id'  => $user_ids[0],
-				'points'   => 64,
-				'date'     => $date->format( 'Y-m-d H:i:s' ),
+				'user_id' => $user_ids[0],
+				'points'  => 64,
+				'date'    => $date->format( 'Y-m-d H:i:s' ),
 			)
 		);
 
@@ -2383,11 +2419,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function test_get_sql_for_block_logs_error() {
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_and_verify_blocks' )
-			, array( new DateTime( '-1 months' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_and_verify_blocks' ) )
+			->setConstructorArgs( array( new DateTime( '-1 months' ) ) )
+			->getMock();
 
 		$error = new WP_Error();
 
@@ -2404,11 +2439,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function test_get_and_verify_blocks_get_blocks_error() {
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_blocks' )
-			, array( new DateTime( '-1 months' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_blocks' ) )
+			->setConstructorArgs( array( new DateTime( '-1 months' ) ) )
+			->getMock();
 
 		$error = new WP_Error();
 
@@ -2470,11 +2504,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function test_get_blocks_error() {
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'get_query_signature_id' )
-			, array( new DateTime( '-1 months' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'get_query_signature_id' ) )
+			->setConstructorArgs( array( new DateTime( '-1 months' ) ) )
+			->getMock();
 
 		$stub->method( 'get_query_signature_id' )
 			->willReturn( false );
@@ -2630,7 +2663,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$end_date   = new DateTime();
 
 		$start = (int) $start_date->format( 'U' );
-		$end = (int) $end_date->format( 'U' );
+		$end   = (int) $end_date->format( 'U' );
 
 		// Before the period.
 		$wpdb->insert(
@@ -2668,11 +2701,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function test_get_and_verify_blocks_failed_filling_block_logs() {
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'fill_block_logs' )
-			, array( new DateTime( '-1 months' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'fill_block_logs' ) )
+			->setConstructorArgs( array( new DateTime( '-1 months' ) ) )
+			->getMock();
 
 		$stub->method( 'fill_block_logs' )->willReturn( false );
 
@@ -2787,118 +2819,118 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		);
 
 		$second_info = $block->get_block_info( $first_info['end'] + 1 );
-		$third_info = $block->get_block_info( $second_info['end'] + 1 );
+		$third_info  = $block->get_block_info( $second_info['end'] + 1 );
 		$fourth_info = $block->get_block_info( $third_info['end'] + 1 );
-		$fifth_info = $block->get_block_info( $fourth_info['end'] + 1 );
+		$fifth_info  = $block->get_block_info( $fourth_info['end'] + 1 );
 
 		return array(
-			'all_one_exactly' => array( array( $first_info ) ),
-			'all_one_fits_start' => array(
+			'all_one_exactly'               => array( array( $first_info ) ),
+			'all_one_fits_start'            => array(
 				array( $first_info ),
 				$first_info['start'],
 				$first_info['end'] + HOUR_IN_SECONDS,
 			),
-			'all_one_fits_end' => array(
+			'all_one_fits_end'              => array(
 				array( $first_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$first_info['end'],
 			),
-			'all_one' => array(
+			'all_one'                       => array(
 				array( $first_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$first_info['end'] + HOUR_IN_SECONDS,
 			),
-			'all_multiple_exactly' => array(
+			'all_multiple_exactly'          => array(
 				array( $first_info, $second_info, $third_info ),
 			),
-			'all_multiple_fits_start' => array(
+			'all_multiple_fits_start'       => array(
 				array( $first_info, $second_info, $third_info ),
 				$first_info['start'],
 				$third_info['end'] + HOUR_IN_SECONDS,
 			),
-			'all_multiple_fits_end' => array(
+			'all_multiple_fits_end'         => array(
 				array( $first_info, $second_info, $third_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$third_info['end'],
 			),
-			'all_multiple' => array(
+			'all_multiple'                  => array(
 				array( $first_info, $second_info, $third_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$third_info['end'] + HOUR_IN_SECONDS,
 			),
-			'start_multiple_exactly' => array(
+			'start_multiple_exactly'        => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				null,
 				null,
 				array( $third_info, $fourth_info ),
 			),
-			'start_multiple_fits_start' => array(
+			'start_multiple_fits_start'     => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'],
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $third_info, $fourth_info ),
 			),
-			'start_multiple_fits_end' => array(
+			'start_multiple_fits_end'       => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'],
 				array( $third_info, $fourth_info ),
 			),
-			'start_multiple' => array(
+			'start_multiple'                => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $third_info, $fourth_info ),
 			),
-			'end_multiple_exactly' => array(
+			'end_multiple_exactly'          => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				null,
 				null,
 				array( $first_info, $second_info ),
 			),
-			'end_multiple_fits_start' => array(
+			'end_multiple_fits_start'       => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'],
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $first_info, $second_info ),
 			),
-			'end_multiple_fits_end' => array(
+			'end_multiple_fits_end'         => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'],
 				array( $first_info, $second_info ),
 			),
-			'end_multiple' => array(
+			'end_multiple'                  => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $first_info, $second_info ),
 			),
-			'middle_multiple_exactly' => array(
+			'middle_multiple_exactly'       => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				null,
 				null,
 				array( $first_info, $fourth_info ),
 			),
-			'middle_multiple_fits_start' => array(
+			'middle_multiple_fits_start'    => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'],
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $first_info, $fourth_info ),
 			),
-			'middle_multiple_fits_end' => array(
+			'middle_multiple_fits_end'      => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'],
 				array( $first_info, $fourth_info ),
 			),
-			'middle_multiple' => array(
+			'middle_multiple'               => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $first_info, $fourth_info ),
 			),
-			'both_ends_multiple_exactly' => array(
+			'both_ends_multiple_exactly'    => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				null,
 				null,
@@ -2910,19 +2942,19 @@ class WordPoints_Top_Users_In_Period_Query_Test
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $second_info, $third_info ),
 			),
-			'both_ends_multiple_fits_end' => array(
+			'both_ends_multiple_fits_end'   => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'],
 				array( $second_info, $third_info ),
 			),
-			'both_ends_multiple' => array(
+			'both_ends_multiple'            => array(
 				array( $first_info, $second_info, $third_info, $fourth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fourth_info['end'] + HOUR_IN_SECONDS,
 				array( $second_info, $third_info ),
 			),
-			'all_three_multiple_exactly' => array(
+			'all_three_multiple_exactly'    => array(
 				array( $first_info, $second_info, $third_info, $fourth_info, $fifth_info ),
 				null,
 				null,
@@ -2934,13 +2966,13 @@ class WordPoints_Top_Users_In_Period_Query_Test
 				$fifth_info['end'] + HOUR_IN_SECONDS,
 				array( $second_info, $fourth_info ),
 			),
-			'all_three_multiple_fits_end' => array(
+			'all_three_multiple_fits_end'   => array(
 				array( $first_info, $second_info, $third_info, $fourth_info, $fifth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fifth_info['end'],
 				array( $second_info, $fourth_info ),
 			),
-			'all_three_multiple' => array(
+			'all_three_multiple'            => array(
 				array( $first_info, $second_info, $third_info, $fourth_info, $fifth_info ),
 				$first_info['start'] - HOUR_IN_SECONDS,
 				$fifth_info['end'] + HOUR_IN_SECONDS,
@@ -2956,11 +2988,10 @@ class WordPoints_Top_Users_In_Period_Query_Test
 	 */
 	public function test_fill_block_logs_error_saving_draft_block() {
 
-		$stub = $this->getMock(
-			'WordPoints_Top_Users_In_Period_Query'
-			, array( 'save_draft_block' )
-			, array( new DateTime( '-1 month' ) )
-		);
+		$stub = $this->getMockBuilder( 'WordPoints_Top_Users_In_Period_Query' )
+			->setMethods( array( 'save_draft_block' ) )
+			->setConstructorArgs( array( new DateTime( '-1 month' ) ) )
+			->getMock();
 
 		$stub->method( 'save_draft_block' )->willReturn( false );
 
@@ -2981,7 +3012,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$start_info = $block->get_block_info( current_time( 'timestamp' ) );
 
 		$start_date = new DateTime( '@' . $start_info['start'] );
-		$end_date = new DateTime( '@' . $start_info['end'] );
+		$end_date   = new DateTime( '@' . $start_info['end'] );
 
 		$user_id_1 = $this->factory->user->create();
 		$user_id_2 = $this->factory->user->create();
@@ -2990,8 +3021,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$this->factory->wordpoints->points_log->create(
 			array(
 				'user_id' => $user_id_1,
-				'points' => 1,
-				'date' => $start_date->format( 'Y-m-d H:i:s' ),
+				'points'  => 1,
+				'date'    => $start_date->format( 'Y-m-d H:i:s' ),
 			)
 		);
 
@@ -2999,8 +3030,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$this->factory->wordpoints->points_log->create(
 			array(
 				'user_id' => $user_id_2,
-				'points' => 2,
-				'date' => $end_date->format( 'Y-m-d H:i:s' ),
+				'points'  => 2,
+				'date'    => $end_date->format( 'Y-m-d H:i:s' ),
 			)
 		);
 
@@ -3008,8 +3039,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$this->factory->wordpoints->points_log->create(
 			array(
 				'user_id' => $user_id_1,
-				'points' => 3,
-				'date' => date(
+				'points'  => 3,
+				'date'    => date(
 					'Y-m-d H:i:s'
 					, (int) $start_date->format( 'U' ) + HOUR_IN_SECONDS
 				),
@@ -3020,8 +3051,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$this->factory->wordpoints->points_log->create(
 			array(
 				'user_id' => $user_id_1,
-				'points' => 5,
-				'date' => date(
+				'points'  => 5,
+				'date'    => date(
 					'Y-m-d H:i:s'
 					, (int) $start_date->format( 'U' ) - 1
 				),
@@ -3032,8 +3063,8 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$this->factory->wordpoints->points_log->create(
 			array(
 				'user_id' => $user_id_2,
-				'points' => 7,
-				'date' => date(
+				'points'  => 7,
+				'date'    => date(
 					'Y-m-d H:i:s'
 					, (int) $end_date->format( 'U' ) + 1
 				),
@@ -3076,7 +3107,7 @@ class WordPoints_Top_Users_In_Period_Query_Test
 		$start_info = $block->get_block_info( current_time( 'timestamp' ) );
 
 		$start_date = new DateTime( '@' . $start_info['start'] );
-		$end_date = new DateTime( '@' . $start_info['end'] );
+		$end_date   = new DateTime( '@' . $start_info['end'] );
 
 		$query = new WordPoints_Top_Users_In_Period_Query( $start_date, $end_date );
 

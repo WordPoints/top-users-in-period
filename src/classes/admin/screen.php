@@ -8,7 +8,7 @@
  */
 
 /**
- * Displays the module's admin screen.
+ * Displays the extension's admin screen.
  *
  * @since 1.0.0
  */

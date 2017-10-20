@@ -22,7 +22,7 @@ class WordPoints_Top_Users_In_Period_PHPUnit_Mock_Query_Cache
 	 *
 	 * @var mixed
 	 */
-	static $value = false;
+	public static $value = false;
 
 	/**
 	 * @since 1.0.0

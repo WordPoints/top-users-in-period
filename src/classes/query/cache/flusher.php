@@ -71,7 +71,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher {
 	 */
 	public function flush( $flush_ended = false, $only_matching_cache = false ) {
 
-		$this->query_caches = wordpoints_module( 'top_users_in_period' )
+		$this->query_caches = wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' );
 
 		$this->only_matching_cache = $only_matching_cache;
