@@ -21,7 +21,7 @@
  * ---------------------------------------------------------------------------------|
  *
  * @package WordPoints_Top_Users_In_Period
- * @version 1.0.1
+ * @version 1.0.2
  * @author  J.D. Grimes <jdg@codesymphony.co>
  * @license GPLv2+
  */
@@ -32,7 +32,7 @@ wordpoints_register_extension(
 		Author:         J.D. Grimes
 		Author URI:     https://wordpoints.org/
 		Extension URI:  https://wordpoints.org/extensions/top-users-in-period/
-		Version:        1.0.1
+		Version:        1.0.2
 		License:        GPLv2+
 		Description:    Display the top points earners within a given period of time.
 		Text Domain:    wordpoints-top-users-in-period

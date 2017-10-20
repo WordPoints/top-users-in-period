@@ -8,6 +8,26 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a CH
 
 Nothing documented at this time.
 
+## [1.0.2] - 2017-10-20
+
+### Requires
+
+- WordPoints: 2.4+
+
+### Added
+
+- `wordpoints_top_users_in_period_table_avatar_size` to filter the size of the user avatars in the top users in period table.
+
+### Changed
+
+- Query class to use the `wordpoints_prevent_interruptions()` function rather than duplicating its code.
+
+### Fixed
+
+- Deprecated notices from `Channel`, `Module Name`, and `Module URI` extension headers.
+- Deprecated notices during uninstall, by using the new installables API.
+- Deprecated notices from queries involving the `start` arg, by using the `offset` arg instead.
+
 ## [1.0.1] - 2017-06-01
 
 ### Fixed
@@ -46,5 +66,6 @@ Nothing documented at this time.
 - Shortcode that displays totals from a dynamic period.
 
 [unreleased]: https://github.com/WordPoints/top-users-in-period/compare/master...HEAD
+[1.0.2]: https://github.com/WordPoints/top-users-in-period/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/WordPoints/top-users-in-period/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/WordPoints/top-users-in-period/compare/...1.0.0
