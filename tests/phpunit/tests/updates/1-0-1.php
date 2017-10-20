@@ -12,11 +12,7 @@
  *
  * @since 1.0.1
  *
- * @covers WordPoints_Top_Users_In_Period_Un_Installer::update_single_to_1_0_1()
- * @covers WordPoints_Top_Users_In_Period_Un_Installer::update_site_to_1_0_1()
- * @covers WordPoints_Top_Users_In_Period_Un_Installer::update_network_to_1_0_1()
- * @covers WordPoints_Top_Users_In_Period_Un_Installer::flush_caches_for_1_0_1()
- * @covers WordPoints_Top_Users_In_Period_Un_Installer::update_db_tables_to_1_0_1()
+ * @covers WordPoints_Top_Users_In_Period_Installable::get_update_routine_factories()
  */
 class WordPoints_Top_Users_In_Period_Update_1_0_1_Test
 	extends WordPoints_PHPUnit_TestCase {
