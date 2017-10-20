@@ -16,11 +16,33 @@ class WordPoints_Top_Users_In_Period_Apps_Functions_Test
 	extends WordPoints_PHPUnit_TestCase {
 
 	/**
+	 * Tests the extensions app init function.
+	 *
+	 * @since 1.0.2
+	 *
+	 * @covers ::wordpoints_top_users_in_period_extensions_app_init
+	 */
+	public function test_extensions_app_init() {
+
+		$this->mock_apps();
+
+		$app = new WordPoints_App( 'test' );
+
+		wordpoints_top_users_in_period_extensions_app_init( $app );
+
+		$this->assertTrue(
+			$app->sub_apps()->is_registered( 'top_users_in_period' )
+		);
+	}
+
+	/**
 	 * Tests the modules app init function.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @covers ::wordpoints_top_users_in_period_modules_app_init
+	 *
+	 * @expectedDeprecated wordpoints_top_users_in_period_modules_app_init
 	 */
 	public function test_modules_app_init() {
 
@@ -36,7 +58,7 @@ class WordPoints_Top_Users_In_Period_Apps_Functions_Test
 	}
 
 	/**
-	 * Tests the module's apps init function.
+	 * Tests the extension's apps init function.
 	 *
 	 * @since 1.0.0
 	 *

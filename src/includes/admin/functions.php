@@ -13,7 +13,7 @@
  * @since 1.0.0
  *
  * @WordPress\action admin_menu
- * @WordPress\action network_admin_menu Only when the module is network-active.
+ * @WordPress\action network_admin_menu Only when the extension is network-active.
  */
 function wordpoints_top_users_in_period_admin_menu() {
 

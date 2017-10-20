@@ -11,7 +11,7 @@
 _deprecated_file( __FILE__, '1.0.2' );
 
 /**
- * Installs, uninstalls, and updates the module.
+ * Installs, uninstalls, and updates the extension.
  *
  * @since 1.0.0
  * @deprecated 1.0.2

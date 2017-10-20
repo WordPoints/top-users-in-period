@@ -36,7 +36,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'test'
@@ -70,7 +70,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'test'
@@ -104,7 +104,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'test'
@@ -139,7 +139,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'test'
@@ -203,7 +203,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'test'
@@ -237,7 +237,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'test'
@@ -274,7 +274,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'test'
@@ -311,7 +311,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'test'
@@ -348,7 +348,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'test'
@@ -391,7 +391,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'test'
@@ -538,7 +538,7 @@ class WordPoints_Top_Users_In_Period_Query_Cache_Flusher_Test
 
 		$this->mock_apps();
 
-		wordpoints_module( 'top_users_in_period' )
+		wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->register(
 				'test'

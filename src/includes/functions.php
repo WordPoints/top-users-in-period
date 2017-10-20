@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The module's main functions.
+ * The extension's main functions.
  *
  * @package WordPoints_Top_Users_In_Period
  * @since   1.0.0
@@ -17,10 +17,9 @@
  */
 function wordpoints_top_users_in_period_register_scripts() {
 
-	$assets_url = wordpoints_modules_url( '/assets', dirname( __FILE__ ) );
+	$assets_url = wordpoints_extensions_url( '/assets', dirname( __FILE__ ) );
 	$suffix     = SCRIPT_DEBUG ? '' : '.min';
-
-	$version = WordPoints_Modules::get_data( __FILE__, 'version' );
+	$version    = wordpoints_get_extension_version( __FILE__ );
 
 	// JS.
 	wp_register_script(
@@ -159,19 +158,40 @@ function wordpoints_top_users_in_period_validate_datetime( $datetime, $timezone 
 }
 
 /**
- * Register Top Users In Period module app when the Modules registry is initialized.
+ * Register Top Users In Period extension app when the Extensions registry is initialized.
+ *
+ * @since 1.0.0 As wordpoints_top_users_in_period_modules_app_init().
+ * @since 1.0.2
+ *
+ * @WordPress\action wordpoints_init_app-extensions
+ * @WordPress\action wordpoints_init_app-modules For back-compat.
+ *
+ * @param WordPoints_App $extensions The extensions app.
+ */
+function wordpoints_top_users_in_period_extensions_app_init( $extensions ) {
+
+	$apps = $extensions->sub_apps();
+
+	$apps->register( 'top_users_in_period', 'WordPoints_App' );
+}
+
+/**
+ * Register Top Users In Period extension app when the Extensions registry is initialized.
  *
  * @since 1.0.0
+ * @deprecated 1.0.2
  *
- * @WordPress\action wordpoints_init_app-modules
- *
- * @param WordPoints_App $modules The modules app.
+ * @param WordPoints_App $modules The extensions app.
  */
 function wordpoints_top_users_in_period_modules_app_init( $modules ) {
 
-	$apps = $modules->sub_apps();
+	_deprecated_function(
+		__FUNCTION__
+		, '1.0.2'
+		, 'wordpoints_top_users_in_period_extensions_app_init'
+	);
 
-	$apps->register( 'top_users_in_period', 'WordPoints_App' );
+	wordpoints_top_users_in_period_extensions_app_init( $modules );
 }
 
 /**
@@ -179,7 +199,8 @@ function wordpoints_top_users_in_period_modules_app_init( $modules ) {
  *
  * @since 1.0.0
  *
- * @WordPress\action wordpoints_init_app-modules-top_users_in_period
+ * @WordPress\action wordpoints_init_app-extensions-top_users_in_period
+ * @WordPress\action wordpoints_init_app-modules-top_users_in_period For back-compat.
  *
  * @param WordPoints_App $app The Top Users In Period app.
  */
@@ -196,7 +217,9 @@ function wordpoints_top_users_in_period_apps_init( $app ) {
  *
  * @since 1.0.0
  *
+ * @WordPress\action wordpoints_init_app_registry-extensions-top_users_in_period-block_types
  * @WordPress\action wordpoints_init_app_registry-modules-top_users_in_period-block_types
+ *                   For back-compat.
  *
  * @param WordPoints_Class_RegistryI $block_types The block types registry.
  */
@@ -210,7 +233,9 @@ function wordpoints_top_users_in_period_block_types_init( $block_types ) {
  *
  * @since 1.0.0
  *
+ * @WordPress\action wordpoints_init_app_registry-extensions-top_users_in_period-query_caches
  * @WordPress\action wordpoints_init_app_registry-modules-top_users_in_period-query_caches
+ *                   For back-compat.
  *
  * @param WordPoints_Class_RegistryI $query_caches The query caches registry.
  */

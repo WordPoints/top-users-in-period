@@ -375,7 +375,7 @@ class WordPoints_Top_Users_In_Period_Query
 			, $this
 		);
 
-		$block_type = wordpoints_module( 'top_users_in_period' )
+		$block_type = wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'block_types' )
 			->get( $slug );
 
@@ -422,7 +422,7 @@ class WordPoints_Top_Users_In_Period_Query
 
 		$is_network_query = $this->is_network_scope();
 
-		$cache = wordpoints_module( 'top_users_in_period' )
+		$cache = wordpoints_extension( 'top_users_in_period' )
 			->get_sub_app( 'query_caches' )
 			->get( $slug, array( $args, $is_network_query ) );
 
