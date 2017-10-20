@@ -93,13 +93,11 @@ class WordPoints_Top_Users_In_Period_Installable
 			),
 		);
 
+		$factories[] = new WordPoints_Updater_Factory( '1.0.1', $updates );
+
 		$tables = $this->get_db_tables_install_routines();
 
-		$updates['single'][]  = $tables['single'][0];
-		$updates['site'][]    = $tables['site'][0];
-		$updates['network'][] = $tables['network'][0];
-
-		$factories[] = new WordPoints_Updater_Factory( '1.0.1', $updates );
+		$factories[] = new WordPoints_Updater_Factory( '1.0.1', $tables );
 
 		return $factories;
 	}
